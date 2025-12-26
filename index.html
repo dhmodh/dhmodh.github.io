@@ -1,4 +1,239 @@
-<code>
-Hi,
-My name is Dishant Modh
-</code>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dishant Modh | Site Reliability Engineer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Dishant Modh – Site Reliability Engineer & Database Administrator specializing in cloud infrastructure, databases, and reliability engineering." />
+
+  <style>
+    :root {
+      --primary: #2563eb;
+      --dark: #0f172a;
+      --muted: #64748b;
+      --bg: #f8fafc;
+      --card: #ffffff;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--dark);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 40px 20px;
+    }
+
+    header {
+      display: grid;
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin: 0;
+    }
+
+    h2 {
+      margin-top: 40px;
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 8px;
+      font-size: 1.6rem;
+    }
+
+    p { color: var(--dark); }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 1.1rem;
+    }
+
+    .links a {
+      margin-right: 16px;
+      text-decoration: none;
+      color: var(--primary);
+      font-weight: 500;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 12px;
+      padding: 24px;
+      margin-top: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .tag {
+      display: inline-block;
+      background: #e0e7ff;
+      color: #1e3a8a;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      margin: 4px;
+    }
+
+    .role {
+      font-weight: 600;
+    }
+
+    .company {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .metrics {
+      font-weight: 600;
+      color: #065f46;
+    }
+
+    footer {
+      margin-top: 60px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <header>
+    <h1>Dishant Modh</h1>
+    <div class="subtitle">
+      Site Reliability Engineer (SRE) & Database Administrator
+    </div>
+    <div class="links">
+      <a href="mailto:dishantmodh7@gmail.com">Email</a>
+      <a href="https://github.com/dhmodh" target="_blank">GitHub</a>
+      <a href="resume.pdf" download>Download Resume</a>
+    </div>
+  </header>
+
+  <!-- SUMMARY -->
+  <section class="card">
+    <p>
+      Results-driven <strong>Site Reliability Engineer & Database Administrator</strong> with
+      <strong>3.8+ years</strong> of experience optimizing cloud infrastructure, large-scale
+      distributed databases, and reliability systems. Proven impact includes
+      <span class="metrics">50% query performance improvements</span>,
+      <span class="metrics">$100K+ AWS cost savings</span>, and
+      highly available multi-region disaster recovery architectures.
+    </p>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <h2>Experience</h2>
+
+  <section class="card">
+    <div class="role">Software Engineer (SRE – DBA)</div>
+    <div class="company">GlobalLogic · Bengaluru | Feb 2024 – Present</div>
+    <ul>
+      <li>Manage and optimize PostgreSQL, Aurora, MySQL, MongoDB, Cassandra, and Snowflake clusters for global workloads.</li>
+      <li>Designed multi-region DR using Aurora Global Database and AWS DMS achieving near-zero RPO and sub-minute RTO.</li>
+      <li>Automated RDS provisioning, monitoring, and backups with Terraform and GitHub Actions, reducing deployment time by 40%.</li>
+      <li>Optimized EC2 and RDS usage, delivering <strong>$100K/month cloud cost savings</strong>.</li>
+      <li>Built Lambda + CloudWatch automation, saving 10+ engineering hours weekly.</li>
+      <li>Improved MTTR by 30% via Datadog and Grafana observability dashboards.</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <div class="role">Software Engineer (Database Administrator)</div>
+    <div class="company">HHAeXchange · Ahmedabad | Dec 2021 – Feb 2024</div>
+    <ul>
+      <li>Administered 100+ production databases with 99.99% uptime.</li>
+      <li>Improved PostgreSQL read performance by 50% and write throughput by 30%.</li>
+      <li>Automated replication, partitioning, and maintenance tasks using Python and PowerShell.</li>
+      <li>Migrated on-prem databases to AWS RDS and Aurora using AWS DMS with minimal downtime.</li>
+      <li>Reduced migration costs by 25% through DMS optimization.</li>
+    </ul>
+  </section>
+
+  <!-- PROJECTS -->
+  <h2>Projects</h2>
+
+  <section class="card">
+    <ul>
+      <li><strong>Highly Available PostgreSQL Cluster:</strong> Built auto-healing Patroni-based PostgreSQL clusters on AWS using Terraform with Prometheus/Grafana monitoring.</li>
+      <li><strong>ML-Powered Database Anomaly Detection:</strong> Developed ML models using Python and scikit-learn to predict performance anomalies, reducing investigation time by 60%.</li>
+    </ul>
+  </section>
+
+  <!-- SKILLS -->
+  <h2>Technical Skills</h2>
+
+  <section class="card">
+    <div class="grid">
+      <div>
+        <strong>Databases</strong><br>
+        PostgreSQL, Aurora, MySQL, MongoDB, Cassandra, Snowflake, Oracle
+      </div>
+      <div>
+        <strong>Cloud</strong><br>
+        AWS (EC2, RDS, DMS, Lambda, S3, IAM, CloudWatch), Azure
+      </div>
+      <div>
+        <strong>DevOps</strong><br>
+        Terraform, Jenkins, GitHub Actions, Docker, Ansible
+      </div>
+      <div>
+        <strong>Languages</strong><br>
+        Python, Go, Bash, PowerShell, SQL
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATIONS -->
+  <h2>Certifications</h2>
+
+  <section class="card">
+    <ul>
+      <li>AWS Solutions Architect – Associate</li>
+      <li>MongoDB SI Associate</li>
+      <li>Microsoft Azure Fundamentals (AZ-900)</li>
+      <li>GitHub Foundations</li>
+    </ul>
+  </section>
+
+  <!-- EDUCATION -->
+  <h2>Education</h2>
+
+  <section class="card">
+    <p><strong>B.Tech in Information Technology</strong><br>
+       Dharmsinh Desai University, Nadiad (2018 – 2022)</p>
+  </section>
+
+  <footer>
+    © 2025 Dishant Modh · Built with GitHub Pages
+  </footer>
+
+</div>
+
+</body>
+</html>
