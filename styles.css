@@ -161,26 +161,6 @@ body {
   transform: scale(1.05);
 }
 
-.logo-image {
-  height: 45px;
-  width: auto;
-  object-fit: contain;
-  display: block;
-  transition: opacity 0.3s ease;
-  z-index: 2;
-  position: relative;
-}
-
-.logo-image:not([src]),
-.logo-image[src=""],
-.logo-image[src="undefined"] {
-  display: none;
-}
-
-.logo:hover .logo-image {
-  opacity: 0.9;
-}
-
 .logo-text {
   position: relative;
   z-index: 2;
@@ -188,7 +168,6 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  display: flex; /* Show by default as fallback */
 }
 
 .logo-glow {
@@ -773,10 +752,6 @@ body {
 
   .hero-actions {
     justify-content: center;
-  }
-
-  .logo-image {
-    height: 35px;
   }
 }
 
