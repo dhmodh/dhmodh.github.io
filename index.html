@@ -2,35 +2,216 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dishant Modh | SRE & Cloud Engineer</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Site Reliability Engineer with expertise in cloud infrastructure, databases, and scalable systems">
   <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
-
 <body>
-<div class="bg-gradient"></div>
-
-<nav>
-  <span class="logo">DM</span>
-  <ul>
-    <li><a href="about.html">About</a></li>
-    <li><a href="experience.html">Experience</a></li>
-    <li><a href="projects.html">Projects</a></li>
-    <li><a href="blog.html">Blog</a></li>
-    <li><a href="contact.html">Contact</a></li>
-  </ul>
-</nav>
-
-<section class="hero">
-  <h1 class="glow">Dishant Modh</h1>
-  <p class="subtitle">Site Reliability Engineer · Cloud · Databases</p>
-
-  <div class="hero-actions">
-    <a href="contact.html" class="btn primary">Contact Me</a>
-    <a href="resume.pdf" class="btn ghost">Resume</a>
+  <!-- Animated Background -->
+  <div class="animated-bg">
+    <div class="gradient-orb orb-1"></div>
+    <div class="gradient-orb orb-2"></div>
+    <div class="gradient-orb orb-3"></div>
   </div>
-</section>
 
-<script src="script.js"></script>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">
+        <span class="logo-text">DM</span>
+        <span class="logo-glow"></span>
+      </a>
+      <ul class="nav-menu">
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="experience.html" class="nav-link">Experience</a></li>
+        <li><a href="projects.html" class="nav-link">Projects</a></li>
+        <li><a href="blog.html" class="nav-link">Blog</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+        <li><a href="resume.pdf" class="nav-link resume-link" target="_blank">Resume</a></li>
+      </ul>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <span class="theme-icon">🌙</span>
+      </button>
+      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="badge-text">Available for Opportunities</span>
+        <span class="badge-pulse"></span>
+      </div>
+      <h1 class="hero-title">
+        <span class="title-line">Dishant Modh</span>
+      </h1>
+      <p class="hero-subtitle">Site Reliability Engineer · Cloud Architect · Database Specialist</p>
+      <p class="hero-description">
+        I'm a Site Reliability Engineer with 3.8+ years of experience building reliable, scalable, 
+        and cost-efficient cloud systems. My expertise lies in designing resilient infrastructure, 
+        optimizing database performance, and engineering robust solutions that power enterprise applications.
+      </p>
+      <div class="hero-actions">
+        <a href="contact.html" class="btn btn-primary">
+          <span>Get In Touch</span>
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <a href="resume.pdf" class="btn btn-secondary" target="_blank">
+          <span>View Resume</span>
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M5 15V17.5C5 17.7761 5.22386 18 5.5 18H14.5C14.7761 18 15 17.7761 15 17.5V15M12.5 10L10 12.5M10 12.5L7.5 10M10 12.5V3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="floating-card card-1">
+        <div class="card-icon">☁️</div>
+        <div class="card-text">Cloud Infrastructure</div>
+      </div>
+      <div class="floating-card card-2">
+        <div class="card-icon">🗄️</div>
+        <div class="card-text">Database Systems</div>
+      </div>
+      <div class="floating-card card-3">
+        <div class="card-icon">⚡</div>
+        <div class="card-text">Performance</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What I Do Section -->
+  <section class="what-i-do">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">What I Do</h2>
+        <p class="section-subtitle">Specialized expertise in building and maintaining enterprise-grade systems</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card" data-aos="fade-up">
+          <div class="service-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+              <line x1="9" y1="3" x2="9" y2="21"/>
+              <line x1="3" y1="9" x2="21" y2="9"/>
+            </svg>
+          </div>
+          <h3 class="service-title">Site Reliability Engineering</h3>
+          <p class="service-description">
+            Designing and maintaining highly available, scalable systems with focus on reliability, 
+            observability, and incident response.
+          </p>
+        </div>
+
+        <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="service-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2L2 7L12 12L22 7L12 2Z"/>
+              <path d="M2 17L12 22L22 17"/>
+              <path d="M2 12L12 17L22 12"/>
+            </svg>
+          </div>
+          <h3 class="service-title">Cloud Architecture</h3>
+          <p class="service-description">
+            Architecting cloud-native solutions on AWS, optimizing infrastructure for performance, 
+            cost, and scalability.
+          </p>
+        </div>
+
+        <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+          <div class="service-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <ellipse cx="12" cy="5" rx="9" ry="3"/>
+              <path d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12"/>
+              <path d="M3 5V19"/>
+              <path d="M21 5V19"/>
+            </svg>
+          </div>
+          <h3 class="service-title">Database Administration</h3>
+          <p class="service-description">
+            Managing and optimizing PostgreSQL databases, ensuring high availability, 
+            performance tuning, and data integrity.
+          </p>
+        </div>
+
+        <div class="service-card" data-aos="fade-up" data-aos-delay="300">
+          <div class="service-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+            </svg>
+          </div>
+          <h3 class="service-title">Performance Optimization</h3>
+          <p class="service-description">
+            Identifying bottlenecks, optimizing queries, and implementing solutions that 
+            maximize infrastructure utilization and reduce costs.
+          </p>
+        </div>
+
+        <div class="service-card" data-aos="fade-up" data-aos-delay="400">
+          <div class="service-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 16V8A2 2 0 0 0 19 6H5A2 2 0 0 0 3 8V16A2 2 0 0 0 5 18H19A2 2 0 0 0 21 16Z"/>
+              <polyline points="7 10 12 15 17 10"/>
+            </svg>
+          </div>
+          <h3 class="service-title">Infrastructure as Code</h3>
+          <p class="service-description">
+            Automating infrastructure provisioning and management using Terraform, 
+            ensuring consistency and repeatability.
+          </p>
+        </div>
+
+        <div class="service-card" data-aos="fade-up" data-aos-delay="500">
+          <div class="service-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"/>
+              <path d="M12 8V12L15 15"/>
+            </svg>
+          </div>
+          <h3 class="service-title">Cost Optimization</h3>
+          <p class="service-description">
+            Driving significant cost savings through intelligent resource management, 
+            right-sizing, and eliminating waste in cloud environments.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact-section">
+    <div class="container">
+      <div class="contact-content">
+        <h2 class="contact-title">Let's Connect</h2>
+        <p class="contact-subtitle">Interested in collaborating or have a question? I'd love to hear from you.</p>
+        <a href="contact.html" class="btn btn-primary btn-large">
+          <span>Get In Touch</span>
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2024 Dishant Modh. Built with passion for reliability and performance.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>

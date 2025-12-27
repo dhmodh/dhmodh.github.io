@@ -2,27 +2,172 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Blog | Dishant Modh</title>
+  <meta name="description" content="Articles and insights on SRE, cloud infrastructure, and database engineering">
   <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
-
 <body>
-<div class="bg-gradient"></div>
+  <div class="animated-bg">
+    <div class="gradient-orb orb-1"></div>
+    <div class="gradient-orb orb-2"></div>
+    <div class="gradient-orb orb-3"></div>
+  </div>
 
-<nav>
-  <a href="index.html" class="logo">DM</a>
-</nav>
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">
+        <span class="logo-text">DM</span>
+        <span class="logo-glow"></span>
+      </a>
+      <ul class="nav-menu">
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="experience.html" class="nav-link">Experience</a></li>
+        <li><a href="projects.html" class="nav-link">Projects</a></li>
+        <li><a href="blog.html" class="nav-link">Blog</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+        <li><a href="resume.pdf" class="nav-link resume-link" target="_blank">Resume</a></li>
+      </ul>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <span class="theme-icon">🌙</span>
+      </button>
+      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
 
-<section class="section glass reveal">
-  <h2>&lt; Writing /&gt;</h2>
+  <section class="section">
+    <div class="container">
+      <h2 class="reveal">Writing & Insights</h2>
+      <p class="section-subtitle reveal" style="text-align: center; margin-bottom: 3rem; color: var(--text-secondary); max-width: 600px; margin-left: auto; margin-right: auto;">
+        Thoughts on site reliability engineering, cloud infrastructure, database optimization, 
+        and building scalable systems.
+      </p>
 
-  <ul class="mono">
-    <li>• Designing Zero-Downtime DB Migrations</li>
-    <li>• AWS Cost Optimization Patterns</li>
-    <li>• PostgreSQL Reliability at Scale</li>
-  </ul>
-</section>
+      <div class="blog-grid">
+        <article class="blog-card glass reveal">
+          <div class="blog-header">
+            <span class="blog-category">Infrastructure</span>
+            <span class="blog-date">2024</span>
+          </div>
+          <h3 class="blog-title">Designing Zero-Downtime Database Migrations</h3>
+          <p class="blog-excerpt">
+            A comprehensive guide to planning and executing database migrations without service 
+            interruption. Covers strategies, tools, and real-world patterns for maintaining 
+            availability during schema changes and data migrations.
+          </p>
+          <div class="blog-tags">
+            <span class="blog-tag">PostgreSQL</span>
+            <span class="blog-tag">Migration</span>
+            <span class="blog-tag">Reliability</span>
+          </div>
+        </article>
 
-<script src="script.js"></script>
+        <article class="blog-card glass reveal">
+          <div class="blog-header">
+            <span class="blog-category">Cloud</span>
+            <span class="blog-date">2024</span>
+          </div>
+          <h3 class="blog-title">AWS Cost Optimization Patterns</h3>
+          <p class="blog-excerpt">
+            Practical strategies for reducing AWS costs without compromising performance or 
+            reliability. Learn about right-sizing, reserved instances, spot instances, and 
+            automated cost management techniques that saved $100K+ monthly.
+          </p>
+          <div class="blog-tags">
+            <span class="blog-tag">AWS</span>
+            <span class="blog-tag">Cost Optimization</span>
+            <span class="blog-tag">FinOps</span>
+          </div>
+        </article>
+
+        <article class="blog-card glass reveal">
+          <div class="blog-header">
+            <span class="blog-category">Database</span>
+            <span class="blog-date">2024</span>
+          </div>
+          <h3 class="blog-title">PostgreSQL Reliability at Scale</h3>
+          <p class="blog-excerpt">
+            Best practices for running PostgreSQL in production environments handling millions 
+            of transactions. Covers replication, monitoring, backup strategies, and performance 
+            tuning techniques that ensure high availability.
+          </p>
+          <div class="blog-tags">
+            <span class="blog-tag">PostgreSQL</span>
+            <span class="blog-tag">High Availability</span>
+            <span class="blog-tag">Performance</span>
+          </div>
+        </article>
+
+        <article class="blog-card glass reveal">
+          <div class="blog-header">
+            <span class="blog-category">DevOps</span>
+            <span class="blog-date">2024</span>
+          </div>
+          <h3 class="blog-title">Infrastructure as Code Best Practices</h3>
+          <p class="blog-excerpt">
+            Building maintainable and scalable infrastructure using Terraform. Learn about 
+            module design, state management, multi-environment strategies, and CI/CD integration 
+            for infrastructure deployments.
+          </p>
+          <div class="blog-tags">
+            <span class="blog-tag">Terraform</span>
+            <span class="blog-tag">IaC</span>
+            <span class="blog-tag">DevOps</span>
+          </div>
+        </article>
+
+        <article class="blog-card glass reveal">
+          <div class="blog-header">
+            <span class="blog-category">Observability</span>
+            <span class="blog-date">2024</span>
+          </div>
+          <h3 class="blog-title">Building Comprehensive Monitoring Systems</h3>
+          <p class="blog-excerpt">
+            Designing observability platforms that provide actionable insights. Covers metrics, 
+            logging, tracing, and alerting strategies that help teams detect and resolve issues 
+            before they impact users.
+          </p>
+          <div class="blog-tags">
+            <span class="blog-tag">Monitoring</span>
+            <span class="blog-tag">Observability</span>
+            <span class="blog-tag">Prometheus</span>
+          </div>
+        </article>
+
+        <article class="blog-card glass reveal">
+          <div class="blog-header">
+            <span class="blog-category">SRE</span>
+            <span class="blog-date">2024</span>
+          </div>
+          <h3 class="blog-title">Site Reliability Engineering Fundamentals</h3>
+          <p class="blog-excerpt">
+            Core principles of SRE: error budgets, SLIs, SLOs, and SLAs. Learn how to balance 
+            reliability with feature velocity, implement effective incident response, and build 
+            systems that scale reliably.
+          </p>
+          <div class="blog-tags">
+            <span class="blog-tag">SRE</span>
+            <span class="blog-tag">Reliability</span>
+            <span class="blog-tag">Best Practices</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2024 Dishant Modh. Built with passion for reliability and performance.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>

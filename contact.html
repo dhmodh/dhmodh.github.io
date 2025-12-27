@@ -2,28 +2,121 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact | Dishant Modh</title>
+  <meta name="description" content="Get in touch with Dishant Modh">
   <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
-
 <body>
-<div class="bg-gradient"></div>
+  <div class="animated-bg">
+    <div class="gradient-orb orb-1"></div>
+    <div class="gradient-orb orb-2"></div>
+    <div class="gradient-orb orb-3"></div>
+  </div>
 
-<nav>
-  <a href="index.html" class="logo">DM</a>
-</nav>
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">
+        <span class="logo-text">DM</span>
+        <span class="logo-glow"></span>
+      </a>
+      <ul class="nav-menu">
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="experience.html" class="nav-link">Experience</a></li>
+        <li><a href="projects.html" class="nav-link">Projects</a></li>
+        <li><a href="blog.html" class="nav-link">Blog</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+        <li><a href="resume.pdf" class="nav-link resume-link" target="_blank">Resume</a></li>
+      </ul>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <span class="theme-icon">🌙</span>
+      </button>
+      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
 
-<section class="section reveal">
-  <h2>&lt; Contact /&gt;</h2>
+  <section class="section">
+    <div class="container">
+      <h2 class="reveal">Get In Touch</h2>
+      <p class="section-subtitle reveal" style="text-align: center; margin-bottom: 3rem; color: var(--text-secondary); max-width: 600px; margin-left: auto; margin-right: auto;">
+        Interested in collaborating, have a question, or want to discuss opportunities? 
+        I'd love to hear from you. Feel free to reach out through the form below or connect via email.
+      </p>
 
-  <form action="https://formspree.io/f/xqkrgkzb" method="POST" class="glass contact">
-    <input type="text" name="name" placeholder="Name" required>
-    <input type="email" name="email" placeholder="Email" required>
-    <textarea name="message" placeholder="Message" required></textarea>
-    <button class="btn primary">Send</button>
-  </form>
-</section>
+      <div class="contact-wrapper">
+        <div class="contact-info glass reveal">
+          <h3>Contact Information</h3>
+          <div class="contact-item">
+            <div class="contact-icon">📧</div>
+            <div>
+              <h4>Email</h4>
+              <p>contact@dishantmodh.com</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">💼</div>
+            <div>
+              <h4>LinkedIn</h4>
+              <p><a href="https://linkedin.com/in/dishantmodh" target="_blank" style="color: var(--accent-primary); text-decoration: none;">linkedin.com/in/dishantmodh</a></p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">🐙</div>
+            <div>
+              <h4>GitHub</h4>
+              <p><a href="https://github.com/dhmodh" target="_blank" style="color: var(--accent-primary); text-decoration: none;">github.com/dhmodh</a></p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">📄</div>
+            <div>
+              <h4>Resume</h4>
+              <p><a href="resume.pdf" target="_blank" style="color: var(--accent-primary); text-decoration: none;">Download PDF</a></p>
+            </div>
+          </div>
+        </div>
 
-<script src="script.js"></script>
+        <form action="https://formspree.io/f/xqkrgkzb" method="POST" class="contact-form glass reveal">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="Your name" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="your.email@example.com" required>
+          </div>
+          <div class="form-group">
+            <label for="subject">Subject</label>
+            <input type="text" id="subject" name="subject" placeholder="What's this about?">
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Your message..." rows="6" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-large">
+            <span>Send Message</span>
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M2.5 17.5L17.5 2.5M17.5 2.5H7.5M17.5 2.5V12.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2024 Dishant Modh. Built with passion for reliability and performance.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>

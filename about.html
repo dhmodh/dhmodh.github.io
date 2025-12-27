@@ -2,31 +2,126 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About | Dishant Modh</title>
+  <meta name="description" content="Learn more about Dishant Modh, a Site Reliability Engineer specializing in cloud infrastructure and databases">
   <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
-
 <body>
-<div class="bg-gradient"></div>
+  <div class="animated-bg">
+    <div class="gradient-orb orb-1"></div>
+    <div class="gradient-orb orb-2"></div>
+    <div class="gradient-orb orb-3"></div>
+  </div>
 
-<nav>
-  <a href="index.html" class="logo">DM</a>
-</nav>
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">
+        <span class="logo-text">DM</span>
+        <span class="logo-glow"></span>
+      </a>
+      <ul class="nav-menu">
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="experience.html" class="nav-link">Experience</a></li>
+        <li><a href="projects.html" class="nav-link">Projects</a></li>
+        <li><a href="blog.html" class="nav-link">Blog</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+        <li><a href="resume.pdf" class="nav-link resume-link" target="_blank">Resume</a></li>
+      </ul>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <span class="theme-icon">🌙</span>
+      </button>
+      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
 
-<section class="section glass reveal">
-  <h2>&lt; About Me /&gt;</h2>
-  <p>
-    I’m a Site Reliability Engineer with 3.8+ years of experience building
-    reliable, scalable, and cost-efficient cloud systems.
-  </p>
+  <section class="section">
+    <div class="container">
+      <h2 class="reveal">About Me</h2>
+      
+      <div class="glass reveal">
+        <div class="about-content">
+          <div class="about-text">
+            <p class="lead-text">
+              I'm a Site Reliability Engineer with 3.8+ years of experience building reliable, 
+              scalable, and cost-efficient cloud systems.
+            </p>
+            <p>
+              My passion lies in designing resilient infrastructure that powers enterprise applications 
+              while maintaining optimal performance and cost efficiency. I specialize in transforming 
+              complex technical challenges into elegant, maintainable solutions.
+            </p>
+            <p>
+              Throughout my career, I've worked with diverse teams to architect systems that handle 
+              millions of requests, optimize database performance, and ensure high availability. 
+              I believe in the power of automation, observability, and continuous improvement.
+            </p>
+          </div>
+        </div>
+      </div>
 
-  <ul class="mono">
-    <li>• AWS · Terraform · PostgreSQL</li>
-    <li>• Reliability & Observability</li>
-    <li>• Cost Optimization</li>
-  </ul>
-</section>
+      <div class="glass reveal">
+        <h3 style="margin-bottom: 1.5rem; font-size: 1.5rem; font-weight: 700;">Core Expertise</h3>
+        <div class="expertise-grid">
+          <div class="expertise-item">
+            <div class="expertise-icon">☁️</div>
+            <h4>AWS Cloud Infrastructure</h4>
+            <p>Designing and managing scalable cloud architectures</p>
+          </div>
+          <div class="expertise-item">
+            <div class="expertise-icon">🗄️</div>
+            <h4>PostgreSQL Administration</h4>
+            <p>Optimizing database performance and reliability</p>
+          </div>
+          <div class="expertise-item">
+            <div class="expertise-icon">⚙️</div>
+            <h4>Terraform & IaC</h4>
+            <p>Infrastructure automation and version control</p>
+          </div>
+          <div class="expertise-item">
+            <div class="expertise-icon">📊</div>
+            <h4>Observability & Monitoring</h4>
+            <p>Building comprehensive monitoring solutions</p>
+          </div>
+          <div class="expertise-item">
+            <div class="expertise-icon">💰</div>
+            <h4>Cost Optimization</h4>
+            <p>Driving significant savings through intelligent resource management</p>
+          </div>
+          <div class="expertise-item">
+            <div class="expertise-icon">🔄</div>
+            <h4>Reliability Engineering</h4>
+            <p>Designing systems for high availability and fault tolerance</p>
+          </div>
+        </div>
+      </div>
 
-<script src="script.js"></script>
+      <div class="glass reveal">
+        <h3 style="margin-bottom: 1.5rem; font-size: 1.5rem; font-weight: 700;">What Drives Me</h3>
+        <ul class="mono" style="font-size: 1.1rem; line-height: 2;">
+          <li>• Building systems that scale reliably under pressure</li>
+          <li>• Solving complex problems with elegant, maintainable solutions</li>
+          <li>• Continuous learning and staying current with cloud technologies</li>
+          <li>• Contributing to open-source projects and sharing knowledge</li>
+          <li>• Helping teams deliver better software through better infrastructure</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2024 Dishant Modh. Built with passion for reliability and performance.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
