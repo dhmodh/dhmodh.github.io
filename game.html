@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PostgreSQL & AWS Infrastructure Quiz | Dishant Modh</title>
+  <meta name="description" content="Test your knowledge of PostgreSQL and AWS Infrastructure with this interactive quiz game. Challenge yourself and share your score!">
+  <meta name="keywords" content="PostgreSQL quiz, AWS quiz, Database quiz, Cloud infrastructure quiz, SRE quiz, DevOps quiz">
+  <link rel="canonical" href="https://dishantmodh.com/game.html">
+  <link rel="icon" type="image/svg+xml" href="favicon_io/favicon.svg?v=5">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    .game-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    .game-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    .game-stats {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+      gap: 1rem;
+    }
+    .stat-box {
+      flex: 1;
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      padding: 1rem;
+      text-align: center;
+    }
+    .stat-value {
+      font-size: 2rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .stat-label {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+    }
+    .question-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 2.5rem;
+      margin-bottom: 2rem;
+    }
+    .question-number {
+      color: var(--accent-primary);
+      font-weight: 600;
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+    }
+    .question-text {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 2rem;
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+    .options-list {
+      display: grid;
+      gap: 1rem;
+    }
+    .option-btn {
+      padding: 1.25rem;
+      background: var(--bg-tertiary);
+      border: 2px solid var(--border-color);
+      border-radius: 12px;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 1rem;
+      color: var(--text-primary);
+      font-family: inherit;
+    }
+    .option-btn:hover {
+      border-color: var(--accent-primary);
+      transform: translateX(5px);
+      background: var(--bg-secondary);
+    }
+    .option-btn.selected {
+      border-color: var(--accent-primary);
+      background: rgba(59, 130, 246, 0.1);
+    }
+    .option-btn.correct {
+      border-color: #10b981;
+      background: rgba(16, 185, 129, 0.1);
+    }
+    .option-btn.incorrect {
+      border-color: #ef4444;
+      background: rgba(239, 68, 68, 0.1);
+    }
+    .option-btn:disabled {
+      cursor: not-allowed;
+      opacity: 0.7;
+    }
+    .game-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 2rem;
+    }
+    .result-screen {
+      text-align: center;
+      padding: 3rem 2rem;
+    }
+    .result-score {
+      font-size: 4rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin: 1rem 0;
+    }
+    .result-message {
+      font-size: 1.5rem;
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+    }
+    .share-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+    .share-btn {
+      padding: 0.75rem 1.5rem;
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      text-decoration: none;
+      color: var(--text-primary);
+      font-weight: 600;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .share-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+    .progress-bar {
+      width: 100%;
+      height: 8px;
+      background: var(--bg-tertiary);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 2rem;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+      transition: width 0.3s ease;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="animated-bg">
+    <div class="gradient-orb orb-1"></div>
+    <div class="gradient-orb orb-2"></div>
+    <div class="gradient-orb orb-3"></div>
+  </div>
+
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">
+        <span class="logo-text">DM</span>
+        <span class="logo-glow"></span>
+      </a>
+      <ul class="nav-menu">
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="experience.html" class="nav-link">Experience</a></li>
+        <li><a href="projects.html" class="nav-link">Projects</a></li>
+        <li><a href="blog.html" class="nav-link">Blog</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+        <li><a href="game.html" class="nav-link">Quiz Game</a></li>
+        <li><a href="resume.pdf" class="nav-link resume-link" target="_blank">Resume</a></li>
+      </ul>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <span class="theme-icon">🌙</span>
+      </button>
+      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <section class="section" style="padding-top: 8rem;">
+    <div class="game-container">
+      <div class="game-header reveal">
+        <h1 class="section-title">PostgreSQL & AWS Infrastructure Quiz</h1>
+        <p class="section-subtitle">Test your knowledge of databases and cloud infrastructure. Challenge yourself!</p>
+      </div>
+
+      <div id="gameScreen">
+        <div class="game-stats reveal">
+          <div class="stat-box">
+            <div class="stat-value" id="score">0</div>
+            <div class="stat-label">Score</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-value" id="questionNum">1</div>
+            <div class="stat-label">Question</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-value" id="totalQuestions">10</div>
+            <div class="stat-label">Total</div>
+          </div>
+        </div>
+
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressBar" style="width: 0%"></div>
+        </div>
+
+        <div class="question-card reveal" id="questionCard">
+          <div class="question-number" id="questionNumber">Question 1 of 10</div>
+          <div class="question-text" id="questionText"></div>
+          <div class="options-list" id="optionsList"></div>
+          <div class="game-actions">
+            <button class="btn btn-primary" id="nextBtn" style="display: none;">Next Question</button>
+            <button class="btn btn-secondary" id="submitBtn">Submit Answer</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="resultScreen" style="display: none;">
+        <div class="result-screen glass reveal">
+          <h2>Quiz Complete! 🎉</h2>
+          <div class="result-score" id="finalScore">0/10</div>
+          <div class="result-message" id="resultMessage"></div>
+          <p style="color: var(--text-secondary); margin-bottom: 2rem;">
+            Great job! Share your score and challenge your friends!
+          </p>
+          <div class="share-buttons">
+            <a href="#" class="share-btn" id="shareTwitter" target="_blank">
+              <span>🐦</span> Share on Twitter
+            </a>
+            <a href="#" class="share-btn" id="shareLinkedIn" target="_blank">
+              <span>💼</span> Share on LinkedIn
+            </a>
+            <a href="#" class="share-btn" id="shareWhatsApp" target="_blank">
+              <span>💬</span> Share on WhatsApp
+            </a>
+          </div>
+          <div class="game-actions" style="margin-top: 2rem;">
+            <button class="btn btn-primary" id="playAgainBtn">Play Again</button>
+            <a href="index.html" class="btn btn-secondary">Back to Home</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2024 Dishant Modh. Built with passion for reliability and performance.</p>
+      <div class="footer-links">
+        <a href="https://linkedin.com/in/dishantmodh" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">LinkedIn</a>
+        <span>•</span>
+        <a href="https://github.com/dhmodh" target="_blank" rel="noopener noreferrer" aria-label="GitHub">GitHub</a>
+        <span>•</span>
+        <a href="resume.pdf" target="_blank" rel="noopener noreferrer">Resume</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>
+

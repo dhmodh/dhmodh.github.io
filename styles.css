@@ -907,6 +907,43 @@ body {
   flex-wrap: wrap;
 }
 
+/* Quiz CTA Section */
+.quiz-cta-section {
+  position: relative;
+  padding: 6rem 2rem;
+  z-index: 1;
+}
+
+.quiz-cta-content {
+  text-align: center;
+  padding: 3rem;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.quiz-cta-icon {
+  font-size: 4rem;
+  margin-bottom: 1.5rem;
+  animation: bounce 2s infinite;
+}
+
+.quiz-cta-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.quiz-cta-description {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin-bottom: 2rem;
+}
+
 /* Social Sharing Section */
 .social-sharing {
   position: relative;
