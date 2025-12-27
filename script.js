@@ -1,3 +1,51 @@
+// Logo Fallback - Handle logo image loading
+document.addEventListener('DOMContentLoaded', function() {
+  const logoImages = document.querySelectorAll('.logo-image');
+  
+  logoImages.forEach(img => {
+    // Hide text when image loads successfully
+    img.addEventListener('load', function() {
+      const logoText = this.nextElementSibling;
+      if (logoText && logoText.classList.contains('logo-text')) {
+        logoText.style.display = 'none';
+      }
+    });
+    
+    // Show text when image fails to load
+    img.addEventListener('error', function() {
+      this.style.display = 'none';
+      const logoText = this.nextElementSibling;
+      if (logoText && logoText.classList.contains('logo-text')) {
+        logoText.style.display = 'flex';
+      }
+    });
+    
+    // Check if image is already loaded or failed
+    if (img.complete) {
+      if (img.naturalHeight === 0) {
+        // Image failed to load
+        img.style.display = 'none';
+        const logoText = img.nextElementSibling;
+        if (logoText && logoText.classList.contains('logo-text')) {
+          logoText.style.display = 'flex';
+        }
+      } else {
+        // Image loaded successfully
+        const logoText = img.nextElementSibling;
+        if (logoText && logoText.classList.contains('logo-text')) {
+          logoText.style.display = 'none';
+        }
+      }
+    } else {
+      // Image is still loading, show text as fallback temporarily
+      const logoText = img.nextElementSibling;
+      if (logoText && logoText.classList.contains('logo-text')) {
+        logoText.style.display = 'flex';
+      }
+    }
+  });
+});
+
 // Theme Toggle
 const themeToggle = document.getElementById('themeToggle');
 const savedTheme = localStorage.getItem('theme') || 'dark';
