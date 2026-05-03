@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Infra Memory Match | Dishant Modh</title>
+  <meta name="description" content="Play an engaging infrastructure memory game. Match cloud and database cards with the fewest moves.">
+  <link rel="icon" type="image/svg+xml" href="favicon_io/favicon.svg?v=5">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    .memory-wrap { max-width: 920px; margin: 0 auto; padding: 1rem 2rem 2rem; }
+    .memory-head { text-align: center; margin-bottom: 1.5rem; }
+    .memory-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; margin-bottom: 1.25rem; }
+    .memory-stat { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 12px; padding: 0.9rem; text-align: center; }
+    .memory-stat b { display: block; font-size: 1.2rem; color: var(--text-primary); }
+    .memory-board { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.8rem; }
+    .memory-card { aspect-ratio: 1/1; border-radius: 12px; border: 1px solid var(--glass-border); background: var(--bg-tertiary); color: var(--text-primary); cursor: pointer; font-weight: 600; font-size: 0.95rem; padding: 0.5rem; transition: transform 0.2s ease, border-color 0.2s ease; }
+    .memory-card:hover { transform: translateY(-2px); border-color: var(--accent-primary); }
+    .memory-card.flipped, .memory-card.matched { background: var(--glass-bg); }
+    .memory-card.matched { border-color: #10b981; color: #10b981; }
+    .memory-back { color: var(--accent-primary); font-size: 1.8rem; }
+    .memory-actions { display: flex; gap: 0.75rem; justify-content: center; margin-top: 1.25rem; flex-wrap: wrap; }
+    .memory-win { margin-top: 1.25rem; text-align: center; color: var(--text-secondary); }
+    @media (max-width: 768px) {
+      .memory-wrap { padding: 1rem; }
+      .memory-stats { grid-template-columns: repeat(2, 1fr); }
+      .memory-board { grid-template-columns: repeat(3, 1fr); }
+    }
+  </style>
+</head>
+<body>
+  <div class="animated-bg">
+    <div class="gradient-orb orb-1"></div>
+    <div class="gradient-orb orb-2"></div>
+    <div class="gradient-orb orb-3"></div>
+  </div>
+
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">
+        <span class="logo-text">DM</span>
+        <span class="logo-glow"></span>
+      </a>
+      <ul class="nav-menu">
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="experience.html" class="nav-link">Experience</a></li>
+        <li><a href="projects.html" class="nav-link">Projects</a></li>
+        <li><a href="blog.html" class="nav-link">Blog</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+        <li><a href="game.html" class="nav-link">Quiz Game</a></li>
+        <li><a href="memory-game.html" class="nav-link">Memory Game</a></li>
+        <li><a href="resume.pdf" class="nav-link resume-link" target="_blank">Resume</a></li>
+      </ul>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <span class="theme-icon">🌙</span>
+      </button>
+      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <section class="section" style="padding-top: 8rem;">
+    <div class="memory-wrap">
+      <div class="memory-head reveal">
+        <h1 class="section-title">Infra Memory Match</h1>
+        <p class="section-subtitle">Flip cards, match pairs, and beat your best score.</p>
+      </div>
+
+      <div class="memory-stats reveal">
+        <div class="memory-stat"><b id="moves">0</b><span>Moves</span></div>
+        <div class="memory-stat"><b id="timer">0s</b><span>Time</span></div>
+        <div class="memory-stat"><b id="matched">0/8</b><span>Matched</span></div>
+        <div class="memory-stat"><b id="best">--</b><span>Best Moves</span></div>
+      </div>
+
+      <div class="memory-board reveal" id="memoryBoard"></div>
+
+      <div class="memory-actions">
+        <button class="btn btn-primary" id="restartGameBtn">Restart</button>
+        <a href="game.html" class="btn btn-secondary">Play Quiz Game</a>
+      </div>
+
+      <div class="memory-win" id="memoryWin"></div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2024 Dishant Modh. Built with passion for reliability and performance.</p>
+      <div class="footer-links">
+        <a href="https://linkedin.com/in/dishantmodh" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <span>•</span>
+        <a href="https://github.com/dhmodh" target="_blank" rel="noopener noreferrer">GitHub</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="memory-game.js"></script>
+</body>
+</html>
