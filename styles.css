@@ -1543,6 +1543,31 @@ body {
   gap: 2rem;
 }
 
+.blog-filters {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin: 0 0 2rem;
+}
+
+.blog-filter-btn {
+  border: 1px solid var(--glass-border);
+  background: var(--glass-bg);
+  color: var(--text-secondary);
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.blog-filter-btn:hover,
+.blog-filter-btn.active {
+  color: white;
+  border-color: transparent;
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+}
+
 .blog-card {
   padding: 2rem;
   transition: all 0.3s ease;

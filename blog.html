@@ -53,116 +53,118 @@
     <div class="container">
       <h2 class="reveal">Writing & Insights</h2>
       <p class="section-subtitle reveal" style="text-align: center; margin-bottom: 3rem; color: var(--text-secondary); max-width: 600px; margin-left: auto; margin-right: auto;">
-        Thoughts on site reliability engineering, cloud infrastructure, database optimization, 
-        and building scalable systems.
+        Deep dives on production databases: reliability, performance tuning, migration strategy,
+        and real-world incident lessons from large-scale systems.
       </p>
 
+      <div class="blog-filters reveal">
+        <button class="blog-filter-btn active" data-blog-filter="all">All</button>
+        <button class="blog-filter-btn" data-blog-filter="postgresql">PostgreSQL</button>
+        <button class="blog-filter-btn" data-blog-filter="migration">Migration</button>
+        <button class="blog-filter-btn" data-blog-filter="performance">Performance</button>
+        <button class="blog-filter-btn" data-blog-filter="reliability">Reliability</button>
+      </div>
+
       <div class="blog-grid">
-        <article class="blog-card glass reveal">
+        <article class="blog-card glass reveal" data-blog-category="postgresql performance">
           <div class="blog-header">
-            <span class="blog-category">Infrastructure</span>
-            <span class="blog-date">2024</span>
+            <span class="blog-category">PostgreSQL</span>
+            <span class="blog-date">Jan 2026 · 12 min</span>
           </div>
-          <h3 class="blog-title">Designing Zero-Downtime Database Migrations</h3>
+          <h3 class="blog-title">How I Cut p95 Latency from 1.8s to 0.9s in PostgreSQL</h3>
           <p class="blog-excerpt">
-            A comprehensive guide to planning and executing database migrations without service 
-            interruption. Covers strategies, tools, and real-world patterns for maintaining 
-            availability during schema changes and data migrations.
+            A practical playbook using EXPLAIN ANALYZE, index redesign, autovacuum tuning,
+            and lock analysis. Includes a repeatable checklist you can apply in production.
           </p>
           <div class="blog-tags">
             <span class="blog-tag">PostgreSQL</span>
-            <span class="blog-tag">Migration</span>
-            <span class="blog-tag">Reliability</span>
+            <span class="blog-tag">Query Tuning</span>
+            <span class="blog-tag">p95 Latency</span>
           </div>
         </article>
 
-        <article class="blog-card glass reveal">
+        <article class="blog-card glass reveal" data-blog-category="migration reliability">
           <div class="blog-header">
-            <span class="blog-category">Cloud</span>
-            <span class="blog-date">2024</span>
+            <span class="blog-category">Migration</span>
+            <span class="blog-date">Dec 2025 · 10 min</span>
           </div>
-          <h3 class="blog-title">AWS Cost Optimization Patterns</h3>
+          <h3 class="blog-title">Zero-Downtime DB Migrations: 4TB On-Prem to AWS</h3>
           <p class="blog-excerpt">
-            Practical strategies for reducing AWS costs without compromising performance or 
-            reliability. Learn about right-sizing, reserved instances, spot instances, and 
-            automated cost management techniques that saved $100K+ monthly.
+            Architecture patterns using AWS DMS + pglogical, cutover strategy, rollback plans,
+            and migration validation patterns that protect SLA during high-risk windows.
           </p>
           <div class="blog-tags">
-            <span class="blog-tag">AWS</span>
-            <span class="blog-tag">Cost Optimization</span>
-            <span class="blog-tag">FinOps</span>
+            <span class="blog-tag">AWS DMS</span>
+            <span class="blog-tag">pglogical</span>
+            <span class="blog-tag">Zero Downtime</span>
           </div>
         </article>
 
-        <article class="blog-card glass reveal">
+        <article class="blog-card glass reveal" data-blog-category="reliability postgresql">
           <div class="blog-header">
-            <span class="blog-category">Database</span>
-            <span class="blog-date">2024</span>
+            <span class="blog-category">Reliability</span>
+            <span class="blog-date">Nov 2025 · 9 min</span>
           </div>
-          <h3 class="blog-title">PostgreSQL Reliability at Scale</h3>
+          <h3 class="blog-title">DR Readiness for Aurora Global Database</h3>
           <p class="blog-excerpt">
-            Best practices for running PostgreSQL in production environments handling millions 
-            of transactions. Covers replication, monitoring, backup strategies, and performance 
-            tuning techniques that ensure high availability.
+            Step-by-step disaster recovery testing approach to achieve near-zero RPO and
+            low RTO with quarterly failover drills and automation-backed runbooks.
           </p>
           <div class="blog-tags">
-            <span class="blog-tag">PostgreSQL</span>
-            <span class="blog-tag">High Availability</span>
-            <span class="blog-tag">Performance</span>
+            <span class="blog-tag">Aurora</span>
+            <span class="blog-tag">RPO/RTO</span>
+            <span class="blog-tag">Runbooks</span>
           </div>
         </article>
 
-        <article class="blog-card glass reveal">
+        <article class="blog-card glass reveal" data-blog-category="performance reliability">
           <div class="blog-header">
-            <span class="blog-category">DevOps</span>
-            <span class="blog-date">2024</span>
+            <span class="blog-category">Performance</span>
+            <span class="blog-date">Oct 2025 · 8 min</span>
           </div>
-          <h3 class="blog-title">Infrastructure as Code Best Practices</h3>
+          <h3 class="blog-title">MongoDB Aggregation Tuning in Production</h3>
           <p class="blog-excerpt">
-            Building maintainable and scalable infrastructure using Terraform. Learn about 
-            module design, state management, multi-environment strategies, and CI/CD integration 
-            for infrastructure deployments.
+            Real query pipeline tuning examples, compound indexing patterns, and hotspot
+            elimination methods that reduced average query latency from 820ms to 450ms.
           </p>
           <div class="blog-tags">
-            <span class="blog-tag">Terraform</span>
-            <span class="blog-tag">IaC</span>
-            <span class="blog-tag">DevOps</span>
+            <span class="blog-tag">MongoDB</span>
+            <span class="blog-tag">Aggregation</span>
+            <span class="blog-tag">Indexing</span>
           </div>
         </article>
 
-        <article class="blog-card glass reveal">
+        <article class="blog-card glass reveal" data-blog-category="reliability performance">
           <div class="blog-header">
             <span class="blog-category">Observability</span>
-            <span class="blog-date">2024</span>
+            <span class="blog-date">Sep 2025 · 11 min</span>
           </div>
-          <h3 class="blog-title">Building Comprehensive Monitoring Systems</h3>
+          <h3 class="blog-title">Datadog + Grafana Alerting That Actually Reduces MTTR</h3>
           <p class="blog-excerpt">
-            Designing observability platforms that provide actionable insights. Covers metrics, 
-            logging, tracing, and alerting strategies that help teams detect and resolve issues 
-            before they impact users.
+            Alert quality design for database incidents, anomaly thresholds, and actionable
+            triage data that cut mean time to resolution by 30% in production.
           </p>
           <div class="blog-tags">
-            <span class="blog-tag">Monitoring</span>
-            <span class="blog-tag">Observability</span>
-            <span class="blog-tag">Prometheus</span>
+            <span class="blog-tag">Datadog</span>
+            <span class="blog-tag">Grafana</span>
+            <span class="blog-tag">MTTR</span>
           </div>
         </article>
 
-        <article class="blog-card glass reveal">
+        <article class="blog-card glass reveal" data-blog-category="postgresql reliability">
           <div class="blog-header">
             <span class="blog-category">SRE</span>
-            <span class="blog-date">2024</span>
+            <span class="blog-date">Aug 2025 · 9 min</span>
           </div>
-          <h3 class="blog-title">Site Reliability Engineering Fundamentals</h3>
+          <h3 class="blog-title">PostgreSQL On-Call Playbook for P1/P0 Incidents</h3>
           <p class="blog-excerpt">
-            Core principles of SRE: error budgets, SLIs, SLOs, and SLAs. Learn how to balance 
-            reliability with feature velocity, implement effective incident response, and build 
-            systems that scale reliably.
+            A battle-tested incident command model, communication templates, severity gates,
+            and post-mortem framework that lowers repeat incidents and response fatigue.
           </p>
           <div class="blog-tags">
-            <span class="blog-tag">SRE</span>
-            <span class="blog-tag">Reliability</span>
-            <span class="blog-tag">Best Practices</span>
+            <span class="blog-tag">On-call</span>
+            <span class="blog-tag">PostgreSQL</span>
+            <span class="blog-tag">Incident Response</span>
           </div>
         </article>
       </div>

@@ -360,6 +360,25 @@ if (projectFilterButtons.length > 0 && projectCards.length > 0) {
   });
 }
 
+// Blog filter feature
+const blogFilterButtons = document.querySelectorAll('.blog-filter-btn');
+const blogCards = document.querySelectorAll('.blog-card[data-blog-category]');
+if (blogFilterButtons.length > 0 && blogCards.length > 0) {
+  blogFilterButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const filter = btn.getAttribute('data-blog-filter') || 'all';
+      blogFilterButtons.forEach(item => item.classList.remove('active'));
+      btn.classList.add('active');
+
+      blogCards.forEach(card => {
+        const categories = (card.getAttribute('data-blog-category') || '').split(' ');
+        const show = filter === 'all' || categories.includes(filter);
+        card.style.display = show ? '' : 'none';
+      });
+    });
+  });
+}
+
 // Copy to clipboard buttons (contact page)
 document.querySelectorAll('.copy-btn[data-copy]').forEach(btn => {
   btn.addEventListener('click', async () => {

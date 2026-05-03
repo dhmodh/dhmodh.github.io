@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SRE Incident Challenge | Dishant Modh</title>
+  <meta name="description" content="Play a fast-paced SRE incident response challenge. Pick the right action before time runs out.">
+  <link rel="icon" type="image/svg+xml" href="favicon_io/favicon.svg?v=5">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    .incident-wrap { max-width: 860px; margin: 0 auto; padding: 1rem 2rem 2rem; }
+    .incident-top { text-align: center; margin-bottom: 1.5rem; }
+    .incident-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; margin-bottom: 1rem; }
+    .incident-stat { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 12px; padding: 0.85rem; text-align: center; }
+    .incident-stat b { font-size: 1.15rem; display: block; }
+    .incident-progress { height: 10px; background: var(--bg-tertiary); border-radius: 999px; overflow: hidden; margin-bottom: 1rem; }
+    .incident-progress-fill { height: 100%; width: 100%; background: linear-gradient(90deg, #10b981, #f59e0b, #ef4444); transition: width 1s linear; }
+    .incident-card { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 16px; padding: 1.5rem; }
+    .incident-title { font-weight: 700; font-size: 1.2rem; margin-bottom: 0.5rem; }
+    .incident-desc { color: var(--text-secondary); margin-bottom: 1rem; }
+    .incident-options { display: grid; gap: 0.7rem; }
+    .incident-option { text-align: left; padding: 0.9rem 1rem; border-radius: 10px; border: 1px solid var(--border-color); background: var(--bg-tertiary); color: var(--text-primary); cursor: pointer; transition: all 0.2s ease; }
+    .incident-option:hover { transform: translateY(-1px); border-color: var(--accent-primary); }
+    .incident-option.correct { border-color: #10b981; background: rgba(16,185,129,0.14); }
+    .incident-option.wrong { border-color: #ef4444; background: rgba(239,68,68,0.14); }
+    .incident-actions { display: flex; justify-content: center; gap: 0.75rem; margin-top: 1rem; flex-wrap: wrap; }
+    .incident-feedback { margin-top: 0.85rem; color: var(--text-secondary); min-height: 24px; }
+    @media (max-width: 768px) {
+      .incident-wrap { padding: 1rem; }
+      .incident-stats { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+  <div class="animated-bg">
+    <div class="gradient-orb orb-1"></div>
+    <div class="gradient-orb orb-2"></div>
+    <div class="gradient-orb orb-3"></div>
+  </div>
+
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo"><span class="logo-text">DM</span><span class="logo-glow"></span></a>
+      <ul class="nav-menu">
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="experience.html" class="nav-link">Experience</a></li>
+        <li><a href="projects.html" class="nav-link">Projects</a></li>
+        <li><a href="blog.html" class="nav-link">Blog</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+        <li><a href="game.html" class="nav-link">Quiz Game</a></li>
+        <li><a href="memory-game.html" class="nav-link">Memory Game</a></li>
+        <li><a href="incident-game.html" class="nav-link">Incident Game</a></li>
+        <li><a href="resume.pdf" class="nav-link resume-link" target="_blank">Resume</a></li>
+      </ul>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"><span class="theme-icon">🌙</span></button>
+      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <section class="section" style="padding-top: 8rem;">
+    <div class="incident-wrap">
+      <div class="incident-top reveal">
+        <h1 class="section-title">SRE Incident Challenge</h1>
+        <p class="section-subtitle">You are on call. Make fast decisions and stabilize production.</p>
+      </div>
+
+      <div class="incident-stats reveal">
+        <div class="incident-stat"><b id="incidentScore">0</b><span>Score</span></div>
+        <div class="incident-stat"><b id="incidentRound">1/8</b><span>Round</span></div>
+        <div class="incident-stat"><b id="incidentStreak">0</b><span>Streak</span></div>
+        <div class="incident-stat"><b id="incidentTimer">20s</b><span>Time Left</span></div>
+      </div>
+
+      <div class="incident-progress reveal"><div id="incidentProgressFill" class="incident-progress-fill"></div></div>
+
+      <div class="incident-card reveal">
+        <div id="incidentTitle" class="incident-title"></div>
+        <div id="incidentDesc" class="incident-desc"></div>
+        <div id="incidentOptions" class="incident-options"></div>
+        <p id="incidentFeedback" class="incident-feedback"></p>
+        <div class="incident-actions">
+          <button id="incidentNextBtn" class="btn btn-primary" style="display:none;">Next Incident</button>
+          <button id="incidentRestartBtn" class="btn btn-secondary">Restart</button>
+          <a href="game.html" class="btn btn-secondary">Quiz Game</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2024 Dishant Modh. Built with passion for reliability and performance.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="incident-game.js"></script>
+</body>
+</html>
