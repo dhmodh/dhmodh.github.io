@@ -269,6 +269,118 @@ document.querySelectorAll('.nav-link').forEach(link => {
   }
 });
 
+// Scroll Progress + Back To Top
+const scrollProgress = document.createElement('div');
+scrollProgress.className = 'scroll-progress';
+document.body.appendChild(scrollProgress);
+
+const backToTop = document.createElement('button');
+backToTop.className = 'back-to-top';
+backToTop.setAttribute('aria-label', 'Back to top');
+backToTop.textContent = '↑';
+document.body.appendChild(backToTop);
+
+const updateScrollUi = () => {
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const progress = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+  scrollProgress.style.width = `${progress}%`;
+
+  if (window.scrollY > 350) {
+    backToTop.classList.add('visible');
+  } else {
+    backToTop.classList.remove('visible');
+  }
+};
+
+window.addEventListener('scroll', updateScrollUi, { passive: true });
+window.addEventListener('resize', updateScrollUi);
+updateScrollUi();
+
+backToTop.addEventListener('click', () => {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+});
+
+// Homepage counter animation
+const statNumbers = document.querySelectorAll('.stat-number[data-target]');
+if (statNumbers.length > 0) {
+  const counterObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+
+      const el = entry.target;
+      const target = Number(el.getAttribute('data-target')) || 0;
+      const divisor = Number(el.getAttribute('data-divisor')) || 1;
+      const prefix = el.getAttribute('data-prefix') || '';
+      const suffix = el.getAttribute('data-suffix') || '+';
+      const duration = 1200;
+      const startTime = performance.now();
+
+      const tick = (now) => {
+        const progress = Math.min((now - startTime) / duration, 1);
+        const current = Math.floor(progress * target);
+        const value = current / divisor;
+        const formatted = Number.isInteger(value) ? String(value) : value.toFixed(2);
+        el.textContent = `${prefix}${formatted}${suffix}`;
+        if (progress < 1) {
+          requestAnimationFrame(tick);
+        } else {
+          const finalValue = target / divisor;
+          const finalFormatted = Number.isInteger(finalValue) ? String(finalValue) : finalValue.toFixed(2);
+          el.textContent = `${prefix}${finalFormatted}${suffix}`;
+        }
+      };
+
+      requestAnimationFrame(tick);
+      observer.unobserve(el);
+    });
+  }, { threshold: 0.4 });
+
+  statNumbers.forEach(num => counterObserver.observe(num));
+}
+
+// Projects filter feature
+const projectFilterButtons = document.querySelectorAll('.project-filter-btn');
+const projectCards = document.querySelectorAll('.project-card[data-category]');
+if (projectFilterButtons.length > 0 && projectCards.length > 0) {
+  projectFilterButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const filter = btn.getAttribute('data-filter') || 'all';
+      projectFilterButtons.forEach(item => item.classList.remove('active'));
+      btn.classList.add('active');
+
+      projectCards.forEach(card => {
+        const categories = (card.getAttribute('data-category') || '').split(' ');
+        const show = filter === 'all' || categories.includes(filter);
+        card.style.display = show ? '' : 'none';
+      });
+    });
+  });
+}
+
+// Copy to clipboard buttons (contact page)
+document.querySelectorAll('.copy-btn[data-copy]').forEach(btn => {
+  btn.addEventListener('click', async () => {
+    const text = btn.getAttribute('data-copy');
+    if (!text) return;
+    try {
+      await navigator.clipboard.writeText(text);
+      const originalText = btn.textContent;
+      btn.textContent = 'Copied!';
+      setTimeout(() => {
+        btn.textContent = originalText;
+      }, 1200);
+    } catch (error) {
+      btn.textContent = 'Failed';
+      setTimeout(() => {
+        btn.textContent = 'Copy';
+      }, 1200);
+    }
+  });
+});
+
 // Console Easter Egg
 console.log('%c👋 Hey there!', 'font-size: 20px; font-weight: bold; color: #3b82f6;');
 console.log('%cInterested in the code? Check out the repository!', 'font-size: 14px; color: #94a3b8;');

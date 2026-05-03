@@ -55,65 +55,73 @@
       <p class="section-subtitle reveal" style="text-align: center; margin-bottom: 3rem; color: var(--text-secondary);">
         A selection of projects showcasing infrastructure, automation, and system design expertise
       </p>
+      <div class="project-filters reveal">
+        <button class="project-filter-btn active" data-filter="all">All</button>
+        <button class="project-filter-btn" data-filter="database">Database</button>
+        <button class="project-filter-btn" data-filter="ai">AI/ML</button>
+        <button class="project-filter-btn" data-filter="cloud">Cloud</button>
+      </div>
 
       <div class="projects-grid">
-        <div class="project-card glass reveal">
+        <div class="project-card glass reveal" data-category="database cloud">
           <div class="project-header">
             <div class="project-icon">🗄️</div>
-            <h3>High Availability PostgreSQL Platform</h3>
+            <h3>High-Availability PostgreSQL Cluster (Patroni)</h3>
           </div>
           <p class="project-description">
-            Designed and implemented an auto-healing PostgreSQL cluster architecture with automated 
-            failover, comprehensive monitoring, and disaster recovery capabilities. The system ensures 
-            99.9% uptime and handles millions of transactions daily.
+            Deployed a 3-node auto-healing PostgreSQL 15 cluster on AWS EC2 using Patroni and etcd for
+            leader election and consensus. Infra managed end-to-end with Terraform and drift controls.
           </p>
           <div class="project-features">
             <span class="feature-badge">Auto-healing</span>
-            <span class="feature-badge">Multi-region</span>
+            <span class="feature-badge">Patroni</span>
+            <span class="feature-badge">etcd</span>
             <span class="feature-badge">Monitoring</span>
-            <span class="feature-badge">Disaster Recovery</span>
+            <span class="feature-badge">&lt;5s Failover</span>
           </div>
           <div class="project-tech">
             <span class="tech-tag">PostgreSQL</span>
-            <span class="tech-tag">AWS RDS</span>
+            <span class="tech-tag">AWS EC2</span>
+            <span class="tech-tag">Patroni</span>
             <span class="tech-tag">Terraform</span>
             <span class="tech-tag">Prometheus</span>
+            <span class="tech-tag">Grafana</span>
           </div>
         </div>
 
-        <div class="project-card glass reveal">
+        <div class="project-card glass reveal" data-category="ai database">
           <div class="project-header">
             <div class="project-icon">🤖</div>
-            <h3>Database Anomaly Detection System</h3>
+            <h3>ML-Powered Database Anomaly Detection</h3>
           </div>
           <p class="project-description">
-            Developed an ML-powered anomaly detection system for database performance monitoring. 
-            The system identifies unusual patterns, predicts potential issues, and provides 
-            actionable insights to prevent incidents before they occur.
+            Built a Python + Scikit-learn Isolation Forest model using 6 months of
+            pg_stat_statements metrics to detect deadlocks, I/O spikes, and autovacuum storms.
           </p>
           <div class="project-features">
-            <span class="feature-badge">Machine Learning</span>
-            <span class="feature-badge">Real-time Monitoring</span>
-            <span class="feature-badge">Predictive Analytics</span>
-            <span class="feature-badge">Alerting</span>
+            <span class="feature-badge">Isolation Forest</span>
+            <span class="feature-badge">91% Precision</span>
+            <span class="feature-badge">87% Recall</span>
+            <span class="feature-badge">Regression Detection</span>
           </div>
           <div class="project-tech">
             <span class="tech-tag">Python</span>
-            <span class="tech-tag">TensorFlow</span>
+            <span class="tech-tag">Scikit-learn</span>
+            <span class="tech-tag">PostgreSQL</span>
             <span class="tech-tag">Grafana</span>
-            <span class="tech-tag">Time Series DB</span>
+            <span class="tech-tag">SQL</span>
           </div>
         </div>
 
-        <div class="project-card glass reveal">
+        <div class="project-card glass reveal" data-category="cloud">
           <div class="project-header">
             <div class="project-icon">☁️</div>
             <h3>AWS Cost Optimization Framework</h3>
           </div>
           <p class="project-description">
             Built a comprehensive cost optimization framework that analyzes AWS usage patterns, 
-            identifies waste, and provides automated recommendations. Resulted in $100K+ monthly 
-            savings through intelligent resource management.
+            identifies waste, and provides automated recommendations. Drove $1.2M annualized
+            savings through EC2, RDS, and EBS right-sizing.
           </p>
           <div class="project-features">
             <span class="feature-badge">Cost Analysis</span>
@@ -129,7 +137,7 @@
           </div>
         </div>
 
-        <div class="project-card glass reveal">
+        <div class="project-card glass reveal" data-category="cloud database">
           <div class="project-header">
             <div class="project-icon">🔄</div>
             <h3>Infrastructure as Code Platform</h3>
@@ -153,7 +161,7 @@
           </div>
         </div>
 
-        <div class="project-card glass reveal">
+        <div class="project-card glass reveal" data-category="cloud database">
           <div class="project-header">
             <div class="project-icon">📊</div>
             <h3>Observability & Monitoring Stack</h3>
@@ -177,7 +185,7 @@
           </div>
         </div>
 
-        <div class="project-card glass reveal">
+        <div class="project-card glass reveal" data-category="database cloud">
           <div class="project-header">
             <div class="project-icon">🚀</div>
             <h3>Zero-Downtime Migration Framework</h3>
