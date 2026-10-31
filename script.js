@@ -148,34 +148,37 @@ if (contactForm) {
     });
   });
   
-  contactForm.addEventListener('submit', (e) => {
+  contactForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-    
-    // Add loading state
     const submitButton = contactForm.querySelector('button[type="submit"]');
-    const originalText = submitButton?.textContent;
-    
-    if (submitButton) {
-      submitButton.textContent = 'Sending...';
-      submitButton.disabled = true;
+    const label = submitButton?.querySelector('span');
+    const original = label?.textContent;
+    let status = contactForm.querySelector('.form-status');
+    if (!status) {
+      status = document.createElement('p');
+      status.className = 'form-status';
+      status.setAttribute('role', 'status');
+      contactForm.appendChild(status);
     }
-    
-    // Simulate form submission (replace with actual form handling)
-    setTimeout(() => {
-      if (submitButton) {
-        submitButton.textContent = 'Sent! ✓';
-        submitButton.style.background = 'linear-gradient(135deg, #10b981, #059669)';
-        
-        setTimeout(() => {
-          if (submitButton) {
-            submitButton.textContent = originalText;
-            submitButton.disabled = false;
-            submitButton.style.background = '';
-            contactForm.reset();
-          }
-        }, 2000);
-      }
-    }, 1500);
+    if (submitButton) { submitButton.disabled = true; if (label) label.textContent = 'Sending...'; }
+    status.className = 'form-status';
+    status.textContent = '';
+    try {
+      const res = await fetch(contactForm.action, {
+        method: 'POST',
+        body: new FormData(contactForm),
+        headers: { Accept: 'application/json' }
+      });
+      if (!res.ok) throw new Error('Request failed');
+      status.textContent = 'Thanks! Your message was sent. I will get back to you soon.';
+      status.classList.add('ok');
+      contactForm.reset();
+    } catch (err) {
+      status.textContent = 'Sorry, something went wrong. Please email me directly at dishantmodh7@gmail.com.';
+      status.classList.add('error');
+    } finally {
+      if (submitButton) { submitButton.disabled = false; if (label) label.textContent = original; }
+    }
   });
 }
 
@@ -322,13 +325,13 @@ if (statNumbers.length > 0) {
         const progress = Math.min((now - startTime) / duration, 1);
         const current = Math.floor(progress * target);
         const value = current / divisor;
-        const formatted = Number.isInteger(value) ? String(value) : value.toFixed(2);
+        const formatted = String(parseFloat(value.toFixed(2)));
         el.textContent = `${prefix}${formatted}${suffix}`;
         if (progress < 1) {
           requestAnimationFrame(tick);
         } else {
           const finalValue = target / divisor;
-          const finalFormatted = Number.isInteger(finalValue) ? String(finalValue) : finalValue.toFixed(2);
+          const finalFormatted = String(parseFloat(finalValue.toFixed(2)));
           el.textContent = `${prefix}${finalFormatted}${suffix}`;
         }
       };
@@ -403,3 +406,147 @@ document.querySelectorAll('.copy-btn[data-copy]').forEach(btn => {
 // Console Easter Egg
 console.log('%c👋 Hey there!', 'font-size: 20px; font-weight: bold; color: #3b82f6;');
 console.log('%cInterested in the code? Check out the repository!', 'font-size: 14px; color: #94a3b8;');
+
+// ===== 2026 Refresh: typing effect =====
+(() => {
+  const el = document.getElementById('typed');
+  if (!el || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const tmp = document.createElement('textarea');
+  const words = el.dataset.words.split('|').map(w => { tmp.innerHTML = w; return tmp.value; });
+  let w = 0, c = words[0].length, deleting = true;
+  const step = () => {
+    const word = words[w];
+    el.textContent = word.slice(0, c);
+    if (deleting) { c--; if (c < 0) { deleting = false; w = (w + 1) % words.length; c = 0; } }
+    else { c++; if (c > words[w].length) { deleting = true; c = words[w].length; setTimeout(step, 1600); return; } }
+    setTimeout(step, deleting ? 35 : 70);
+  };
+  setTimeout(step, 3200);
+})();
+
+// ===== Cursor spotlight =====
+(() => {
+  if (window.matchMedia('(hover: none)').matches) return;
+  const s = document.createElement('div');
+  s.className = 'spotlight';
+  document.body.appendChild(s);
+  window.addEventListener('mousemove', e => {
+    s.style.left = e.clientX + 'px';
+    s.style.top = e.clientY + 'px';
+    s.style.opacity = 1;
+  }, { passive: true });
+})();
+
+// ===== Subtle 3D tilt on cards =====
+(() => {
+  if (window.matchMedia('(hover: none)').matches) return;
+  document.querySelectorAll('.service-card, .cert-card, .why-hire-card').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
+      card.style.transform = `perspective(700px) rotateX(${-y * 6}deg) rotateY(${x * 6}deg) translateY(-4px)`;
+    });
+    card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+  });
+})();
+
+// ===== Command palette (Ctrl/Cmd+K or "/") =====
+(() => {
+  const items = [
+    { t: 'Home', h: 'index.html', k: 'go' },
+    { t: 'About', h: 'about.html', k: 'go' },
+    { t: 'Experience', h: 'experience.html', k: 'go' },
+    { t: 'Projects', h: 'projects.html', k: 'go' },
+    { t: 'Reliability Tools', h: 'tools.html', k: 'go' },
+    { t: 'Blog', h: 'blog.html', k: 'go' },
+    { t: 'Contact', h: 'contact.html', k: 'go' },
+    { t: 'Quiz Game', h: 'game.html', k: 'play' },
+    { t: 'Memory Match', h: 'memory-game.html', k: 'play' },
+    { t: 'Incident Challenge', h: 'incident-game.html', k: 'play' },
+    { t: 'Open Resume (PDF)', h: 'resume.pdf', k: 'open', ext: true },
+    { t: 'LinkedIn', h: 'https://linkedin.com/in/dishantmodh', k: 'open', ext: true },
+    { t: 'GitHub', h: 'https://github.com/dhmodh', k: 'open', ext: true },
+    { t: 'Copy email address', k: 'action', run: () => navigator.clipboard?.writeText('dishantmodh7@gmail.com') },
+    { t: 'Toggle light / dark theme', k: 'action', run: () => document.getElementById('themeToggle')?.click() }
+  ];
+  let overlay, input, list, sel = 0, shown = [], lastFocus;
+
+  const build = () => {
+    overlay = document.createElement('div');
+    overlay.className = 'cmdk-overlay';
+    overlay.hidden = true;
+    overlay.innerHTML = '<div class="cmdk" role="dialog" aria-modal="true" aria-label="Command palette">' +
+      '<input class="cmdk-input" type="text" placeholder="Jump to a page or action..." aria-label="Search commands" autocomplete="off">' +
+      '<ul class="cmdk-list" role="listbox"></ul>' +
+      '<div class="cmdk-foot"><span>↑↓ navigate</span><span>↵ select</span><span>esc close</span></div></div>';
+    document.body.appendChild(overlay);
+    input = overlay.querySelector('.cmdk-input');
+    list = overlay.querySelector('.cmdk-list');
+    overlay.addEventListener('mousedown', e => { if (e.target === overlay) close(); });
+    input.addEventListener('input', () => render(input.value));
+    input.addEventListener('keydown', e => {
+      if (e.key === 'ArrowDown') { e.preventDefault(); sel = Math.min(shown.length - 1, sel + 1); paint(); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); sel = Math.max(0, sel - 1); paint(); }
+      else if (e.key === 'Enter') { e.preventDefault(); choose(shown[sel]); }
+      else if (e.key === 'Escape') { e.preventDefault(); close(); }
+    });
+  };
+  const render = (q) => {
+    q = (q || '').trim().toLowerCase();
+    shown = items.filter(i => !q || i.t.toLowerCase().includes(q) || i.k.includes(q));
+    sel = 0;
+    list.innerHTML = shown.length
+      ? shown.map((i, n) => `<li role="option" data-n="${n}"><span>${i.t}</span><em>${i.k}</em></li>`).join('')
+      : '<li class="cmdk-empty">No results</li>';
+    list.querySelectorAll('li[data-n]').forEach(li => {
+      li.addEventListener('mousemove', () => { sel = +li.dataset.n; paint(); });
+      li.addEventListener('click', () => choose(shown[+li.dataset.n]));
+    });
+    paint();
+  };
+  const paint = () => {
+    list.querySelectorAll('li[data-n]').forEach(li => {
+      const on = +li.dataset.n === sel;
+      li.classList.toggle('sel', on);
+      li.setAttribute('aria-selected', on);
+      if (on) li.scrollIntoView({ block: 'nearest' });
+    });
+  };
+  const choose = (i) => {
+    if (!i) return;
+    close();
+    if (i.run) i.run();
+    else if (i.ext) window.open(i.h, '_blank', 'noopener');
+    else window.location.href = i.h;
+  };
+  const open = () => {
+    if (!overlay) build();
+    lastFocus = document.activeElement;
+    overlay.hidden = false;
+    input.value = '';
+    render('');
+    input.focus();
+  };
+  const close = () => {
+    if (overlay) overlay.hidden = true;
+    lastFocus?.focus?.();
+  };
+  document.addEventListener('keydown', e => {
+    const typing = /^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement?.tagName || '');
+    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); overlay && !overlay.hidden ? close() : open(); }
+    else if (e.key === '/' && !typing) { e.preventDefault(); open(); }
+    else if (e.key === 'Escape' && overlay && !overlay.hidden) close();
+  });
+  // nav button
+  const container = document.querySelector('.nav-container');
+  const themeBtn = document.getElementById('themeToggle');
+  if (container && themeBtn) {
+    const b = document.createElement('button');
+    b.className = 'cmdk-btn';
+    b.type = 'button';
+    b.setAttribute('aria-label', 'Open command palette');
+    b.innerHTML = '<span>Search</span><kbd>Ctrl K</kbd>';
+    b.addEventListener('click', open);
+    container.insertBefore(b, themeBtn);
+  }
+})();

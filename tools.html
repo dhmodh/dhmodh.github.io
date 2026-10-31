@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="favicon_io/favicon.svg?v=5">
+  <link rel="manifest" href="favicon_io/site.webmanifest">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <title>Reliability Tools | Dishant Modh</title>
+  <meta name="description" content="Free interactive SRE tools: SLA/SLO downtime and error-budget calculator, and a PostgreSQL configuration starter generator.">
+  <link rel="canonical" href="https://dishantmodh.com/tools.html">
+</head>
+<body>
+  <div class="animated-bg">
+    <div class="gradient-orb orb-1"></div>
+    <div class="gradient-orb orb-2"></div>
+    <div class="gradient-orb orb-3"></div>
+  </div>
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">
+        <span class="logo-text">DM</span>
+        <span class="logo-glow"></span>
+      </a>
+      <ul class="nav-menu">
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="experience.html" class="nav-link">Experience</a></li>
+        <li><a href="projects.html" class="nav-link">Projects</a></li>
+        <li><a href="tools.html" class="nav-link">Tools</a></li>
+        <li><a href="blog.html" class="nav-link">Blog</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+        <li><a href="game.html" class="nav-link">Games</a></li>
+        <li><a href="resume.pdf" class="nav-link resume-link" target="_blank">Resume</a></li>
+      </ul>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <span class="theme-icon">🌙</span>
+      </button>
+      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="reveal">Reliability Tools</h2>
+      <p class="page-lead reveal">Small, free utilities I wish I had during on-call. Everything runs in your browser &mdash; nothing is sent anywhere.</p>
+
+      <!-- SLO calculator -->
+      <div class="tool-card glass reveal" id="slo-tool">
+        <div class="tool-head">
+          <div class="tool-icon">⏱️</div>
+          <div>
+            <h3>SLA / SLO Downtime &amp; Error Budget</h3>
+            <p>How much downtime does a target actually allow? Track how much of your budget an incident burns.</p>
+          </div>
+        </div>
+        <div class="slo-presets" role="group" aria-label="Presets">
+          <button type="button" class="chip" data-slo="99">99%</button>
+          <button type="button" class="chip" data-slo="99.5">99.5%</button>
+          <button type="button" class="chip active" data-slo="99.9">99.9%</button>
+          <button type="button" class="chip" data-slo="99.95">99.95%</button>
+          <button type="button" class="chip" data-slo="99.99">99.99%</button>
+          <button type="button" class="chip" data-slo="99.999">99.999%</button>
+        </div>
+        <div class="tool-grid">
+          <label class="field">Availability target (%)
+            <input type="number" id="slo-input" value="99.9" min="0" max="99.99999" step="0.001" inputmode="decimal">
+          </label>
+          <label class="field">Downtime already used this month (minutes)
+            <input type="number" id="slo-used" value="0" min="0" step="1" inputmode="numeric">
+          </label>
+        </div>
+        <div class="result-grid" id="slo-results" aria-live="polite"></div>
+        <div class="budget" id="slo-budget" aria-live="polite">
+          <div class="budget-top"><span id="slo-budget-label">Monthly error budget</span><strong id="slo-budget-pct">0% used</strong></div>
+          <div class="budget-bar"><div class="budget-fill" id="slo-budget-fill"></div></div>
+          <p id="slo-budget-note"></p>
+        </div>
+      </div>
+
+      <!-- PG tuning -->
+      <div class="tool-card glass reveal" id="pg-tool">
+        <div class="tool-head">
+          <div class="tool-icon">🐘</div>
+          <div>
+            <h3>PostgreSQL Config Starter</h3>
+            <p>Sane first-pass <code>postgresql.conf</code> values from RAM, CPUs and workload. A starting point &mdash; always benchmark and validate against your own workload.</p>
+          </div>
+        </div>
+        <div class="tool-grid four">
+          <label class="field">RAM (GB)
+            <input type="number" id="pg-ram" value="32" min="1" max="2048" step="1" inputmode="numeric">
+          </label>
+          <label class="field">vCPUs
+            <input type="number" id="pg-cpu" value="8" min="1" max="512" step="1" inputmode="numeric">
+          </label>
+          <label class="field">Max connections
+            <input type="number" id="pg-conn" value="200" min="10" max="5000" step="10" inputmode="numeric">
+          </label>
+          <label class="field">Workload
+            <select id="pg-load">
+              <option value="oltp" selected>OLTP (web / transactional)</option>
+              <option value="mixed">Mixed</option>
+              <option value="dw">Analytics / DW</option>
+            </select>
+          </label>
+        </div>
+        <div class="code-wrap">
+          <button type="button" class="copy-btn code-copy" id="pg-copy">Copy</button>
+          <pre class="code-block" id="pg-output" aria-live="polite"></pre>
+        </div>
+        <p class="tool-note">Heuristics follow common PGTune-style guidance (shared_buffers ≈ 25% RAM, SSD-friendly planner costs). Managed services such as RDS/Aurora set many of these through parameter groups.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2026 Dishant Modh. Built with passion for reliability and performance.</p>
+      <div class="footer-links">
+        <a href="https://linkedin.com/in/dishantmodh" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">LinkedIn</a>
+        <span>•</span>
+        <a href="https://github.com/dhmodh" target="_blank" rel="noopener noreferrer" aria-label="GitHub">GitHub</a>
+        <span>•</span>
+        <a href="resume.pdf" target="_blank" rel="noopener noreferrer">Resume</a>
+      </div>
+    </div>
+  </footer>
+  <script src="script.js"></script>
+  <script src="tools.js"></script>
+</body>
+</html>

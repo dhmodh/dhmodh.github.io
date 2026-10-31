@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="/favicon_io/favicon.svg?v=5">
+  <link rel="manifest" href="/favicon_io/site.webmanifest">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <title>404 | Dishant Modh</title>
+  <meta name="robots" content="noindex">
+</head>
+<body>
+  <div class="animated-bg">
+    <div class="gradient-orb orb-1"></div>
+    <div class="gradient-orb orb-2"></div>
+    <div class="gradient-orb orb-3"></div>
+  </div>
+  <section class="notfound">
+    <p class="nf-code">HTTP 404</p>
+    <h1>This page has <span class="gradient-name">failed over</span>.</h1>
+    <pre class="code-block nf-log">$ psql -h primary -c "SELECT page FROM site WHERE url = current_path;"
+(0 rows)
+$ patronictl failover --candidate home
+✔ Promoted: <a href="/">dishantmodh.com/</a></pre>
+    <div class="hero-actions" style="justify-content:center">
+      <a href="/" class="btn btn-primary"><span>Back to Home</span></a>
+      <a href="/experience.html" class="btn btn-secondary"><span>See Experience</span></a>
+    </div>
+  </section>
+</body>
+</html>

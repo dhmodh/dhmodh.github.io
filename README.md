@@ -39,6 +39,10 @@ To enable Google Analytics:
 ├── about.html          # About page
 ├── experience.html     # Experience page
 ├── projects.html       # Projects page
+├── tools.html / tools.js  # SLO + PostgreSQL config tools
+├── 404.html            # Custom not-found page
+├── og-image.jpg        # Social share preview (1200x630)
+├── tests/suite.py      # Browser test suite (Playwright)
 ├── blog.html           # Blog page
 ├── contact.html        # Contact page
 ├── styles.css          # Main stylesheet
@@ -134,3 +138,17 @@ This project is open source and available for personal use.
 
 Built with modern web technologies and best practices for performance and SEO.
 
+
+## 🧪 Testing
+
+```bash
+pip install playwright && playwright install chromium
+python3 -m http.server 8000          # terminal 1 (repo root)
+python3 tests/suite.py               # terminal 2
+```
+Covers: console errors, broken links/assets, horizontal overflow on desktop/tablet/mobile,
+experience content, command palette (Ctrl/Cmd+K), SLO + PostgreSQL calculators (unit + UI),
+contact form success/failure, theme persistence, mobile menu, 404 page.
+
+## ✨ Shortcuts
+- `Ctrl/Cmd + K` or `/` opens the command palette.
