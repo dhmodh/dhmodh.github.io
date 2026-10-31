@@ -508,7 +508,7 @@ body {
 
 .services-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
   gap: 2rem;
 }
 
@@ -706,7 +706,7 @@ body {
 
 .skills-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
   gap: 2rem;
   margin-bottom: 2rem;
 }
@@ -801,7 +801,7 @@ body {
 
 .certifications-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
   gap: 2rem;
 }
 
@@ -843,7 +843,7 @@ body {
 
 .why-hire-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
   gap: 2rem;
 }
 
@@ -1131,7 +1131,7 @@ body {
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
   gap: 2rem;
 }
 
@@ -1193,27 +1193,6 @@ body {
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .nav-menu {
-    position: fixed;
-    top: 70px;
-    left: -100%;
-    flex-direction: column;
-    background: var(--glass-bg);
-    backdrop-filter: blur(20px);
-    width: 100%;
-    padding: 2rem;
-    border-bottom: 1px solid var(--glass-border);
-    transition: left 0.3s ease;
-  }
-
-  .nav-menu.active {
-    left: 0;
-  }
-
-  .mobile-menu-toggle {
-    display: flex;
-  }
-
   .hero {
     flex-direction: column;
     text-align: center;
@@ -1302,7 +1281,7 @@ body {
 
 .expertise-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
   gap: 1.5rem;
 }
 
@@ -1449,7 +1428,7 @@ body {
 /* Projects Page Styles */
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 350px), 1fr));
   gap: 2rem;
 }
 
@@ -1539,7 +1518,7 @@ body {
 /* Blog Page Styles */
 .blog-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 350px), 1fr));
   gap: 2rem;
 }
 
@@ -1632,7 +1611,7 @@ body {
 /* Contact Page Styles */
 .contact-wrapper {
   display: grid;
-  grid-template-columns: 1fr 1.5fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr);
   gap: 3rem;
   max-width: 1200px;
   margin: 0 auto;
@@ -1927,7 +1906,7 @@ body {
 
 /* Featured work */
 .featured-section { position: relative; z-index: 1; padding: 4rem 0 2rem; }
-.featured-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; max-width: 1100px; margin: 3rem auto 0; padding: 0 1rem; }
+.featured-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 1.5rem; max-width: 1100px; margin: 3rem auto 0; padding: 0 1rem; }
 .featured-card { display: flex; flex-direction: column; gap: .6rem; padding: 2rem; text-decoration: none; color: inherit; transition: transform .3s, border-color .3s, box-shadow .3s; }
 .featured-card:hover { transform: translateY(-6px); border-color: var(--accent-primary); box-shadow: var(--shadow-glow); }
 .featured-kicker { font-family: 'JetBrains Mono', monospace; font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; color: var(--accent-tertiary); }
@@ -2021,7 +2000,7 @@ body {
 }
 
 /* Banner scrolls away instead of covering content (desktop) */
-@media (min-width: 769px) { .hiring-banner { position: absolute; } }
+@media (min-width: 1001px) { .hiring-banner { position: absolute; } }
 
 /* 4 cards -> clean 2x2 instead of 3+1 */
 .why-hire-grid { grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr)); }
@@ -2191,7 +2170,7 @@ body {
 /* Hub */
 .gx-daily { display: flex; gap: 1.5rem; align-items: center; justify-content: space-between; flex-wrap: wrap; max-width: 1000px; margin: 0 auto 2rem; border-color: rgba(139,92,246,.4); }
 .gx-daily h2 { font-size: 1.5rem; margin: .25rem 0; } .gx-daily p { color: var(--text-secondary); }
-.gx-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; max-width: 1000px; margin: 0 auto 2.5rem; }
+.gx-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 1.5rem; max-width: 1000px; margin: 0 auto 2.5rem; }
 .gx-game { display: flex; flex-direction: column; gap: .5rem; padding: 1.75rem; margin: 0; text-decoration: none; color: inherit; transition: transform .3s, border-color .3s, box-shadow .3s; }
 .gx-game:hover { transform: translateY(-6px); border-color: var(--accent-primary); box-shadow: var(--shadow-glow); }
 .gx-ico { font-size: 2.4rem; } .gx-game h3 { font-size: 1.25rem; } .gx-game p { color: var(--text-secondary); flex: 1; }
@@ -2231,3 +2210,110 @@ body {
 .field.check input { width: 1.2rem; height: 1.2rem; accent-color: var(--accent-primary); }
 .cr-list { margin: .5rem 0 1rem 1.2rem; display: grid; gap: .3rem; font-family: 'JetBrains Mono', monospace; font-size: .85rem; color: var(--text-secondary); }
 .tool-card { scroll-margin-top: 90px; }
+
+
+/* ===== Round 6: phone + tablet fixes ===== */
+/* Mobile / tablet navigation (hamburger up to 1000px so iPads get a menu that fits) */
+@media (max-width: 1000px) {
+  .nav-container { gap: .5rem; }
+  .theme-toggle { margin-left: auto; margin-right: .25rem; flex: none; }
+  .cmdk-btn { display: none; }
+  .mobile-menu-toggle { display: flex; justify-content: center; align-items: center; min-width: 44px; min-height: 44px; padding: .5rem; flex: none; }
+  .mobile-menu-toggle.active span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+  .mobile-menu-toggle.active span:nth-child(2) { opacity: 0; }
+  .mobile-menu-toggle.active span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+  /* The navbar has backdrop-filter, so it is the containing block for this fixed menu:
+     top:100% puts it right below the bar and the height fills the rest of the screen. */
+  .nav-menu {
+    position: fixed; top: 100%; left: 0; right: 0; width: auto;
+    height: calc(100vh - 100%); height: calc(100dvh - 100%);
+    flex-direction: column; align-items: stretch; justify-content: flex-start; gap: 0;
+    padding: .5rem 1.25rem 2rem; overflow-y: auto; overscroll-behavior: contain;
+    background: var(--bg-primary); border-top: 1px solid var(--border-color);
+    transform: translateX(100%); opacity: 0; visibility: hidden;
+    transition: transform .3s ease, opacity .25s ease, visibility 0s linear .3s;
+    z-index: 999;
+  }
+  .nav-menu.active { transform: none; opacity: 1; visibility: visible; transition-delay: 0s; }
+  .nav-menu li { border-bottom: 1px solid var(--border-color); }
+  .nav-menu .nav-link { display: flex; align-items: center; min-height: 54px; padding: .5rem .25rem; font-size: 1.15rem; }
+  .nav-menu .nav-link::after { display: none; }
+  .nav-menu .resume-link { color: var(--accent-primary); font-weight: 600; }
+  body.menu-open { overflow: hidden; }
+
+  /* compact "Now at Disney" banner */
+  .hiring-banner { position: static; margin-top: 60px; padding: .6rem 0; }
+  .hiring-actions, .hiring-icon { display: none; }
+  .hiring-content { gap: .25rem; padding: 0 1rem; }
+  .hiring-text { font-size: .9rem; justify-content: center; text-align: center; }
+
+  /* single-column hero (the floating cards overlap each other on tablets) */
+  .hero { flex-direction: column; text-align: center; margin-top: 0; min-height: auto; padding: 3.5rem 1.5rem 3rem; }
+  .hero-content { max-width: 680px; }
+  .hero-visual { display: none; }
+  .hero-actions { justify-content: center; }
+}
+/* Touch devices: no keyboard shortcut button, bigger tap areas */
+@media (hover: none) {
+  .cmdk-btn { display: none; }
+  .chip, .btn, .wg-key, .blog-filter-btn { min-height: 44px; }
+  .theme-toggle { min-width: 44px; min-height: 44px; }
+}
+/* Respect iPhone notches / home bar */
+@supports (padding: max(0px)) {
+  .navbar { padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right); }
+  .footer { padding-bottom: max(1.5rem, env(safe-area-inset-bottom)); }
+}
+
+/* Round 6b: tap targets + small-phone polish */
+@media (max-width: 1000px) { .hiring-content { justify-content: center; } }
+@media (hover: none) {
+  .nav-link { padding-top: .75rem; padding-bottom: .75rem; }
+  .project-filter-btn, .blog-filter-btn { min-height: 44px; padding-left: 1rem; padding-right: 1rem; }
+  .copy-btn, .code-copy { min-height: 36px; padding: .4rem .85rem; }
+  input[type="range"] { min-height: 36px; }
+  .footer-links a { display: inline-block; padding: .6rem .4rem; }
+}
+@media (max-width: 420px) {
+  .gx-wrap { padding: 0 .6rem; }
+  .gx-card { padding: .8rem; }
+  .wg-keys { gap: .35rem; }
+  .wg-krow { gap: 3px; }
+  .wg-key { font-size: .8rem; }
+  .container { padding-left: 1rem; padding-right: 1rem; }
+}
+
+/* Stats cards: keep 2-column grid inside small phones (was 3px too wide at 375px) */
+.stats-grid { grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); }
+@media (max-width: 768px) { .stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 600px) {
+  .stat-card { padding: 1.25rem .6rem; min-width: 0; }
+  .stat-number { font-size: 2.1rem; }
+  .stat-label { font-size: .9rem; overflow-wrap: anywhere; }
+}
+
+
+/* Round 6c: small-phone + narrow-desktop fixes found by the responsive suite */
+.skill-category, .project-card, .contact-info, .contact-form, .blog-card, .service-card, .cert-card, .why-hire-card, .tool-card, .experience-card { min-width: 0; }
+.contact-item p, .contact-item a, .contact-item h4 { overflow-wrap: anywhere; }
+.post-body :not(pre) > code { overflow-wrap: anywhere; }
+.tool-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.tool-grid.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.field input, .field select, .field textarea { min-width: 0; width: 100%; }
+@media (max-width: 1100px) { .tool-grid.four { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 1000px) {
+  .navbar, .navbar.scrolled { padding: .5rem 0; }
+  .nav-container { padding: 0 1rem; }
+}
+@media (max-width: 768px) { .tool-grid, .tool-grid.four { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 600px) {
+  .quick-stats { padding: 3rem 1rem; margin-top: 40px; }
+  .stats-grid { gap: .75rem; }
+  .stat-number { font-size: clamp(1.5rem, 7vw, 2.1rem); }
+  .stat-card { padding: 1.1rem .5rem; }
+}
+@media (max-width: 420px) {
+  .gx-section { padding-left: .4rem; padding-right: .4rem; }
+  .section { padding-left: .9rem; padding-right: .9rem; }
+}
+@media (max-width: 420px) { .gx-card { padding: .8rem .45rem; } .gx-wrap { padding: 0 .35rem; } }

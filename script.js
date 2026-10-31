@@ -25,18 +25,25 @@ function updateThemeIcon(theme) {
 const mobileMenuToggle = document.getElementById('mobileMenuToggle');
 const navMenu = document.querySelector('.nav-menu');
 
-mobileMenuToggle?.addEventListener('click', () => {
-  navMenu?.classList.toggle('active');
-  mobileMenuToggle.classList.toggle('active');
-});
+function setMenu(open) {
+  if (!navMenu || !mobileMenuToggle) return;
+  navMenu.classList.toggle('active', open);
+  mobileMenuToggle.classList.toggle('active', open);
+  mobileMenuToggle.setAttribute('aria-expanded', String(open));
+  document.body.classList.toggle('menu-open', open);
+}
+if (mobileMenuToggle && navMenu) {
+  mobileMenuToggle.setAttribute('aria-expanded', 'false');
+  mobileMenuToggle.setAttribute('aria-controls', 'primaryNav');
+  if (!mobileMenuToggle.getAttribute('aria-label')) mobileMenuToggle.setAttribute('aria-label', 'Toggle navigation menu');
+  navMenu.id = navMenu.id || 'primaryNav';
+}
+mobileMenuToggle?.addEventListener('click', () => setMenu(!navMenu?.classList.contains('active')));
 
-// Close mobile menu when clicking on a link
-document.querySelectorAll('.nav-link').forEach(link => {
-  link.addEventListener('click', () => {
-    navMenu?.classList.remove('active');
-    mobileMenuToggle?.classList.remove('active');
-  });
-});
+// Close mobile menu when clicking on a link, pressing Escape, or growing past the breakpoint
+document.querySelectorAll('.nav-link').forEach(link => link.addEventListener('click', () => setMenu(false)));
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && navMenu?.classList.contains('active')) { setMenu(false); mobileMenuToggle?.focus(); } });
+window.addEventListener('resize', () => { if (window.innerWidth > 1000) setMenu(false); });
 
 // Reveal on Scroll Animation
 const revealObserver = new IntersectionObserver((entries) => {
