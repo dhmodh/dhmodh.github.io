@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+<channel>
+  <title>Dishant Modh - Articles</title>
+  <link>https://dishantmodh.com/blog.html</link>
+  <description>PostgreSQL, AWS and database reliability articles by Dishant Modh.</description>
+  <language>en</language>
+  <item>
+    <title>How I Cut PostgreSQL p95 Latency from 1.8s to 0.9s</title>
+    <link>https://dishantmodh.com/blog/postgresql-p95-latency-playbook.html</link>
+    <guid>https://dishantmodh.com/blog/postgresql-p95-latency-playbook.html</guid>
+    <pubDate>Thu, 15 Jan 2026 09:00:00 +0000</pubDate>
+    <category>PostgreSQL</category>
+    <description>A practical playbook for PostgreSQL query tuning: pg_stat_statements, EXPLAIN (ANALYZE, BUFFERS), index redesign, autovacuum tuning and lock analysis.</description>
+  </item>
+  <item>
+    <title>Zero-Downtime Database Migrations: On-Prem to AWS with DMS and pglogical</title>
+    <link>https://dishantmodh.com/blog/zero-downtime-database-migration-aws-dms-pglogical.html</link>
+    <guid>https://dishantmodh.com/blog/zero-downtime-database-migration-aws-dms-pglogical.html</guid>
+    <pubDate>Wed, 10 Dec 2025 09:00:00 +0000</pubDate>
+    <category>Migration</category>
+    <description>A cutover-first guide to migrating production PostgreSQL and MySQL to AWS with AWS DMS and pglogical: replication, validation, sequences, rollback and runbook.</description>
+  </item>
+  <item>
+    <title>DR Readiness for Aurora Global Database: From Architecture to Quarterly Drills</title>
+    <link>https://dishantmodh.com/blog/aurora-global-database-dr-readiness.html</link>
+    <guid>https://dishantmodh.com/blog/aurora-global-database-dr-readiness.html</guid>
+    <pubDate>Wed, 12 Nov 2025 09:00:00 +0000</pubDate>
+    <category>Reliability</category>
+    <description>How to make Aurora Global Database disaster recovery real: RPO and RTO targets, switchover vs failover, replication lag monitoring, runbooks and automated drills.</description>
+  </item>
+  <item>
+    <title>MongoDB Aggregation Tuning in Production (and Fixing Cassandra Hotspots)</title>
+    <link>https://dishantmodh.com/blog/mongodb-aggregation-pipeline-tuning.html</link>
+    <guid>https://dishantmodh.com/blog/mongodb-aggregation-pipeline-tuning.html</guid>
+    <pubDate>Tue, 14 Oct 2025 09:00:00 +0000</pubDate>
+    <category>MongoDB</category>
+    <description>How to speed up slow MongoDB aggregation pipelines: explain(), stage ordering, ESR indexes, $lookup cost, plus a note on Cassandra partition key hotspots.</description>
+  </item>
+  <item>
+    <title>Datadog + Grafana Alerting That Actually Reduces MTTR</title>
+    <link>https://dishantmodh.com/blog/datadog-grafana-alerting-reduce-mttr.html</link>
+    <guid>https://dishantmodh.com/blog/datadog-grafana-alerting-reduce-mttr.html</guid>
+    <pubDate>Tue, 16 Sep 2025 09:00:00 +0000</pubDate>
+    <category>Observability</category>
+    <description>Design database alerting that shortens incidents: symptom-based alerts, SLO burn rates, anomaly monitors, runbook links and the dashboards on-call engineers need.</description>
+  </item>
+  <item>
+    <title>PostgreSQL On-Call Playbook for P1/P0 Incidents</title>
+    <link>https://dishantmodh.com/blog/postgresql-on-call-playbook-p1-incidents.html</link>
+    <guid>https://dishantmodh.com/blog/postgresql-on-call-playbook-p1-incidents.html</guid>
+    <pubDate>Tue, 12 Aug 2025 09:00:00 +0000</pubDate>
+    <category>Reliability</category>
+    <description>A calm first-15-minutes playbook for PostgreSQL incidents: triage queries for connections, locks, replication, disk and wraparound, plus communication and post-mortems.</description>
+  </item>
+  <item>
+    <title>PgBouncer Explained: Connection Pooling Modes, Sizing and Pitfalls</title>
+    <link>https://dishantmodh.com/blog/pgbouncer-connection-pooling-guide.html</link>
+    <guid>https://dishantmodh.com/blog/pgbouncer-connection-pooling-guide.html</guid>
+    <pubDate>Wed, 28 Oct 2026 09:00:00 +0000</pubDate>
+    <category>PostgreSQL</category>
+    <description>When and how to use PgBouncer with PostgreSQL: session vs transaction pooling, sizing the pool, prepared statements, monitoring and common pitfalls.</description>
+  </item>
+  <item>
+    <title>Terraform for RDS: Reusable Module Patterns and Drift Detection</title>
+    <link>https://dishantmodh.com/blog/terraform-rds-module-patterns.html</link>
+    <guid>https://dishantmodh.com/blog/terraform-rds-module-patterns.html</guid>
+    <pubDate>Sat, 31 Oct 2026 09:00:00 +0000</pubDate>
+    <category>Automation</category>
+    <description>How to build a safe, reusable Terraform module for Amazon RDS: sane defaults, deletion protection, secrets, parameter groups, testing and scheduled drift detection.</description>
+  </item>
+  <item>
+    <title>Aurora PostgreSQL vs RDS PostgreSQL: A Practical Decision Guide</title>
+    <link>https://dishantmodh.com/blog/aurora-vs-rds-postgresql-decision-guide.html</link>
+    <guid>https://dishantmodh.com/blog/aurora-vs-rds-postgresql-decision-guide.html</guid>
+    <pubDate>Tue, 20 Oct 2026 09:00:00 +0000</pubDate>
+    <category>AWS</category>
+    <description>Compare Amazon Aurora PostgreSQL and RDS for PostgreSQL on architecture, failover, replicas, cost model and compatibility, with a checklist for choosing.</description>
+  </item>
+  <item>
+    <title>PostgreSQL Backups and Point-in-Time Recovery: Test Your Restores</title>
+    <link>https://dishantmodh.com/blog/postgresql-backup-pitr-restore-testing.html</link>
+    <guid>https://dishantmodh.com/blog/postgresql-backup-pitr-restore-testing.html</guid>
+    <pubDate>Thu, 22 Oct 2026 09:00:00 +0000</pubDate>
+    <category>PostgreSQL</category>
+    <description>A practical guide to PostgreSQL backups: base backups, WAL archiving, point-in-time recovery steps, RDS PITR and how to prove your restores work.</description>
+  </item>
+  <item>
+    <title>AWS Database Cost Optimization: A Right-Sizing Framework That Works</title>
+    <link>https://dishantmodh.com/blog/aws-database-cost-optimization-right-sizing.html</link>
+    <guid>https://dishantmodh.com/blog/aws-database-cost-optimization-right-sizing.html</guid>
+    <pubDate>Sat, 24 Oct 2026 09:00:00 +0000</pubDate>
+    <category>Cost</category>
+    <description>A step-by-step framework to cut AWS database and compute costs safely: find idle resources, right-size with percentiles, pick storage and pricing, and automate.</description>
+  </item>
+  <item>
+    <title>Patroni High Availability for PostgreSQL: Architecture, Config and Failover Testing</title>
+    <link>https://dishantmodh.com/blog/patroni-high-availability-postgresql-guide.html</link>
+    <guid>https://dishantmodh.com/blog/patroni-high-availability-postgresql-guide.html</guid>
+    <pubDate>Mon, 26 Oct 2026 09:00:00 +0000</pubDate>
+    <category>Reliability</category>
+    <description>How Patroni and etcd deliver automatic PostgreSQL failover: architecture, a minimal configuration, the key timing parameters, split-brain safety and how to test failover.</description>
+  </item>
+  <item>
+    <title>PostgreSQL Index Types Explained: B-tree, GIN, GiST, BRIN and When to Use Each</title>
+    <link>https://dishantmodh.com/blog/postgresql-index-types-guide.html</link>
+    <guid>https://dishantmodh.com/blog/postgresql-index-types-guide.html</guid>
+    <pubDate>Fri, 30 Oct 2026 09:00:00 +0000</pubDate>
+    <category>PostgreSQL</category>
+    <description>Choose the right PostgreSQL index: B-tree, Hash, GIN, GiST, SP-GiST and BRIN compared, plus partial, expression, covering and multicolumn indexes with examples.</description>
+  </item>
+</channel>
+</rss>

@@ -3,10 +3,55 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SRE Incident Challenge | Dishant Modh</title>
-  <meta name="description" content="Play a fast-paced SRE incident response challenge. Pick the right action before time runs out.">
+  <!-- SEO:start -->
+  <title>SRE Incident Response Challenge | Dishant Modh</title>
+  <meta name="description" content="Play a fast-paced SRE incident response challenge: choose the right action before time runs out. Interactive game by Dishant Modh.">
+  <meta name="author" content="Dishant Modh">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+  <meta name="theme-color" content="#0a0e27">
+  <link rel="canonical" href="https://dishantmodh.com/incident-game.html">
+  <link rel="alternate" type="application/rss+xml" title="Dishant Modh - Articles" href="https://dishantmodh.com/feed.xml">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Dishant Modh">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:url" content="https://dishantmodh.com/incident-game.html">
+  <meta property="og:title" content="SRE Incident Response Challenge | Dishant Modh">
+  <meta property="og:description" content="Play a fast-paced SRE incident response challenge: choose the right action before time runs out. Interactive game by Dishant Modh.">
+  <meta property="og:image" content="https://dishantmodh.com/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Dishant Modh - Senior Database Reliability Engineer">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="SRE Incident Response Challenge | Dishant Modh">
+  <meta name="twitter:description" content="Play a fast-paced SRE incident response challenge: choose the right action before time runs out. Interactive game by Dishant Modh.">
+  <meta name="twitter:image" content="https://dishantmodh.com/og-image.jpg">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://dishantmodh.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Incident Challenge",
+          "item": "https://dishantmodh.com/incident-game.html"
+        }
+      ]
+    }
+  ]
+}
+  </script>
+  <!-- SEO:end -->
   <link rel="icon" type="image/svg+xml" href="favicon_io/favicon.svg?v=5">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=20261101">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -35,6 +80,7 @@
   </style>
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
   <div class="animated-bg">
     <div class="gradient-orb orb-1"></div>
     <div class="gradient-orb orb-2"></div>
@@ -43,7 +89,10 @@
 
   <nav class="navbar">
     <div class="nav-container">
-      <a href="index.html" class="logo"><span class="logo-text">DM</span><span class="logo-glow"></span></a>
+      <a href="index.html" class="logo">
+        <span class="logo-text">DM</span>
+        <span class="logo-glow"></span>
+      </a>
       <ul class="nav-menu">
         <li><a href="about.html" class="nav-link">About</a></li>
         <li><a href="experience.html" class="nav-link">Experience</a></li>
@@ -51,15 +100,20 @@
         <li><a href="tools.html" class="nav-link">Tools</a></li>
         <li><a href="blog.html" class="nav-link">Blog</a></li>
         <li><a href="contact.html" class="nav-link">Contact</a></li>
-        <li><a href="game.html" class="nav-link">Games</a></li>
-        <li><a href="memory-game.html" class="nav-link">Memory Game</a></li>
-        <li><a href="incident-game.html" class="nav-link">Incident Game</a></li>
-        <li><a href="resume.pdf" class="nav-link resume-link" target="_blank">Resume</a></li>
+        <li><a href="games.html" class="nav-link">Games</a></li>
+        <li><a href="resume.html" class="nav-link resume-link">Resume</a></li>
       </ul>
-      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"><span class="theme-icon">🌙</span></button>
-      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <span class="theme-icon">🌙</span>
+      </button>
+      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </div>
   </nav>
+  <main id="main">
 
   <section class="section" style="padding-top: 8rem;">
     <div class="incident-wrap">
@@ -91,13 +145,14 @@
     </div>
   </section>
 
+  </main>
   <footer class="footer">
     <div class="container">
       <p>&copy; 2026 Dishant Modh. Built with passion for reliability and performance.</p>
     </div>
   </footer>
 
-  <script src="script.js"></script>
-  <script src="incident-game.js"></script>
+  <script src="script.js?v=20261101"></script>
+  <script src="incident-game.js?v=20261101"></script>
 </body>
 </html>

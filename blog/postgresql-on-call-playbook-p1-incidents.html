@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="/favicon_io/favicon.svg?v=5">
+  <link rel="manifest" href="/favicon_io/site.webmanifest">
+  <link rel="stylesheet" href="/styles.css?v=20261101">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- SEO:start -->
+  <title>PostgreSQL On-Call Playbook for P1/P0 Incidents | Dishant Modh</title>
+  <meta name="description" content="A calm first-15-minutes playbook for PostgreSQL incidents: triage queries for connections, locks, replication, disk and wraparound, plus communication and post-mortems.">
+  <meta name="author" content="Dishant Modh">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+  <meta name="theme-color" content="#0a0e27">
+  <link rel="canonical" href="https://dishantmodh.com/blog/postgresql-on-call-playbook-p1-incidents.html">
+  <link rel="alternate" type="application/rss+xml" title="Dishant Modh - Articles" href="https://dishantmodh.com/feed.xml">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Dishant Modh">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:url" content="https://dishantmodh.com/blog/postgresql-on-call-playbook-p1-incidents.html">
+  <meta property="og:title" content="PostgreSQL On-Call Playbook for P1/P0 Incidents | Dishant Modh">
+  <meta property="og:description" content="A calm first-15-minutes playbook for PostgreSQL incidents: triage queries for connections, locks, replication, disk and wraparound, plus communication and post-mortems.">
+  <meta property="og:image" content="https://dishantmodh.com/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Dishant Modh - Senior Database Reliability Engineer">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PostgreSQL On-Call Playbook for P1/P0 Incidents | Dishant Modh">
+  <meta name="twitter:description" content="A calm first-15-minutes playbook for PostgreSQL incidents: triage queries for connections, locks, replication, disk and wraparound, plus communication and post-mortems.">
+  <meta name="twitter:image" content="https://dishantmodh.com/og-image.jpg">
+  <meta property="article:published_time" content="2025-08-12">
+  <meta property="article:author" content="Dishant Modh">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://dishantmodh.com/#person",
+      "name": "Dishant Modh",
+      "jobTitle": "Senior Database Reliability Engineer",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "The Walt Disney Company"
+      },
+      "url": "https://dishantmodh.com/",
+      "image": "https://dishantmodh.com/og-image.jpg",
+      "sameAs": [
+        "https://linkedin.com/in/dishantmodh",
+        "https://github.com/dhmodh"
+      ],
+      "knowsAbout": [
+        "Database Reliability Engineering",
+        "Site Reliability Engineering",
+        "PostgreSQL",
+        "Amazon Aurora",
+        "AWS",
+        "Terraform",
+        "MySQL",
+        "MongoDB",
+        "Cassandra",
+        "Snowflake",
+        "Disaster Recovery",
+        "Database Performance Tuning",
+        "Zero-Downtime Migrations"
+      ],
+      "alumniOf": {
+        "@type": "CollegeOrUniversity",
+        "name": "Dharmsinh Desai University"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Bengaluru",
+        "addressRegion": "Karnataka",
+        "addressCountry": "IN"
+      },
+      "description": "Senior Database Reliability Engineer at The Walt Disney Company with 5+ years of experience in PostgreSQL, Aurora, AWS and Terraform."
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://dishantmodh.com/blog/postgresql-on-call-playbook-p1-incidents.html#article",
+      "headline": "PostgreSQL On-Call Playbook for P1/P0 Incidents",
+      "description": "A calm first-15-minutes playbook for PostgreSQL incidents: triage queries for connections, locks, replication, disk and wraparound, plus communication and post-mortems.",
+      "image": "https://dishantmodh.com/og-image.jpg",
+      "datePublished": "2025-08-12",
+      "dateModified": "2025-08-12",
+      "author": {
+        "@id": "https://dishantmodh.com/#person"
+      },
+      "publisher": {
+        "@id": "https://dishantmodh.com/#person"
+      },
+      "mainEntityOfPage": "https://dishantmodh.com/blog/postgresql-on-call-playbook-p1-incidents.html",
+      "keywords": "PostgreSQL incident response, on-call runbook, pg_stat_activity, replication slots, transaction ID wraparound, post-mortem template, DBA on-call",
+      "inLanguage": "en",
+      "articleSection": "Reliability"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://dishantmodh.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://dishantmodh.com/blog.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "PostgreSQL On-Call Playbook for P1/P0 Incidents",
+          "item": "https://dishantmodh.com/blog/postgresql-on-call-playbook-p1-incidents.html"
+        }
+      ]
+    }
+  ]
+}
+  </script>
+  <!-- SEO:end -->
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="animated-bg">
+    <div class="gradient-orb orb-1"></div>
+    <div class="gradient-orb orb-2"></div>
+    <div class="gradient-orb orb-3"></div>
+  </div>
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="/index.html" class="logo">
+        <span class="logo-text">DM</span>
+        <span class="logo-glow"></span>
+      </a>
+      <ul class="nav-menu">
+        <li><a href="/about.html" class="nav-link">About</a></li>
+        <li><a href="/experience.html" class="nav-link">Experience</a></li>
+        <li><a href="/projects.html" class="nav-link">Projects</a></li>
+        <li><a href="/tools.html" class="nav-link">Tools</a></li>
+        <li><a href="/blog.html" class="nav-link">Blog</a></li>
+        <li><a href="/contact.html" class="nav-link">Contact</a></li>
+        <li><a href="/games.html" class="nav-link">Games</a></li>
+        <li><a href="/resume.html" class="nav-link resume-link">Resume</a></li>
+      </ul>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <span class="theme-icon">🌙</span>
+      </button>
+      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+  <main id="main" class="post-wrap">
+    <article class="post">
+      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><a href="/blog.html">Blog</a><span>/</span><span aria-current="page">Reliability</span></nav>
+      <header class="post-head">
+        <span class="blog-category">Reliability</span>
+        <h1>PostgreSQL On-Call Playbook for P1/P0 Incidents</h1>
+        <p class="post-meta"><span>By <a href="/about.html">Dishant Modh</a></span><span>&middot;</span><time datetime="2025-08-12">Aug 2025</time><span>&middot;</span><span>8 min read</span></p>
+        <p class="post-lede">A calm first-15-minutes playbook for PostgreSQL incidents: triage queries for connections, locks, replication, disk and wraparound, plus communication and post-mortems.</p>
+      </header>
+      <aside class="toc glass" aria-label="Table of contents"><strong>On this page</strong><ol id="toc"></ol></aside>
+      <div class="post-body">
+<p>As primary on-call DBA for P1 and P0 database incidents, I wrote a lot of post-mortems (12 of them led to 8 systemic fixes). The pattern that helped most was a calm, repeatable first 15 minutes. This is that playbook.</p>
+
+<h2 id="rules">1. Ground rules</h2>
+<ul>
+<li><strong>Capture evidence before you change anything.</strong> A snapshot of <code>pg_stat_activity</code> is gone once you restart.</li>
+<li><strong>Do not restart first.</strong> Restarts clear caches, drop connections and hide the cause.</li>
+<li><strong>One incident commander</strong> talks to stakeholders; you work the problem.</li>
+<li><strong>Write a timeline as you go.</strong> Future you will need it.</li>
+</ul>
+
+<h2 id="triage">2. Triage in five questions</h2>
+<p><strong>Is the database up and accepting connections?</strong> Then: what are sessions doing?</p>
+<pre><code>SELECT state, wait_event_type, count(*)
+FROM pg_stat_activity
+WHERE datname IS NOT NULL
+GROUP BY 1, 2
+ORDER BY 3 DESC;</code></pre>
+<p>Lots of <code>active</code> with <code>Lock</code> waits means blocking. Many <code>idle in transaction</code> means an application leak. Connection count near <code>max_connections</code> means saturation.</p>
+
+<h2 id="blockers">3. Blocking and long queries</h2>
+<pre><code>SELECT pid, pg_blocking_pids(pid) AS blocked_by,
+       now() - query_start AS running,
+       left(query, 80) AS query
+FROM pg_stat_activity
+WHERE cardinality(pg_blocking_pids(pid)) &gt; 0;</code></pre>
+<p>Find the root blocker (the pid that is blocking but not itself blocked). Try <code>pg_cancel_backend(pid)</code> first; use <code>pg_terminate_backend(pid)</code> if cancel does not work. Agree with the commander before killing business-critical work.</p>
+
+<h2 id="disk">4. Disk and WAL growth</h2>
+<p>A full disk takes PostgreSQL down. The usual culprit is WAL retained by an inactive or lagging replication slot:</p>
+<pre><code>SELECT slot_name, active,
+       pg_size_pretty(pg_wal_lsn_diff(pg_current_wal_lsn(), restart_lsn)) AS retained
+FROM pg_replication_slots;</code></pre>
+<p>If a slot is inactive and its consumer is gone for good, dropping it frees WAL. Confirm with the owner first, because dropping a slot breaks that subscriber.</p>
+
+<h2 id="replication">5. Replication and failover</h2>
+<pre><code>SELECT client_addr, state, sync_state, replay_lag
+FROM pg_stat_replication;</code></pre>
+<p>If the primary is truly lost, follow your failover runbook (Patroni, RDS/Aurora failover, etc.) rather than improvising. Verify the new primary accepts writes and that applications reconnected.</p>
+
+<h2 id="wraparound">6. The quiet killer: transaction ID age</h2>
+<pre><code>SELECT datname, age(datfrozenxid) AS xid_age
+FROM pg_database
+ORDER BY 2 DESC;</code></pre>
+<p>Ages creeping toward the high hundreds of millions deserve attention long before the hard limit near 2 billion. Fixing it means getting autovacuum to complete freezing: remove long transactions and stale replication slots, and consider a manual <code>VACUUM (FREEZE)</code> on the worst tables.</p>
+
+<h2 id="scenarios">7. Quick scenario cheat sheet</h2>
+<ul>
+<li><strong>Connections exhausted:</strong> look for <code>idle in transaction</code> sessions and app leaks; check whether a pooler is in front; raise limits only as a last resort.</li>
+<li><strong>CPU pegged:</strong> rank statements by total time in <code>pg_stat_statements</code>; look for a new query, a missing index or a plan change after a statistics shift.</li>
+<li><strong>Replica lag climbing:</strong> check for heavy writes on the primary, long queries on the replica that conflict with replay, and network or I/O limits.</li>
+<li><strong>Out-of-memory kills:</strong> remember <code>work_mem</code> applies per sort/hash node per connection, so large values multiplied by many connections add up.</li>
+<li><strong>Sudden slowdown after a deploy:</strong> compare the plans of the top queries before and after; roll back the change if it correlates.</li>
+</ul>
+
+<h2 id="comms">8. Communicate on a schedule</h2>
+<ul>
+<li>First update within minutes: impact, what you know, next update time.</li>
+<li>Then every 15-30 minutes, even if the update is "still investigating".</li>
+<li>Close with a clear "resolved" message and the post-mortem date.</li>
+</ul>
+
+<h2 id="postmortem">9. Blameless post-mortem template</h2>
+<ol>
+<li><strong>Summary and impact</strong> (who, how long, how bad).</li>
+<li><strong>Timeline</strong> with timestamps.</li>
+<li><strong>Root cause</strong> and contributing factors.</li>
+<li><strong>What went well / what did not.</strong></li>
+<li><strong>Action items</strong> with owners and dates, focused on systemic fixes: alerts, automation, guardrails.</li>
+</ol>
+<p>The measure of a good post-mortem is whether the same incident can still happen next quarter.</p>
+</div>
+      <section class="post-cta glass">
+        <h2>Enjoyed this?</h2>
+        <p>I write about PostgreSQL, AWS and database reliability. Have a question or a similar problem to solve?</p>
+        <div class="hero-actions"><a class="btn btn-primary" href="/contact.html"><span>Get in touch</span></a><a class="btn btn-secondary" href="/tools.html"><span>Try the tools</span></a></div>
+        <div class="share-row"><span>Share:</span>
+          <a href="https://twitter.com/intent/tweet?url=https://dishantmodh.com/blog/postgresql-on-call-playbook-p1-incidents.html&amp;text=PostgreSQL%20On-Call%20Playbook%20for%20P1/P0%20Incidents" target="_blank" rel="noopener noreferrer">Twitter</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://dishantmodh.com/blog/postgresql-on-call-playbook-p1-incidents.html" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <button type="button" class="copy-btn" data-copy="https://dishantmodh.com/blog/postgresql-on-call-playbook-p1-incidents.html">Copy link</button></div>
+      </section>
+      <section class="related"><h2>More articles</h2><div class="featured-grid"><a class="featured-card glass" href="/blog/postgresql-p95-latency-playbook.html"><span class="featured-kicker">PostgreSQL</span><h3>How I Cut PostgreSQL p95 Latency from 1.8s to 0.9s</h3><span class="featured-link">Read article &rarr;</span></a><a class="featured-card glass" href="/blog/zero-downtime-database-migration-aws-dms-pglogical.html"><span class="featured-kicker">Migration</span><h3>Zero-Downtime Database Migrations: On-Prem to AWS with DMS and pglogical</h3><span class="featured-link">Read article &rarr;</span></a><a class="featured-card glass" href="/blog/aurora-global-database-dr-readiness.html"><span class="featured-kicker">Reliability</span><h3>DR Readiness for Aurora Global Database: From Architecture to Quarterly Drills</h3><span class="featured-link">Read article &rarr;</span></a><a class="featured-card glass" href="/blog/mongodb-aggregation-pipeline-tuning.html"><span class="featured-kicker">MongoDB</span><h3>MongoDB Aggregation Tuning in Production (and Fixing Cassandra Hotspots)</h3><span class="featured-link">Read article &rarr;</span></a><a class="featured-card glass" href="/blog/datadog-grafana-alerting-reduce-mttr.html"><span class="featured-kicker">Observability</span><h3>Datadog + Grafana Alerting That Actually Reduces MTTR</h3><span class="featured-link">Read article &rarr;</span></a><a class="featured-card glass" href="/blog/pgbouncer-connection-pooling-guide.html"><span class="featured-kicker">PostgreSQL</span><h3>PgBouncer Explained: Connection Pooling Modes, Sizing and Pitfalls</h3><span class="featured-link">Read article &rarr;</span></a><a class="featured-card glass" href="/blog/terraform-rds-module-patterns.html"><span class="featured-kicker">Automation</span><h3>Terraform for RDS: Reusable Module Patterns and Drift Detection</h3><span class="featured-link">Read article &rarr;</span></a><a class="featured-card glass" href="/blog/aurora-vs-rds-postgresql-decision-guide.html"><span class="featured-kicker">AWS</span><h3>Aurora PostgreSQL vs RDS PostgreSQL: A Practical Decision Guide</h3><span class="featured-link">Read article &rarr;</span></a><a class="featured-card glass" href="/blog/postgresql-backup-pitr-restore-testing.html"><span class="featured-kicker">PostgreSQL</span><h3>PostgreSQL Backups and Point-in-Time Recovery: Test Your Restores</h3><span class="featured-link">Read article &rarr;</span></a><a class="featured-card glass" href="/blog/aws-database-cost-optimization-right-sizing.html"><span class="featured-kicker">Cost</span><h3>AWS Database Cost Optimization: A Right-Sizing Framework That Works</h3><span class="featured-link">Read article &rarr;</span></a><a class="featured-card glass" href="/blog/patroni-high-availability-postgresql-guide.html"><span class="featured-kicker">Reliability</span><h3>Patroni High Availability for PostgreSQL: Architecture, Config and Failover Testing</h3><span class="featured-link">Read article &rarr;</span></a><a class="featured-card glass" href="/blog/postgresql-index-types-guide.html"><span class="featured-kicker">PostgreSQL</span><h3>PostgreSQL Index Types Explained: B-tree, GIN, GiST, BRIN and When to Use Each</h3><span class="featured-link">Read article &rarr;</span></a></div></section>
+    </article>
+  </main>
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2026 Dishant Modh. Built with passion for reliability and performance.</p>
+      <div class="footer-links">
+        <a href="https://linkedin.com/in/dishantmodh" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">LinkedIn</a>
+        <span>•</span>
+        <a href="https://github.com/dhmodh" target="_blank" rel="noopener noreferrer" aria-label="GitHub">GitHub</a>
+        <span>•</span>
+        <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">Resume</a>
+      </div>
+    </div>
+  </footer>
+  <script src="/script.js?v=20261101"></script>
+  <script src="/post.js?v=20261101"></script>
+</body>
+</html>

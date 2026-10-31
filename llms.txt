@@ -1,0 +1,32 @@
+# Dishant Modh
+
+> Senior Database Reliability Engineer at The Walt Disney Company (since July 2026). 5+ years across PostgreSQL, Amazon Aurora, MySQL, MongoDB, Cassandra, Snowflake, AWS and Terraform. Based in Bengaluru, India.
+
+## Key pages
+- [Home](https://dishantmodh.com/): overview
+- [Experience](https://dishantmodh.com/experience.html): Disney, GlobalLogic, HHAeXchange
+- [Resume](https://dishantmodh.com/resume.html): full resume (PDF: https://dishantmodh.com/resume.pdf)
+- [Projects](https://dishantmodh.com/projects.html)
+- [Tools](https://dishantmodh.com/tools.html): SLO calculator, PostgreSQL config starter, failover simulator
+- [Blog](https://dishantmodh.com/blog.html)
+- [Games](https://dishantmodh.com/games.html): word guess, vacuum snake, SQL typing sprint, quiz, memory, incident challenge
+
+## Articles
+- [How I Cut PostgreSQL p95 Latency from 1.8s to 0.9s](https://dishantmodh.com/blog/postgresql-p95-latency-playbook.html)
+- [Zero-Downtime Database Migrations: On-Prem to AWS with DMS and pglogical](https://dishantmodh.com/blog/zero-downtime-database-migration-aws-dms-pglogical.html)
+- [DR Readiness for Aurora Global Database: From Architecture to Quarterly Drills](https://dishantmodh.com/blog/aurora-global-database-dr-readiness.html)
+- [MongoDB Aggregation Tuning in Production (and Fixing Cassandra Hotspots)](https://dishantmodh.com/blog/mongodb-aggregation-pipeline-tuning.html)
+- [Datadog + Grafana Alerting That Actually Reduces MTTR](https://dishantmodh.com/blog/datadog-grafana-alerting-reduce-mttr.html)
+- [PostgreSQL On-Call Playbook for P1/P0 Incidents](https://dishantmodh.com/blog/postgresql-on-call-playbook-p1-incidents.html)
+- [PgBouncer Explained: Connection Pooling Modes, Sizing and Pitfalls](https://dishantmodh.com/blog/pgbouncer-connection-pooling-guide.html)
+- [Terraform for RDS: Reusable Module Patterns and Drift Detection](https://dishantmodh.com/blog/terraform-rds-module-patterns.html)
+- [Aurora PostgreSQL vs RDS PostgreSQL: A Practical Decision Guide](https://dishantmodh.com/blog/aurora-vs-rds-postgresql-decision-guide.html)
+- [PostgreSQL Backups and Point-in-Time Recovery: Test Your Restores](https://dishantmodh.com/blog/postgresql-backup-pitr-restore-testing.html)
+- [AWS Database Cost Optimization: A Right-Sizing Framework That Works](https://dishantmodh.com/blog/aws-database-cost-optimization-right-sizing.html)
+- [Patroni High Availability for PostgreSQL: Architecture, Config and Failover Testing](https://dishantmodh.com/blog/patroni-high-availability-postgresql-guide.html)
+- [PostgreSQL Index Types Explained: B-tree, GIN, GiST, BRIN and When to Use Each](https://dishantmodh.com/blog/postgresql-index-types-guide.html)
+
+## Contact
+- https://dishantmodh.com/contact.html
+- https://linkedin.com/in/dishantmodh
+- https://github.com/dhmodh

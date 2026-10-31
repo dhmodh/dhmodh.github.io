@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="favicon_io/favicon.svg?v=5">
+  <link rel="manifest" href="favicon_io/site.webmanifest">
+  <link rel="stylesheet" href="styles.css?v=20261101">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- SEO:start -->
+  <title>DB Word Guess: Daily Database &amp; SRE Word Game</title>
+  <meta name="description" content="Guess the five-letter database or SRE term in six tries. A free daily word puzzle for engineers with hints, streaks, stats and shareable results.">
+  <meta name="author" content="Dishant Modh">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+  <meta name="theme-color" content="#0a0e27">
+  <link rel="canonical" href="https://dishantmodh.com/word-game.html">
+  <link rel="alternate" type="application/rss+xml" title="Dishant Modh - Articles" href="https://dishantmodh.com/feed.xml">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Dishant Modh">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:url" content="https://dishantmodh.com/word-game.html">
+  <meta property="og:title" content="DB Word Guess: Daily Database &amp; SRE Word Game">
+  <meta property="og:description" content="Guess the five-letter database or SRE term in six tries. A free daily word puzzle for engineers with hints, streaks, stats and shareable results.">
+  <meta property="og:image" content="https://dishantmodh.com/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Dishant Modh - Senior Database Reliability Engineer">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DB Word Guess: Daily Database &amp; SRE Word Game">
+  <meta name="twitter:description" content="Guess the five-letter database or SRE term in six tries. A free daily word puzzle for engineers with hints, streaks, stats and shareable results.">
+  <meta name="twitter:image" content="https://dishantmodh.com/og-image.jpg">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://dishantmodh.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Games",
+          "item": "https://dishantmodh.com/games.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "DB Word Guess",
+          "item": "https://dishantmodh.com/word-game.html"
+        }
+      ]
+    },
+    {
+      "@type": "VideoGame",
+      "name": "DB Word Guess",
+      "description": "Daily five-letter word puzzle with database and SRE terms.",
+      "url": "https://dishantmodh.com/word-game.html",
+      "genre": [
+        "Puzzle",
+        "Educational"
+      ],
+      "applicationCategory": "Game",
+      "playMode": "SinglePlayer",
+      "gamePlatform": "Web browser",
+      "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "author": {
+        "@id": "https://dishantmodh.com/#person"
+      }
+    }
+  ]
+}
+  </script>
+  <!-- SEO:end -->
+</head>
+<body class="game-page">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="animated-bg">
+    <div class="gradient-orb orb-1"></div>
+    <div class="gradient-orb orb-2"></div>
+    <div class="gradient-orb orb-3"></div>
+  </div>
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">
+        <span class="logo-text">DM</span>
+        <span class="logo-glow"></span>
+      </a>
+      <ul class="nav-menu">
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="experience.html" class="nav-link">Experience</a></li>
+        <li><a href="projects.html" class="nav-link">Projects</a></li>
+        <li><a href="tools.html" class="nav-link">Tools</a></li>
+        <li><a href="blog.html" class="nav-link">Blog</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+        <li><a href="games.html" class="nav-link">Games</a></li>
+        <li><a href="resume.html" class="nav-link resume-link">Resume</a></li>
+      </ul>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <span class="theme-icon">🌙</span>
+      </button>
+      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+  <main id="main" class="section gx-section">
+    <div class="gx-wrap">
+      <div class="gx-head reveal">
+        <h1>DB Word Guess</h1>
+        <p>Guess the five-letter database or SRE term in six tries. A new puzzle every day.</p>
+      </div>
+      
+      <div class="gx-card glass">
+        <div class="gx-tabs" role="group" aria-label="Mode">
+          <button type="button" class="chip active" data-wg-mode="daily">Daily puzzle</button>
+          <button type="button" class="chip" data-wg-mode="practice">Practice</button>
+        </div>
+        <div class="wg-board" id="wgBoard" role="grid" aria-label="Guess board"></div>
+        <p class="wg-msg" id="wgMsg" role="status" aria-live="polite"></p>
+        <div class="wg-keys" id="wgKeys"></div>
+        <div class="gx-actions">
+          <button type="button" class="btn btn-secondary" id="wgHintBtn" disabled><span>Hint (after 2 guesses)</span></button>
+          <button type="button" class="btn btn-primary" id="wgShare" style="display:none"><span>Share result</span></button>
+        </div>
+        <div class="gx-stats">
+          <div><b id="wgPlayed">0</b><span>Played</span></div><div><b id="wgWinPct">-</b><span>Win %</span></div>
+          <div><b id="wgStreak">0</b><span>Streak</span></div><div><b id="wgMax">0</b><span>Best streak</span></div>
+        </div>
+        <p class="gx-note">Green = right letter, right spot. Yellow = right letter, wrong spot. Any five letters are accepted as a guess. The daily word changes at local midnight.</p>
+      </div>
+      <div class="gx-more"><a class="btn btn-secondary" href="games.html"><span>All games</span></a><a class="btn btn-secondary" href="blog.html"><span>Read the blog</span></a></div>
+    </div>
+  </main>
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2026 Dishant Modh. Built with passion for reliability and performance.</p>
+      <div class="footer-links">
+        <a href="https://linkedin.com/in/dishantmodh" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">LinkedIn</a>
+        <span>•</span>
+        <a href="https://github.com/dhmodh" target="_blank" rel="noopener noreferrer" aria-label="GitHub">GitHub</a>
+        <span>•</span>
+        <a href="resume.pdf" target="_blank" rel="noopener noreferrer">Resume</a>
+      </div>
+    </div>
+  </footer>
+  <script src="script.js?v=20261101"></script>
+  <script src="games-common.js?v=20261101"></script>
+  <script src="word.js?v=20261101"></script>
+</body>
+</html>

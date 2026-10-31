@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="favicon_io/favicon.svg?v=5">
+  <link rel="manifest" href="favicon_io/site.webmanifest">
+  <link rel="stylesheet" href="styles.css?v=20261101">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- SEO:start -->
+  <title>Vacuum Snake: Play the Database Cleanup Game</title>
+  <meta name="description" content="Guide the autovacuum snake to eat dead tuples without hitting the wall or yourself. A free retro snake game with a database twist. Keyboard and touch.">
+  <meta name="author" content="Dishant Modh">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+  <meta name="theme-color" content="#0a0e27">
+  <link rel="canonical" href="https://dishantmodh.com/snake-game.html">
+  <link rel="alternate" type="application/rss+xml" title="Dishant Modh - Articles" href="https://dishantmodh.com/feed.xml">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Dishant Modh">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:url" content="https://dishantmodh.com/snake-game.html">
+  <meta property="og:title" content="Vacuum Snake: Play the Database Cleanup Game">
+  <meta property="og:description" content="Guide the autovacuum snake to eat dead tuples without hitting the wall or yourself. A free retro snake game with a database twist. Keyboard and touch.">
+  <meta property="og:image" content="https://dishantmodh.com/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Dishant Modh - Senior Database Reliability Engineer">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Vacuum Snake: Play the Database Cleanup Game">
+  <meta name="twitter:description" content="Guide the autovacuum snake to eat dead tuples without hitting the wall or yourself. A free retro snake game with a database twist. Keyboard and touch.">
+  <meta name="twitter:image" content="https://dishantmodh.com/og-image.jpg">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://dishantmodh.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Games",
+          "item": "https://dishantmodh.com/games.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Vacuum Snake",
+          "item": "https://dishantmodh.com/snake-game.html"
+        }
+      ]
+    },
+    {
+      "@type": "VideoGame",
+      "name": "Vacuum Snake",
+      "description": "Retro snake game where you eat dead tuples.",
+      "url": "https://dishantmodh.com/snake-game.html",
+      "genre": [
+        "Puzzle",
+        "Educational"
+      ],
+      "applicationCategory": "Game",
+      "playMode": "SinglePlayer",
+      "gamePlatform": "Web browser",
+      "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "author": {
+        "@id": "https://dishantmodh.com/#person"
+      }
+    }
+  ]
+}
+  </script>
+  <!-- SEO:end -->
+</head>
+<body class="game-page">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="animated-bg">
+    <div class="gradient-orb orb-1"></div>
+    <div class="gradient-orb orb-2"></div>
+    <div class="gradient-orb orb-3"></div>
+  </div>
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">
+        <span class="logo-text">DM</span>
+        <span class="logo-glow"></span>
+      </a>
+      <ul class="nav-menu">
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="experience.html" class="nav-link">Experience</a></li>
+        <li><a href="projects.html" class="nav-link">Projects</a></li>
+        <li><a href="tools.html" class="nav-link">Tools</a></li>
+        <li><a href="blog.html" class="nav-link">Blog</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+        <li><a href="games.html" class="nav-link">Games</a></li>
+        <li><a href="resume.html" class="nav-link resume-link">Resume</a></li>
+      </ul>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <span class="theme-icon">🌙</span>
+      </button>
+      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+  <main id="main" class="section gx-section">
+    <div class="gx-wrap">
+      <div class="gx-head reveal">
+        <h1>Vacuum Snake</h1>
+        <p>Guide autovacuum through the table. Eat dead tuples, dodge the edges and your own bloat.</p>
+      </div>
+      
+      <div class="gx-card glass">
+        <div class="gx-stats"><div><b id="snScore">0</b><span>Score</span></div><div><b id="snBest">0</b><span>Best</span></div></div>
+        <canvas id="snakeCanvas" class="sn-canvas" width="400" height="400" aria-label="Vacuum Snake game board"></canvas>
+        <p class="wg-msg" id="snMsg" role="status" aria-live="polite">Press an arrow key or tap Start. Space pauses.</p>
+        <div class="sn-pad" aria-label="Touch controls">
+          <button type="button" data-dir="up" aria-label="Up">▲</button>
+          <button type="button" data-dir="left" aria-label="Left">◀</button>
+          <button type="button" data-dir="down" aria-label="Down">▼</button>
+          <button type="button" data-dir="right" aria-label="Right">▶</button>
+        </div>
+        <div class="gx-actions"><button type="button" class="btn btn-primary" id="snStart"><span>Start</span></button></div>
+        <p class="gx-note">Controls: arrow keys or WASD, swipe on touch screens. Red = dead tuple (+1). Golden = index (+3, every 5th). The game speeds up as you clean.</p>
+      </div>
+      <div class="gx-more"><a class="btn btn-secondary" href="games.html"><span>All games</span></a><a class="btn btn-secondary" href="blog.html"><span>Read the blog</span></a></div>
+    </div>
+  </main>
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2026 Dishant Modh. Built with passion for reliability and performance.</p>
+      <div class="footer-links">
+        <a href="https://linkedin.com/in/dishantmodh" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">LinkedIn</a>
+        <span>•</span>
+        <a href="https://github.com/dhmodh" target="_blank" rel="noopener noreferrer" aria-label="GitHub">GitHub</a>
+        <span>•</span>
+        <a href="resume.pdf" target="_blank" rel="noopener noreferrer">Resume</a>
+      </div>
+    </div>
+  </footer>
+  <script src="script.js?v=20261101"></script>
+  <script src="games-common.js?v=20261101"></script>
+  <script src="snake.js?v=20261101"></script>
+</body>
+</html>

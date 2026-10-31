@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="/favicon_io/favicon.svg?v=5">
+  <link rel="manifest" href="/favicon_io/site.webmanifest">
+  <link rel="stylesheet" href="/styles.css?v=20261101">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- SEO:start -->
+  <title>Zero-Downtime DB Migration to AWS: DMS &amp; pglogical | Dishant Modh</title>
+  <meta name="description" content="A cutover-first guide to migrating production PostgreSQL and MySQL to AWS with AWS DMS and pglogical: replication, validation, sequences, rollback and runbook.">
+  <meta name="author" content="Dishant Modh">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+  <meta name="theme-color" content="#0a0e27">
+  <link rel="canonical" href="https://dishantmodh.com/blog/zero-downtime-database-migration-aws-dms-pglogical.html">
+  <link rel="alternate" type="application/rss+xml" title="Dishant Modh - Articles" href="https://dishantmodh.com/feed.xml">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Dishant Modh">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:url" content="https://dishantmodh.com/blog/zero-downtime-database-migration-aws-dms-pglogical.html">
+  <meta property="og:title" content="Zero-Downtime DB Migration to AWS: DMS &amp; pglogical | Dishant Modh">
+  <meta property="og:description" content="A cutover-first guide to migrating production PostgreSQL and MySQL to AWS with AWS DMS and pglogical: replication, validation, sequences, rollback and runbook.">
+  <meta property="og:image" content="https://dishantmodh.com/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Dishant Modh - Senior Database Reliability Engineer">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Zero-Downtime DB Migration to AWS: DMS &amp; pglogical | Dishant Modh">
+  <meta name="twitter:description" content="A cutover-first guide to migrating production PostgreSQL and MySQL to AWS with AWS DMS and pglogical: replication, validation, sequences, rollback and runbook.">
+  <meta name="twitter:image" content="https://dishantmodh.com/og-image.jpg">
+  <meta property="article:published_time" content="2025-12-10">
+  <meta property="article:author" content="Dishant Modh">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://dishantmodh.com/#person",
+      "name": "Dishant Modh",
+      "jobTitle": "Senior Database Reliability Engineer",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "The Walt Disney Company"
+      },
+      "url": "https://dishantmodh.com/",
+      "image": "https://dishantmodh.com/og-image.jpg",
+      "sameAs": [
+        "https://linkedin.com/in/dishantmodh",
+        "https://github.com/dhmodh"
+      ],
+      "knowsAbout": [
+        "Database Reliability Engineering",
+        "Site Reliability Engineering",
+        "PostgreSQL",
+        "Amazon Aurora",
+        "AWS",
+        "Terraform",
+        "MySQL",
+        "MongoDB",
+        "Cassandra",
+        "Snowflake",
+        "Disaster Recovery",
+        "Database Performance Tuning",
+        "Zero-Downtime Migrations"
+      ],
+      "alumniOf": {
+        "@type": "CollegeOrUniversity",
+        "name": "Dharmsinh Desai University"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Bengaluru",
+        "addressRegion": "Karnataka",
+        "addressCountry": "IN"
+      },
+      "description": "Senior Database Reliability Engineer at The Walt Disney Company with 5+ years of experience in PostgreSQL, Aurora, AWS and Terraform."
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://dishantmodh.com/blog/zero-downtime-database-migration-aws-dms-pglogical.html#article",
+      "headline": "Zero-Downtime Database Migrations: On-Prem to AWS with DMS and pglogical",
+      "description": "A cutover-first guide to migrating production PostgreSQL and MySQL to AWS with AWS DMS and pglogical: replication, validation, sequences, rollback and runbook.",
+      "image": "https://dishantmodh.com/og-image.jpg",
+      "datePublished": "2025-12-10",
+      "dateModified": "2025-12-10",
+      "author": {
+        "@id": "https://dishantmodh.com/#person"
+      },
+      "publisher": {
+        "@id": "https://dishantmodh.com/#person"
+      },
+      "mainEntityOfPage": "https://dishantmodh.com/blog/zero-downtime-database-migration-aws-dms-pglogical.html",
+      "keywords": "zero downtime migration, AWS DMS, pglogical, PostgreSQL migration to AWS, RDS migration, database cutover, CDC",
+      "inLanguage": "en",
+      "articleSection": "Migration"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://dishantmodh.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://dishantmodh.com/blog.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Zero-Downtime Database Migrations: On-Prem to AWS with DMS and pglogical",
+          "item": "https://dishantmodh.com/blog/zero-downtime-database-migration-aws-dms-pglogical.html"
+        }
+      ]
+    }
+  ]
+}
+  </script>
+  <!-- SEO:end -->
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="animated-bg">
+    <div class="gradient-orb orb-1"></div>
+    <div class="gradient-orb orb-2"></div>
+    <div class="gradient-orb orb-3"></div>
+  </div>
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="/index.html" class="logo">
+        <span class="logo-text">DM</span>
+        <span class="logo-glow"></span>
+      </a>
+      <ul class="nav-menu">
+        <li><a href="/about.html" class="nav-link">About</a></li>
+        <li><a href="/experience.html" class="nav-link">Experience</a></li>
+        <li><a href="/projects.html" class="nav-link">Projects</a></li>
+        <li><a href="/tools.html" class="nav-link">Tools</a></li>
+        <li><a href="/blog.html" class="nav-link">Blog</a></li>
+        <li><a href="/contact.html" class="nav-link">Contact</a></li>
+        <li><a href="/games.html" class="nav-link">Games</a></li>
+        <li><a href="/resume.html" class="nav-link resume-link">Resume</a></li>
+      </ul>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <span class="theme-icon">🌙</span>
+      </button>
+      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+  <main id="main" class="post-wrap">
+    <article class="post">
+      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><a href="/blog.html">Blog</a><span>/</span><span aria-current="page">Migration</span></nav>
+      <header class="post-head">
+        <span class="blog-category">Migration</span>
+        <h1>Zero-Downtime Database Migrations: On-Prem to AWS with DMS and pglogical</h1>
+        <p class="post-meta"><span>By <a href="/about.html">Dishant Modh</a></span><span>&middot;</span><time datetime="2025-12-10">Dec 2025</time><span>&middot;</span><span>8 min read</span></p>
+        <p class="post-lede">A cutover-first guide to migrating production PostgreSQL and MySQL to AWS with AWS DMS and pglogical: replication, validation, sequences, rollback and runbook.</p>
+      </header>
+      <aside class="toc glass" aria-label="Table of contents"><strong>On this page</strong><ol id="toc"></ol></aside>
+      <div class="post-body">
+<p>Across several on-premises-to-AWS moves of PostgreSQL and MySQL workloads, including more than 4 TB of production data, the migrations that went well shared one trait: the team designed the <strong>cutover and rollback first</strong> and the data copy second. Here is the approach, with the details that usually bite.</p>
+
+<h2 id="choose">1. Pick the replication path</h2>
+<ul>
+<li><strong>AWS DMS</strong> (full load + CDC) works across engines and into RDS/Aurora, with built-in validation. Great for heterogeneous moves or when you cannot enable logical replication on the source.</li>
+<li><strong>pglogical / native logical replication</strong> suits PostgreSQL to PostgreSQL. You get tighter control and fewer type-mapping surprises, but need <code>wal_level = logical</code> on the source and a primary key (or replica identity) on every replicated table.</li>
+</ul>
+<p>Whichever you choose, migrate the <strong>schema separately and first</strong> using the engine's native tooling, then let the replication tool move data only.</p>
+
+<h2 id="prepare">2. Prepare the source</h2>
+<pre><code># postgresql.conf (source) for logical replication
+wal_level = logical
+max_replication_slots = 10
+max_wal_senders = 10
+shared_preload_libraries = 'pglogical'</code></pre>
+<p>Check disk headroom for WAL. A stalled subscriber makes the source retain WAL indefinitely, so alert on replication slot lag from day one. On RDS targets, logical replication is enabled through the parameter group (for example <code>rds.logical_replication</code>).</p>
+
+<h2 id="load">3. Initial load, then catch up</h2>
+<p>Start CDC so changes during the bulk copy are queued, run the full load, then let replication drain until lag is near zero and <em>stays</em> there under normal traffic. Tune LOB handling and CDC batch sizes in DMS for tables with large objects, because defaults can throttle throughput badly. Consolidating redundant replication tasks also reduces cost and noise.</p>
+
+<h2 id="validate">4. Validate continuously, not once</h2>
+<ul>
+<li>Row counts per table, then checksums on critical tables or sampled ranges.</li>
+<li>DMS data validation or an equivalent comparison job running during replication.</li>
+<li>Application smoke tests pointed at the <em>target</em> in read-only mode before any switch.</li>
+<li>Compare query plans for your top queries. A different version or missing statistics can change performance.</li>
+</ul>
+
+<h2 id="sequences">5. The gotcha: sequences and other non-replicated state</h2>
+<p>Logical replication moves rows, <strong>not sequence positions</strong>. Forget this and your first insert after cutover fails with a duplicate key. During the cutover window, advance every sequence with a safety margin:</p>
+<pre><code>SELECT setval('orders_id_seq', (SELECT max(id) FROM orders) + 1000);</code></pre>
+<p>Also check roles and grants, extensions, scheduled jobs, large objects, and anything stored outside tables that the tool does not carry over.</p>
+
+<h2 id="cutover">6. A cutover runbook that fits in an hour</h2>
+<ol>
+<li>Lower DNS TTLs a day ahead.</li>
+<li>Announce the window; enable read-only mode or pause writers at the application.</li>
+<li>Wait for replication lag to hit zero; confirm with a final row-count check.</li>
+<li>Sync sequences on the target.</li>
+<li>Switch connection strings or DNS to the target.</li>
+<li>Run smoke tests and watch error rates, latency and replication health.</li>
+<li>Keep the source intact and read-only for an agreed soak period.</li>
+</ol>
+
+<h2 id="rollback">7. Decide rollback before you start</h2>
+<p>A rollback plan that only exists in someone's head is not a plan. The strongest option is <strong>reverse replication</strong> from the new primary back to the source during the soak window, so you can switch back without losing writes. If that is not feasible, define the exact point after which rollback means data loss, and get that accepted by stakeholders in advance.</p>
+
+<h2 id="takeaways">Takeaways</h2>
+<ul>
+<li>Design cutover and rollback first.</li>
+<li>Schema first, data second, validation throughout.</li>
+<li>Sequences are the classic day-one failure.</li>
+<li>Rehearse in staging with production-sized data and time the cutover.</li>
+</ul>
+<p>Planning a migration and want to compare notes? <a href="/contact.html">Get in touch</a>.</p>
+</div>
+      <section class="post-cta glass">
+        <h2>Enjoyed this?</h2>
+        <p>I write about PostgreSQL, AWS and database reliability. Have a question or a similar problem to solve?</p>
+        <div class="hero-actions"><a class="btn btn-primary" href="/contact.html"><span>Get in touch</span></a><a class="btn btn-secondary" href="/tools.html"><span>Try the tools</span></a></div>
+        <div class="share-row"><span>Share:</span>
+          <a href="https://twitter.com/intent/tweet?url=https://dishantmodh.com/blog/zero-downtime-database-migration-aws-dms-pglogical.html&amp;text=Zero-Downtime%20Database%20Migrations:%20On-Prem%20to%20AWS%20with%20DMS%20and%20pglogical" target="_blank" rel="noopener noreferrer">Twitter</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://dishantmodh.com/blog/zero-downtime-database-migration-aws-dms-pglogical.html" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <button type="button" class="copy-btn" data-copy="https://dishantmodh.com/blog/zero-downtime-database-migration-aws-dms-pglogical.html">Copy link</button></div>
+      </section>
+      <section class="related"><h2>More articles</h2><div class="featured-grid"><a class="featured-card glass" href="/blog/postgresql-p95-latency-playbook.html"><span class="featured-kicker">PostgreSQL</span><h3>How I Cut PostgreSQL p95 Latency from 1.8s to 0.9s</h3><span class="featured-link">Read article &rarr;</span></a><a class="featured-card glass" href="/blog/aurora-global-database-dr-readiness.html"><span class="featured-kicker">Reliability</span><h3>DR Readiness for Aurora Global Database: From Architecture to Quarterly Drills</h3><span class="featured-link">Read article &rarr;</span></a><a class="featured-card glass" href="/blog/mongodb-aggregation-pipeline-tuning.html"><span class="featured-kicker">MongoDB</span><h3>MongoDB Aggregation Tuning in Production (and Fixing Cassandra Hotspots)</h3><span class="featured-link">Read article &rarr;</span></a><a class="featured-card glass" href="/blog/datadog-grafana-alerting-reduce-mttr.html"><span class="featured-kicker">Observability</span><h3>Datadog + Grafana Alerting That Actually Reduces MTTR</h3><span class="featured-link">Read article &rarr;</span></a><a class="featured-card glass" href="/blog/postgresql-on-call-playbook-p1-incidents.html"><span class="featured-kicker">Reliability</span><h3>PostgreSQL On-Call Playbook for P1/P0 Incidents</h3><span class="featured-link">Read article &rarr;</span></a><a class="featured-card glass" href="/blog/pgbouncer-connection-pooling-guide.html"><span class="featured-kicker">PostgreSQL</span><h3>PgBouncer Explained: Connection Pooling Modes, Sizing and Pitfalls</h3><span class="featured-link">Read article &rarr;</span></a><a class="featured-card glass" href="/blog/terraform-rds-module-patterns.html"><span class="featured-kicker">Automation</span><h3>Terraform for RDS: Reusable Module Patterns and Drift Detection</h3><span class="featured-link">Read article &rarr;</span></a><a class="featured-card glass" href="/blog/aurora-vs-rds-postgresql-decision-guide.html"><span class="featured-kicker">AWS</span><h3>Aurora PostgreSQL vs RDS PostgreSQL: A Practical Decision Guide</h3><span class="featured-link">Read article &rarr;</span></a><a class="featured-card glass" href="/blog/postgresql-backup-pitr-restore-testing.html"><span class="featured-kicker">PostgreSQL</span><h3>PostgreSQL Backups and Point-in-Time Recovery: Test Your Restores</h3><span class="featured-link">Read article &rarr;</span></a><a class="featured-card glass" href="/blog/aws-database-cost-optimization-right-sizing.html"><span class="featured-kicker">Cost</span><h3>AWS Database Cost Optimization: A Right-Sizing Framework That Works</h3><span class="featured-link">Read article &rarr;</span></a><a class="featured-card glass" href="/blog/patroni-high-availability-postgresql-guide.html"><span class="featured-kicker">Reliability</span><h3>Patroni High Availability for PostgreSQL: Architecture, Config and Failover Testing</h3><span class="featured-link">Read article &rarr;</span></a><a class="featured-card glass" href="/blog/postgresql-index-types-guide.html"><span class="featured-kicker">PostgreSQL</span><h3>PostgreSQL Index Types Explained: B-tree, GIN, GiST, BRIN and When to Use Each</h3><span class="featured-link">Read article &rarr;</span></a></div></section>
+    </article>
+  </main>
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2026 Dishant Modh. Built with passion for reliability and performance.</p>
+      <div class="footer-links">
+        <a href="https://linkedin.com/in/dishantmodh" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">LinkedIn</a>
+        <span>•</span>
+        <a href="https://github.com/dhmodh" target="_blank" rel="noopener noreferrer" aria-label="GitHub">GitHub</a>
+        <span>•</span>
+        <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">Resume</a>
+      </div>
+    </div>
+  </footer>
+  <script src="/script.js?v=20261101"></script>
+  <script src="/post.js?v=20261101"></script>
+</body>
+</html>

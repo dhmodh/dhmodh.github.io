@@ -42,7 +42,13 @@ To enable Google Analytics:
 ├── tools.html / tools.js  # SLO + PostgreSQL config tools
 ├── 404.html            # Custom not-found page
 ├── og-image.jpg        # Social share preview (1200x630)
-├── tests/suite.py      # Browser test suite (Playwright)
+├── resume.html         # Printable web resume (also source for resume.pdf)
+├── blog/               # Full article pages (indexable)
+├── feed.xml / sitemap.xml / robots.txt / llms.txt
+├── failover.js / terminal.js / post.js
+├── games.html + word-game / snake-game / typing-game (.html/.js), games-common.js, games-hub.js
+├── SEO-GUIDE.md        # Steps to get ranked (Search Console, backlinks)
+├── tests/suite.py, suite2.py, suite3.py  # Browser test suites (Playwright)
 ├── blog.html           # Blog page
 ├── contact.html        # Contact page
 ├── styles.css          # Main stylesheet
@@ -144,7 +150,7 @@ Built with modern web technologies and best practices for performance and SEO.
 ```bash
 pip install playwright && playwright install chromium
 python3 -m http.server 8000          # terminal 1 (repo root)
-python3 tests/suite.py               # terminal 2
+python3 tests/suite.py && python3 tests/suite2.py && python3 tests/suite3.py   # terminal 2
 ```
 Covers: console errors, broken links/assets, horizontal overflow on desktop/tablet/mobile,
 experience content, command palette (Ctrl/Cmd+K), SLO + PostgreSQL calculators (unit + UI),

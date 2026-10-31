@@ -363,23 +363,36 @@ if (projectFilterButtons.length > 0 && projectCards.length > 0) {
   });
 }
 
-// Blog filter feature
+// Blog filter + search
 const blogFilterButtons = document.querySelectorAll('.blog-filter-btn');
 const blogCards = document.querySelectorAll('.blog-card[data-blog-category]');
-if (blogFilterButtons.length > 0 && blogCards.length > 0) {
+if (blogCards.length > 0) {
+  const searchInput = document.getElementById('blogSearch');
+  const countEl = document.getElementById('blogCount');
+  let activeFilter = 'all';
+  const applyBlogFilters = () => {
+    const q = (searchInput?.value || '').trim().toLowerCase();
+    let shown = 0;
+    blogCards.forEach(card => {
+      const categories = (card.getAttribute('data-blog-category') || '').split(' ');
+      const okFilter = activeFilter === 'all' || categories.includes(activeFilter);
+      const okSearch = !q || card.textContent.toLowerCase().includes(q);
+      const show = okFilter && okSearch;
+      card.style.display = show ? '' : 'none';
+      if (show) shown++;
+    });
+    if (countEl) countEl.textContent = (q || activeFilter !== 'all')
+      ? (shown ? shown + ' article' + (shown === 1 ? '' : 's') + ' found' : 'No articles match. Try another keyword.') : '';
+  };
   blogFilterButtons.forEach(btn => {
     btn.addEventListener('click', () => {
-      const filter = btn.getAttribute('data-blog-filter') || 'all';
+      activeFilter = btn.getAttribute('data-blog-filter') || 'all';
       blogFilterButtons.forEach(item => item.classList.remove('active'));
       btn.classList.add('active');
-
-      blogCards.forEach(card => {
-        const categories = (card.getAttribute('data-blog-category') || '').split(' ');
-        const show = filter === 'all' || categories.includes(filter);
-        card.style.display = show ? '' : 'none';
-      });
+      applyBlogFilters();
     });
   });
+  searchInput?.addEventListener('input', applyBlogFilters);
 }
 
 // Copy to clipboard buttons (contact page)
@@ -453,17 +466,31 @@ console.log('%cInterested in the code? Check out the repository!', 'font-size: 1
 // ===== Command palette (Ctrl/Cmd+K or "/") =====
 (() => {
   const items = [
-    { t: 'Home', h: 'index.html', k: 'go' },
-    { t: 'About', h: 'about.html', k: 'go' },
-    { t: 'Experience', h: 'experience.html', k: 'go' },
-    { t: 'Projects', h: 'projects.html', k: 'go' },
-    { t: 'Reliability Tools', h: 'tools.html', k: 'go' },
-    { t: 'Blog', h: 'blog.html', k: 'go' },
-    { t: 'Contact', h: 'contact.html', k: 'go' },
-    { t: 'Quiz Game', h: 'game.html', k: 'play' },
-    { t: 'Memory Match', h: 'memory-game.html', k: 'play' },
-    { t: 'Incident Challenge', h: 'incident-game.html', k: 'play' },
-    { t: 'Open Resume (PDF)', h: 'resume.pdf', k: 'open', ext: true },
+    { t: 'Home', h: '/index.html', k: 'go' },
+    { t: 'About', h: '/about.html', k: 'go' },
+    { t: 'Experience', h: '/experience.html', k: 'go' },
+    { t: 'Projects', h: '/projects.html', k: 'go' },
+    { t: 'Reliability Tools', h: '/tools.html', k: 'go' },
+    { t: 'Failover Simulator', h: '/tools.html#failover', k: 'play' },
+    { t: 'Blog', h: '/blog.html', k: 'go' },
+    { t: 'Contact', h: '/contact.html', k: 'go' },
+    { t: 'All Games', h: '/games.html', k: 'play' },
+    { t: 'DB Word Guess (daily)', h: '/word-game.html', k: 'play' },
+    { t: 'Vacuum Snake', h: '/snake-game.html', k: 'play' },
+    { t: 'SQL Sprint (typing)', h: '/typing-game.html', k: 'play' },
+    { t: 'Quiz Game', h: '/game.html', k: 'play' },
+    { t: 'Memory Match', h: '/memory-game.html', k: 'play' },
+    { t: 'Incident Challenge', h: '/incident-game.html', k: 'play' },
+    { t: 'Resume (web)', h: '/resume.html', k: 'go' },
+    { t: 'Download Resume (PDF)', h: '/resume.pdf', k: 'open', ext: true },
+    { t: 'Article: PostgreSQL p95 latency playbook', h: '/blog/postgresql-p95-latency-playbook.html', k: 'read' },
+    { t: 'Article: Zero-downtime DB migrations', h: '/blog/zero-downtime-database-migration-aws-dms-pglogical.html', k: 'read' },
+    { t: 'Article: Aurora Global Database DR', h: '/blog/aurora-global-database-dr-readiness.html', k: 'read' },
+    { t: 'Article: MongoDB aggregation tuning', h: '/blog/mongodb-aggregation-pipeline-tuning.html', k: 'read' },
+    { t: 'Article: Datadog + Grafana alerting', h: '/blog/datadog-grafana-alerting-reduce-mttr.html', k: 'read' },
+    { t: 'Article: PostgreSQL on-call playbook', h: '/blog/postgresql-on-call-playbook-p1-incidents.html', k: 'read' },
+    { t: 'Article: PgBouncer guide', h: '/blog/pgbouncer-connection-pooling-guide.html', k: 'read' },
+    { t: 'Article: Terraform RDS modules', h: '/blog/terraform-rds-module-patterns.html', k: 'read' },
     { t: 'LinkedIn', h: 'https://linkedin.com/in/dishantmodh', k: 'open', ext: true },
     { t: 'GitHub', h: 'https://github.com/dhmodh', k: 'open', ext: true },
     { t: 'Copy email address', k: 'action', run: () => navigator.clipboard?.writeText('dishantmodh7@gmail.com') },
@@ -550,3 +577,6 @@ console.log('%cInterested in the code? Check out the repository!', 'font-size: 1
     container.insertBefore(b, themeBtn);
   }
 })();
+
+// Resume page: print button
+document.getElementById('printResume')?.addEventListener('click', () => window.print());

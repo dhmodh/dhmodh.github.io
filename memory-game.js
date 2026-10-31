@@ -101,6 +101,7 @@ function checkMatch() {
 
 function finishGame() {
   stopTimer();
+  if (window.DMG) window.DMG.award('memory');
   const best = Number(localStorage.getItem('infra_memory_best_moves') || '0');
   if (!best || moveCount < best) {
     localStorage.setItem('infra_memory_best_moves', String(moveCount));

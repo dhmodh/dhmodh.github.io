@@ -3,16 +3,70 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Blog | Dishant Modh</title>
-  <meta name="description" content="Articles and insights on SRE, cloud infrastructure, and database engineering">
+  <!-- SEO:start -->
+  <title>Blog | Dishant Modh - PostgreSQL, AWS &amp; SRE Articles</title>
+  <meta name="description" content="Practical articles on PostgreSQL performance tuning, zero-downtime migrations, Aurora disaster recovery and database reliability from Dishant Modh.">
+  <meta name="author" content="Dishant Modh">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+  <meta name="theme-color" content="#0a0e27">
+  <link rel="canonical" href="https://dishantmodh.com/blog.html">
+  <link rel="alternate" type="application/rss+xml" title="Dishant Modh - Articles" href="https://dishantmodh.com/feed.xml">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Dishant Modh">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:url" content="https://dishantmodh.com/blog.html">
+  <meta property="og:title" content="Blog | Dishant Modh - PostgreSQL, AWS &amp; SRE Articles">
+  <meta property="og:description" content="Practical articles on PostgreSQL performance tuning, zero-downtime migrations, Aurora disaster recovery and database reliability from Dishant Modh.">
+  <meta property="og:image" content="https://dishantmodh.com/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Dishant Modh - Senior Database Reliability Engineer">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Blog | Dishant Modh - PostgreSQL, AWS &amp; SRE Articles">
+  <meta name="twitter:description" content="Practical articles on PostgreSQL performance tuning, zero-downtime migrations, Aurora disaster recovery and database reliability from Dishant Modh.">
+  <meta name="twitter:image" content="https://dishantmodh.com/og-image.jpg">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://dishantmodh.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://dishantmodh.com/blog.html"
+        }
+      ]
+    },
+    {
+      "@type": "Blog",
+      "name": "Dishant Modh - Writing & Insights",
+      "url": "https://dishantmodh.com/blog.html",
+      "author": {
+        "@id": "https://dishantmodh.com/#person"
+      }
+    }
+  ]
+}
+  </script>
+  <!-- SEO:end -->
   <link rel="icon" type="image/svg+xml" href="favicon_io/favicon.svg?v=5">
   <link rel="manifest" href="favicon_io/site.webmanifest">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=20261101">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
   <div class="animated-bg">
     <div class="gradient-orb orb-1"></div>
     <div class="gradient-orb orb-2"></div>
@@ -32,8 +86,8 @@
         <li><a href="tools.html" class="nav-link">Tools</a></li>
         <li><a href="blog.html" class="nav-link">Blog</a></li>
         <li><a href="contact.html" class="nav-link">Contact</a></li>
-        <li><a href="game.html" class="nav-link">Games</a></li>
-        <li><a href="resume.pdf" class="nav-link resume-link" target="_blank">Resume</a></li>
+        <li><a href="games.html" class="nav-link">Games</a></li>
+        <li><a href="resume.html" class="nav-link resume-link">Resume</a></li>
       </ul>
       <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
         <span class="theme-icon">🌙</span>
@@ -45,14 +99,20 @@
       </button>
     </div>
   </nav>
+  <main id="main">
 
   <section class="section">
     <div class="container">
-      <h2 class="reveal">Writing & Insights</h2>
+      <h1 class="reveal">Writing & Insights</h1>
       <p class="section-subtitle reveal" style="text-align: center; margin-bottom: 3rem; color: var(--text-secondary); max-width: 600px; margin-left: auto; margin-right: auto;">
         Deep dives on production databases: reliability, performance tuning, migration strategy,
         and real-world incident lessons from large-scale systems.
       </p>
+
+      <div class="blog-search reveal">
+        <input type="search" id="blogSearch" placeholder="Search articles (e.g. autovacuum, DMS, Aurora)..." aria-label="Search articles">
+        <p id="blogCount" class="blog-count" aria-live="polite"></p>
+      </div>
 
       <div class="blog-filters reveal">
         <button class="blog-filter-btn active" data-blog-filter="all">All</button>
@@ -66,9 +126,9 @@
         <article class="blog-card glass reveal" data-blog-category="postgresql performance">
           <div class="blog-header">
             <span class="blog-category">PostgreSQL</span>
-            <span class="blog-date">Jan 2026 · 12 min</span>
+            <span class="blog-date">Jan 2026 · 8 min</span>
           </div>
-          <h3 class="blog-title">How I Cut p95 Latency from 1.8s to 0.9s in PostgreSQL</h3>
+          <h3 class="blog-title"><a href="/blog/postgresql-p95-latency-playbook.html" class="blog-link">How I Cut p95 Latency from 1.8s to 0.9s in PostgreSQL</a></h3>
           <p class="blog-excerpt">
             A practical playbook using EXPLAIN ANALYZE, index redesign, autovacuum tuning,
             and lock analysis. Includes a repeatable checklist you can apply in production.
@@ -78,14 +138,15 @@
             <span class="blog-tag">Query Tuning</span>
             <span class="blog-tag">p95 Latency</span>
           </div>
+          <a class="featured-link blog-read" href="/blog/postgresql-p95-latency-playbook.html">Read article &rarr;</a>
         </article>
 
         <article class="blog-card glass reveal" data-blog-category="migration reliability">
           <div class="blog-header">
             <span class="blog-category">Migration</span>
-            <span class="blog-date">Dec 2025 · 10 min</span>
+            <span class="blog-date">Dec 2025 · 8 min</span>
           </div>
-          <h3 class="blog-title">Zero-Downtime DB Migrations: 4TB On-Prem to AWS</h3>
+          <h3 class="blog-title"><a href="/blog/zero-downtime-database-migration-aws-dms-pglogical.html" class="blog-link">Zero-Downtime DB Migrations: 4TB On-Prem to AWS</a></h3>
           <p class="blog-excerpt">
             Architecture patterns using AWS DMS + pglogical, cutover strategy, rollback plans,
             and migration validation patterns that protect SLA during high-risk windows.
@@ -95,14 +156,15 @@
             <span class="blog-tag">pglogical</span>
             <span class="blog-tag">Zero Downtime</span>
           </div>
+          <a class="featured-link blog-read" href="/blog/zero-downtime-database-migration-aws-dms-pglogical.html">Read article &rarr;</a>
         </article>
 
         <article class="blog-card glass reveal" data-blog-category="reliability postgresql">
           <div class="blog-header">
             <span class="blog-category">Reliability</span>
-            <span class="blog-date">Nov 2025 · 9 min</span>
+            <span class="blog-date">Nov 2025 · 7 min</span>
           </div>
-          <h3 class="blog-title">DR Readiness for Aurora Global Database</h3>
+          <h3 class="blog-title"><a href="/blog/aurora-global-database-dr-readiness.html" class="blog-link">DR Readiness for Aurora Global Database</a></h3>
           <p class="blog-excerpt">
             Step-by-step disaster recovery testing approach to achieve near-zero RPO and
             low RTO with quarterly failover drills and automation-backed runbooks.
@@ -112,14 +174,15 @@
             <span class="blog-tag">RPO/RTO</span>
             <span class="blog-tag">Runbooks</span>
           </div>
+          <a class="featured-link blog-read" href="/blog/aurora-global-database-dr-readiness.html">Read article &rarr;</a>
         </article>
 
         <article class="blog-card glass reveal" data-blog-category="performance reliability">
           <div class="blog-header">
             <span class="blog-category">Performance</span>
-            <span class="blog-date">Oct 2025 · 8 min</span>
+            <span class="blog-date">Oct 2025 · 7 min</span>
           </div>
-          <h3 class="blog-title">MongoDB Aggregation Tuning in Production</h3>
+          <h3 class="blog-title"><a href="/blog/mongodb-aggregation-pipeline-tuning.html" class="blog-link">MongoDB Aggregation Tuning in Production</a></h3>
           <p class="blog-excerpt">
             Real query pipeline tuning examples, compound indexing patterns, and hotspot
             elimination methods that reduced average query latency from 820ms to 450ms.
@@ -129,14 +192,15 @@
             <span class="blog-tag">Aggregation</span>
             <span class="blog-tag">Indexing</span>
           </div>
+          <a class="featured-link blog-read" href="/blog/mongodb-aggregation-pipeline-tuning.html">Read article &rarr;</a>
         </article>
 
         <article class="blog-card glass reveal" data-blog-category="reliability performance">
           <div class="blog-header">
             <span class="blog-category">Observability</span>
-            <span class="blog-date">Sep 2025 · 11 min</span>
+            <span class="blog-date">Sep 2025 · 8 min</span>
           </div>
-          <h3 class="blog-title">Datadog + Grafana Alerting That Actually Reduces MTTR</h3>
+          <h3 class="blog-title"><a href="/blog/datadog-grafana-alerting-reduce-mttr.html" class="blog-link">Datadog + Grafana Alerting That Actually Reduces MTTR</a></h3>
           <p class="blog-excerpt">
             Alert quality design for database incidents, anomaly thresholds, and actionable
             triage data that cut mean time to resolution by 30% in production.
@@ -146,14 +210,15 @@
             <span class="blog-tag">Grafana</span>
             <span class="blog-tag">MTTR</span>
           </div>
+          <a class="featured-link blog-read" href="/blog/datadog-grafana-alerting-reduce-mttr.html">Read article &rarr;</a>
         </article>
 
         <article class="blog-card glass reveal" data-blog-category="postgresql reliability">
           <div class="blog-header">
             <span class="blog-category">SRE</span>
-            <span class="blog-date">Aug 2025 · 9 min</span>
+            <span class="blog-date">Aug 2025 · 8 min</span>
           </div>
-          <h3 class="blog-title">PostgreSQL On-Call Playbook for P1/P0 Incidents</h3>
+          <h3 class="blog-title"><a href="/blog/postgresql-on-call-playbook-p1-incidents.html" class="blog-link">PostgreSQL On-Call Playbook for P1/P0 Incidents</a></h3>
           <p class="blog-excerpt">
             A battle-tested incident command model, communication templates, severity gates,
             and post-mortem framework that lowers repeat incidents and response fatigue.
@@ -163,11 +228,97 @@
             <span class="blog-tag">PostgreSQL</span>
             <span class="blog-tag">Incident Response</span>
           </div>
+          <a class="featured-link blog-read" href="/blog/postgresql-on-call-playbook-p1-incidents.html">Read article &rarr;</a>
         </article>
+
+        <article class="blog-card glass reveal" data-blog-category="postgresql performance">
+          <div class="blog-header">
+            <span class="blog-category">PostgreSQL</span>
+            <span class="blog-date">Oct 2026 · 7 min</span>
+          </div>
+          <h3 class="blog-title"><a href="/blog/pgbouncer-connection-pooling-guide.html" class="blog-link">PgBouncer Explained: Connection Pooling Modes, Sizing and Pitfalls</a></h3>
+          <p class="blog-excerpt">When and how to use PgBouncer with PostgreSQL: session vs transaction pooling, sizing the pool, prepared statements, monitoring and common pitfalls.</p>
+          <div class="blog-tags"><span class="blog-tag">PostgreSQL</span><span class="blog-tag">PgBouncer</span><span class="blog-tag">Connections</span></div>
+          <a class="featured-link blog-read" href="/blog/pgbouncer-connection-pooling-guide.html">Read article &rarr;</a>
+        </article>
+
+        <article class="blog-card glass reveal" data-blog-category="reliability">
+          <div class="blog-header">
+            <span class="blog-category">Automation</span>
+            <span class="blog-date">Oct 2026 · 8 min</span>
+          </div>
+          <h3 class="blog-title"><a href="/blog/terraform-rds-module-patterns.html" class="blog-link">Terraform for RDS: Reusable Module Patterns and Drift Detection</a></h3>
+          <p class="blog-excerpt">How to build a safe, reusable Terraform module for Amazon RDS: sane defaults, deletion protection, secrets, parameter groups, testing and scheduled drift detection.</p>
+          <div class="blog-tags"><span class="blog-tag">Terraform</span><span class="blog-tag">AWS RDS</span><span class="blog-tag">IaC</span></div>
+          <a class="featured-link blog-read" href="/blog/terraform-rds-module-patterns.html">Read article &rarr;</a>
+        </article>
+
+        <article class="blog-card glass reveal" data-blog-category="reliability performance">
+          <div class="blog-header">
+            <span class="blog-category">AWS</span>
+            <span class="blog-date">Oct 2026 · 6 min</span>
+          </div>
+          <h3 class="blog-title"><a href="/blog/aurora-vs-rds-postgresql-decision-guide.html" class="blog-link">Aurora PostgreSQL vs RDS PostgreSQL: A Practical Decision Guide</a></h3>
+          <p class="blog-excerpt">Compare Amazon Aurora PostgreSQL and RDS for PostgreSQL on architecture, failover, replicas, cost model and compatibility, with a checklist for choosing.</p>
+          <div class="blog-tags"><span class="blog-tag">Aurora</span><span class="blog-tag">RDS</span><span class="blog-tag">AWS</span></div>
+          <a class="featured-link blog-read" href="/blog/aurora-vs-rds-postgresql-decision-guide.html">Read article &rarr;</a>
+        </article>
+
+        <article class="blog-card glass reveal" data-blog-category="postgresql reliability">
+          <div class="blog-header">
+            <span class="blog-category">PostgreSQL</span>
+            <span class="blog-date">Oct 2026 · 7 min</span>
+          </div>
+          <h3 class="blog-title"><a href="/blog/postgresql-backup-pitr-restore-testing.html" class="blog-link">PostgreSQL Backups and Point-in-Time Recovery: Test Your Restores</a></h3>
+          <p class="blog-excerpt">A practical guide to PostgreSQL backups: base backups, WAL archiving, point-in-time recovery steps, RDS PITR and how to prove your restores work.</p>
+          <div class="blog-tags"><span class="blog-tag">PostgreSQL</span><span class="blog-tag">Backups</span><span class="blog-tag">PITR</span></div>
+          <a class="featured-link blog-read" href="/blog/postgresql-backup-pitr-restore-testing.html">Read article &rarr;</a>
+        </article>
+
+        <article class="blog-card glass reveal" data-blog-category="performance reliability">
+          <div class="blog-header">
+            <span class="blog-category">Cost</span>
+            <span class="blog-date">Oct 2026 · 7 min</span>
+          </div>
+          <h3 class="blog-title"><a href="/blog/aws-database-cost-optimization-right-sizing.html" class="blog-link">AWS Database Cost Optimization: A Right-Sizing Framework That Works</a></h3>
+          <p class="blog-excerpt">A step-by-step framework to cut AWS database and compute costs safely: find idle resources, right-size with percentiles, choose storage and pricing models, and automate savings.</p>
+          <div class="blog-tags"><span class="blog-tag">AWS</span><span class="blog-tag">Cost Optimization</span><span class="blog-tag">RDS</span></div>
+          <a class="featured-link blog-read" href="/blog/aws-database-cost-optimization-right-sizing.html">Read article &rarr;</a>
+        </article>
+
+        <article class="blog-card glass reveal" data-blog-category="postgresql reliability">
+          <div class="blog-header">
+            <span class="blog-category">Reliability</span>
+            <span class="blog-date">Oct 2026 · 7 min</span>
+          </div>
+          <h3 class="blog-title"><a href="/blog/patroni-high-availability-postgresql-guide.html" class="blog-link">Patroni High Availability for PostgreSQL: Architecture, Config and Failover Testing</a></h3>
+          <p class="blog-excerpt">How Patroni and etcd deliver automatic PostgreSQL failover: architecture, a minimal configuration, the key timing parameters, split-brain safety and how to test failover.</p>
+          <div class="blog-tags"><span class="blog-tag">Patroni</span><span class="blog-tag">etcd</span><span class="blog-tag">High Availability</span></div>
+          <a class="featured-link blog-read" href="/blog/patroni-high-availability-postgresql-guide.html">Read article &rarr;</a>
+        </article>
+
+        <article class="blog-card glass reveal" data-blog-category="postgresql performance">
+          <div class="blog-header">
+            <span class="blog-category">PostgreSQL</span>
+            <span class="blog-date">Oct 2026 · 7 min</span>
+          </div>
+          <h3 class="blog-title"><a href="/blog/postgresql-index-types-guide.html" class="blog-link">PostgreSQL Index Types Explained: B-tree, GIN, GiST, BRIN and When to Use Each</a></h3>
+          <p class="blog-excerpt">Choose the right PostgreSQL index: B-tree, Hash, GIN, GiST, SP-GiST and BRIN compared, plus partial, expression, covering and multicolumn indexes with examples.</p>
+          <div class="blog-tags"><span class="blog-tag">PostgreSQL</span><span class="blog-tag">Indexes</span><span class="blog-tag">Performance</span></div>
+          <a class="featured-link blog-read" href="/blog/postgresql-index-types-guide.html">Read article &rarr;</a>
+        </article>
+
+
+
+
+
+
+
       </div>
     </div>
   </section>
 
+  </main>
   <footer class="footer">
     <div class="container">
       <p>&copy; 2026 Dishant Modh. Built with passion for reliability and performance.</p>
@@ -181,6 +332,6 @@
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="script.js?v=20261101"></script>
 </body>
 </html>

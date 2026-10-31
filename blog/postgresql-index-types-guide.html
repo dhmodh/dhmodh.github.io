@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="/favicon_io/favicon.svg?v=5">
+  <link rel="manifest" href="/favicon_io/site.webmanifest">
+  <link rel="stylesheet" href="/styles.css?v=20261101">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- SEO:start -->
+  <title>PostgreSQL Index Types: B-tree, GIN, GiST, BRIN Guide | Dishant Modh</title>
+  <meta name="description" content="Choose the right PostgreSQL index: B-tree, Hash, GIN, GiST, SP-GiST and BRIN compared, plus partial, expression, covering and multicolumn indexes with examples.">
+  <meta name="author" content="Dishant Modh">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+  <meta name="theme-color" content="#0a0e27">
+  <link rel="canonical" href="https://dishantmodh.com/blog/postgresql-index-types-guide.html">
+  <link rel="alternate" type="application/rss+xml" title="Dishant Modh - Articles" href="https://dishantmodh.com/feed.xml">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Dishant Modh">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:url" content="https://dishantmodh.com/blog/postgresql-index-types-guide.html">
+  <meta property="og:title" content="PostgreSQL Index Types: B-tree, GIN, GiST, BRIN Guide | Dishant Modh">
+  <meta property="og:description" content="Choose the right PostgreSQL index: B-tree, Hash, GIN, GiST, SP-GiST and BRIN compared, plus partial, expression, covering and multicolumn indexes with examples.">
+  <meta property="og:image" content="https://dishantmodh.com/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Dishant Modh - Senior Database Reliability Engineer">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PostgreSQL Index Types: B-tree, GIN, GiST, BRIN Guide | Dishant Modh">
+  <meta name="twitter:description" content="Choose the right PostgreSQL index: B-tree, Hash, GIN, GiST, SP-GiST and BRIN compared, plus partial, expression, covering and multicolumn indexes with examples.">
+  <meta name="twitter:image" content="https://dishantmodh.com/og-image.jpg">
+  <meta property="article:published_time" content="2026-10-30">
+  <meta property="article:author" content="Dishant Modh">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://dishantmodh.com/#person",
+      "name": "Dishant Modh",
+      "jobTitle": "Senior Database Reliability Engineer",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "The Walt Disney Company"
+      },
+      "url": "https://dishantmodh.com/",
+      "image": "https://dishantmodh.com/og-image.jpg",
+      "sameAs": [
+        "https://linkedin.com/in/dishantmodh",
+        "https://github.com/dhmodh"
+      ],
+      "knowsAbout": [
+        "Database Reliability Engineering",
+        "Site Reliability Engineering",
+        "PostgreSQL",
+        "Amazon Aurora",
+        "AWS",
+        "Terraform",
+        "MySQL",
+        "MongoDB",
+        "Cassandra",
+        "Snowflake",
+        "Disaster Recovery",
+        "Database Performance Tuning",
+        "Zero-Downtime Migrations"
+      ],
+      "alumniOf": {
+        "@type": "CollegeOrUniversity",
+        "name": "Dharmsinh Desai University"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Bengaluru",
+        "addressRegion": "Karnataka",
+        "addressCountry": "IN"
+      },
+      "description": "Senior Database Reliability Engineer at The Walt Disney Company with 5+ years of experience in PostgreSQL, Aurora, AWS and Terraform."
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://dishantmodh.com/blog/postgresql-index-types-guide.html#article",
+      "headline": "PostgreSQL Index Types Explained: B-tree, GIN, GiST, BRIN and When to Use Each",
+      "description": "Choose the right PostgreSQL index: B-tree, Hash, GIN, GiST, SP-GiST and BRIN compared, plus partial, expression, covering and multicolumn indexes with examples.",
+      "image": "https://dishantmodh.com/og-image.jpg",
+      "datePublished": "2026-10-30",
+      "dateModified": "2026-10-30",
+      "author": {
+        "@id": "https://dishantmodh.com/#person"
+      },
+      "publisher": {
+        "@id": "https://dishantmodh.com/#person"
+      },
+      "mainEntityOfPage": "https://dishantmodh.com/blog/postgresql-index-types-guide.html",
+      "keywords": "PostgreSQL index types, B-tree vs GIN, GiST, BRIN index, partial index, covering index INCLUDE, pg_trgm, jsonb index",
+      "inLanguage": "en",
+      "articleSection": "PostgreSQL"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://dishantmodh.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://dishantmodh.com/blog.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "PostgreSQL Index Types Explained: B-tree, GIN, GiST, BRIN and When to Use Each",
+          "item": "https://dishantmodh.com/blog/postgresql-index-types-guide.html"
+        }
+      ]
+    }
+  ]
+}
+  </script>
+  <!-- SEO:end -->
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="animated-bg">
+    <div class="gradient-orb orb-1"></div>
+    <div class="gradient-orb orb-2"></div>
+    <div class="gradient-orb orb-3"></div>
+  </div>
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="/index.html" class="logo">
+        <span class="logo-text">DM</span>
+        <span class="logo-glow"></span>
+      </a>
+      <ul class="nav-menu">
+        <li><a href="/about.html" class="nav-link">About</a></li>
+        <li><a href="/experience.html" class="nav-link">Experience</a></li>
+        <li><a href="/projects.html" class="nav-link">Projects</a></li>
+        <li><a href="/tools.html" class="nav-link">Tools</a></li>
+        <li><a href="/blog.html" class="nav-link">Blog</a></li>
+        <li><a href="/contact.html" class="nav-link">Contact</a></li>
+        <li><a href="/games.html" class="nav-link">Games</a></li>
+        <li><a href="/resume.html" class="nav-link resume-link">Resume</a></li>
+      </ul>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <span class="theme-icon">🌙</span>
+      </button>
+      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+  <main id="main" class="post-wrap">
+    <article class="post">
+      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><a href="/blog.html">Blog</a><span>/</span><span aria-current="page">PostgreSQL</span></nav>
+      <header class="post-head">
+        <span class="blog-category">PostgreSQL</span>
+        <h1>PostgreSQL Index Types Explained: B-tree, GIN, GiST, BRIN and When to Use Each</h1>
+        <p class="post-meta"><span>By <a href="/about.html">Dishant Modh</a></span><span>&middot;</span><time datetime="2026-10-30">Oct 2026</time><span>&middot;</span><span>7 min read</span></p>
+        <p class="post-lede">Choose the right PostgreSQL index: B-tree, Hash, GIN, GiST, SP-GiST and BRIN compared, plus partial, expression, covering and multicolumn indexes with examples.</p>
+      </header>
+      <aside class="toc glass" aria-label="Table of contents"><strong>On this page</strong><ol id="toc"></ol></aside>
+      <div class="post-body">
+<p>The default B-tree solves most indexing problems, but PostgreSQL ships several other index types that can make specific queries thousands of times faster. This guide explains what each one is for and how to pick.</p>
+
+<h2 id="btree">1. B-tree: the default</h2>
+<p>B-tree supports equality, range comparisons (<code>&lt;, &lt;=, &gt;, &gt;=, BETWEEN</code>), <code>ORDER BY</code> and prefix <code>LIKE 'abc%'</code> (with a suitable collation or operator class). If you are unsure, start here.</p>
+<pre><code>CREATE INDEX idx_orders_customer_created
+  ON orders (customer_id, created_at DESC);</code></pre>
+
+<h2 id="multicolumn">2. Multicolumn order matters</h2>
+<p>Put columns used for equality first and the range or sort column last. An index on <code>(customer_id, created_at)</code> serves <code>WHERE customer_id = 7 AND created_at &gt; ...</code> well, but is far less useful for queries that filter only on <code>created_at</code>.</p>
+
+<h2 id="hash">3. Hash</h2>
+<p>Hash indexes handle equality only. They are crash-safe since PostgreSQL 10, but B-tree is usually just as good and more flexible, so reach for hash only after measuring a benefit.</p>
+
+<h2 id="gin">4. GIN: many values per row</h2>
+<p>GIN (Generalized Inverted Index) indexes composite values: arrays, <code>jsonb</code> and full-text search vectors. It excels at "contains" queries.</p>
+<pre><code>CREATE INDEX idx_events_payload ON events USING gin (payload jsonb_path_ops);
+SELECT * FROM events WHERE payload @&gt; '{"type": "login"}';
+
+CREATE INDEX idx_docs_fts ON docs USING gin (to_tsvector('english', body));</code></pre>
+<p>GIN reads are fast, but writes are heavier. PostgreSQL batches updates through a pending list to soften that cost.</p>
+
+<h2 id="trgm">5. Trigram search with pg_trgm</h2>
+<p>For <code>LIKE '%term%'</code> or fuzzy matching, a B-tree cannot help. The <code>pg_trgm</code> extension with a GIN or GiST index can:</p>
+<pre><code>CREATE EXTENSION IF NOT EXISTS pg_trgm;
+CREATE INDEX idx_users_name_trgm ON users USING gin (name gin_trgm_ops);
+SELECT * FROM users WHERE name ILIKE '%modh%';</code></pre>
+
+<h2 id="gist">6. GiST and SP-GiST</h2>
+<p>GiST is a flexible framework for geometric data, ranges, nearest-neighbour search and exclusion constraints (for example, preventing overlapping bookings with range types). SP-GiST suits partitioned, non-balanced structures such as certain text or IP-address patterns.</p>
+
+<h2 id="brin">7. BRIN: huge, naturally ordered tables</h2>
+<p>BRIN (Block Range Index) stores a summary per range of table blocks, so it is tiny. It works when the indexed column correlates with physical order, such as an append-only <code>created_at</code> timestamp on a time-series or log table.</p>
+<pre><code>CREATE INDEX idx_logs_created_brin ON logs USING brin (created_at);</code></pre>
+<p>On a multi-terabyte table, a BRIN index can be megabytes instead of hundreds of gigabytes. If rows are updated or inserted out of order, its effectiveness drops.</p>
+
+<h2 id="special">8. Partial, expression and covering indexes</h2>
+<ul>
+<li><strong>Partial:</strong> index only the rows you query. Smaller and faster.</li>
+<li><strong>Expression:</strong> index the result of a function so queries using it can use the index.</li>
+<li><strong>Covering (<code>INCLUDE</code>):</strong> add non-key columns so queries can be answered by an index-only scan.</li>
+</ul>
+<pre><code>CREATE INDEX idx_orders_open ON orders (created_at) WHERE status = 'open';
+CREATE INDEX idx_users_lower_email ON users (lower(email));
+CREATE INDEX idx_orders_cust_inc ON orders (customer_id) INCLUDE (total);</code></pre>
+
+<h2 id="maintenance">9. Keep indexes healthy</h2>
+<ul>
+<li>Create with <code>CREATE INDEX CONCURRENTLY</code> on live systems.</li>
+<li>Find unused indexes with <code>pg_stat_user_indexes</code> (check they do not enforce constraints) and drop them; every index slows writes.</li>
+<li>Rebuild bloated indexes online with <code>REINDEX INDEX CONCURRENTLY</code>.</li>
+<li>Verify the planner actually uses a new index with <code>EXPLAIN (ANALYZE, BUFFERS)</code>.</li>
+</ul>
+
+<h2 id="cheatsheet">Cheat sheet</h2>
+<ol>
+<li>Equality and ranges, sorting: <strong>B-tree</strong>.</li>
+<li>Arrays, jsonb, full-text: <strong>GIN</strong>.</li>
+<li>Substring or fuzzy text: <strong>GIN/GiST + pg_trgm</strong>.</li>
+<li>Geometry, ranges, nearest neighbour: <strong>GiST</strong>.</li>
+<li>Giant append-only tables: <strong>BRIN</strong>.</li>
+<li>Small hot subset: <strong>partial index</strong>.</li>
+</ol>
+<p>Continue with the <a href="/blog/postgresql-p95-latency-playbook.html">p95 latency tuning playbook</a>.</p>
+</div>
+      <section class="post-cta glass">
+        <h2>Enjoyed this?</h2>
+        <p>I write about PostgreSQL, AWS and database reliability. Have a question or a similar problem to solve?</p>
+        <div class="hero-actions"><a class="btn btn-primary" href="/contact.html"><span>Get in touch</span></a><a class="btn btn-secondary" href="/tools.html"><span>Try the tools</span></a></div>
+        <div class="share-row"><span>Share:</span>
+          <a href="https://twitter.com/intent/tweet?url=https://dishantmodh.com/blog/postgresql-index-types-guide.html&amp;text=PostgreSQL%20Index%20Types%20Explained:%20B-tree,%20GIN,%20GiST,%20BRIN%20and%20When%20to%20Use%20Each" target="_blank" rel="noopener noreferrer">Twitter</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://dishantmodh.com/blog/postgresql-index-types-guide.html" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <button type="button" class="copy-btn" data-copy="https://dishantmodh.com/blog/postgresql-index-types-guide.html">Copy link</button></div>
+      </section>
+      <section class="related"><h2>More articles</h2><div class="featured-grid"><a class="featured-card glass" href="/blog/postgresql-p95-latency-playbook.html"><span class="featured-kicker">PostgreSQL</span><h3>How I Cut PostgreSQL p95 Latency from 1.8s to 0.9s</h3><span class="featured-link">Read article &rarr;</span></a><a class="featured-card glass" href="/blog/zero-downtime-database-migration-aws-dms-pglogical.html"><span class="featured-kicker">Migration</span><h3>Zero-Downtime Database Migrations: On-Prem to AWS with DMS and pglogical</h3><span class="featured-link">Read article &rarr;</span></a><a class="featured-card glass" href="/blog/aurora-global-database-dr-readiness.html"><span class="featured-kicker">Reliability</span><h3>DR Readiness for Aurora Global Database: From Architecture to Quarterly Drills</h3><span class="featured-link">Read article &rarr;</span></a><a class="featured-card glass" href="/blog/mongodb-aggregation-pipeline-tuning.html"><span class="featured-kicker">MongoDB</span><h3>MongoDB Aggregation Tuning in Production (and Fixing Cassandra Hotspots)</h3><span class="featured-link">Read article &rarr;</span></a><a class="featured-card glass" href="/blog/datadog-grafana-alerting-reduce-mttr.html"><span class="featured-kicker">Observability</span><h3>Datadog + Grafana Alerting That Actually Reduces MTTR</h3><span class="featured-link">Read article &rarr;</span></a><a class="featured-card glass" href="/blog/postgresql-on-call-playbook-p1-incidents.html"><span class="featured-kicker">Reliability</span><h3>PostgreSQL On-Call Playbook for P1/P0 Incidents</h3><span class="featured-link">Read article &rarr;</span></a><a class="featured-card glass" href="/blog/pgbouncer-connection-pooling-guide.html"><span class="featured-kicker">PostgreSQL</span><h3>PgBouncer Explained: Connection Pooling Modes, Sizing and Pitfalls</h3><span class="featured-link">Read article &rarr;</span></a><a class="featured-card glass" href="/blog/terraform-rds-module-patterns.html"><span class="featured-kicker">Automation</span><h3>Terraform for RDS: Reusable Module Patterns and Drift Detection</h3><span class="featured-link">Read article &rarr;</span></a><a class="featured-card glass" href="/blog/aurora-vs-rds-postgresql-decision-guide.html"><span class="featured-kicker">AWS</span><h3>Aurora PostgreSQL vs RDS PostgreSQL: A Practical Decision Guide</h3><span class="featured-link">Read article &rarr;</span></a><a class="featured-card glass" href="/blog/postgresql-backup-pitr-restore-testing.html"><span class="featured-kicker">PostgreSQL</span><h3>PostgreSQL Backups and Point-in-Time Recovery: Test Your Restores</h3><span class="featured-link">Read article &rarr;</span></a><a class="featured-card glass" href="/blog/aws-database-cost-optimization-right-sizing.html"><span class="featured-kicker">Cost</span><h3>AWS Database Cost Optimization: A Right-Sizing Framework That Works</h3><span class="featured-link">Read article &rarr;</span></a><a class="featured-card glass" href="/blog/patroni-high-availability-postgresql-guide.html"><span class="featured-kicker">Reliability</span><h3>Patroni High Availability for PostgreSQL: Architecture, Config and Failover Testing</h3><span class="featured-link">Read article &rarr;</span></a></div></section>
+    </article>
+  </main>
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2026 Dishant Modh. Built with passion for reliability and performance.</p>
+      <div class="footer-links">
+        <a href="https://linkedin.com/in/dishantmodh" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">LinkedIn</a>
+        <span>•</span>
+        <a href="https://github.com/dhmodh" target="_blank" rel="noopener noreferrer" aria-label="GitHub">GitHub</a>
+        <span>•</span>
+        <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">Resume</a>
+      </div>
+    </div>
+  </footer>
+  <script src="/script.js?v=20261101"></script>
+  <script src="/post.js?v=20261101"></script>
+</body>
+</html>

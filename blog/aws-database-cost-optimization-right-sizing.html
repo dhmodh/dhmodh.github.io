@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="/favicon_io/favicon.svg?v=5">
+  <link rel="manifest" href="/favicon_io/site.webmanifest">
+  <link rel="stylesheet" href="/styles.css?v=20261101">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- SEO:start -->
+  <title>AWS Database Cost Optimization Framework | Dishant Modh</title>
+  <meta name="description" content="A step-by-step framework to cut AWS database and compute costs safely: find idle resources, right-size with percentiles, pick storage and pricing, and automate.">
+  <meta name="author" content="Dishant Modh">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+  <meta name="theme-color" content="#0a0e27">
+  <link rel="canonical" href="https://dishantmodh.com/blog/aws-database-cost-optimization-right-sizing.html">
+  <link rel="alternate" type="application/rss+xml" title="Dishant Modh - Articles" href="https://dishantmodh.com/feed.xml">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Dishant Modh">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:url" content="https://dishantmodh.com/blog/aws-database-cost-optimization-right-sizing.html">
+  <meta property="og:title" content="AWS Database Cost Optimization Framework | Dishant Modh">
+  <meta property="og:description" content="A step-by-step framework to cut AWS database and compute costs safely: find idle resources, right-size with percentiles, pick storage and pricing, and automate.">
+  <meta property="og:image" content="https://dishantmodh.com/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Dishant Modh - Senior Database Reliability Engineer">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="AWS Database Cost Optimization Framework | Dishant Modh">
+  <meta name="twitter:description" content="A step-by-step framework to cut AWS database and compute costs safely: find idle resources, right-size with percentiles, pick storage and pricing, and automate.">
+  <meta name="twitter:image" content="https://dishantmodh.com/og-image.jpg">
+  <meta property="article:published_time" content="2026-10-24">
+  <meta property="article:author" content="Dishant Modh">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://dishantmodh.com/#person",
+      "name": "Dishant Modh",
+      "jobTitle": "Senior Database Reliability Engineer",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "The Walt Disney Company"
+      },
+      "url": "https://dishantmodh.com/",
+      "image": "https://dishantmodh.com/og-image.jpg",
+      "sameAs": [
+        "https://linkedin.com/in/dishantmodh",
+        "https://github.com/dhmodh"
+      ],
+      "knowsAbout": [
+        "Database Reliability Engineering",
+        "Site Reliability Engineering",
+        "PostgreSQL",
+        "Amazon Aurora",
+        "AWS",
+        "Terraform",
+        "MySQL",
+        "MongoDB",
+        "Cassandra",
+        "Snowflake",
+        "Disaster Recovery",
+        "Database Performance Tuning",
+        "Zero-Downtime Migrations"
+      ],
+      "alumniOf": {
+        "@type": "CollegeOrUniversity",
+        "name": "Dharmsinh Desai University"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Bengaluru",
+        "addressRegion": "Karnataka",
+        "addressCountry": "IN"
+      },
+      "description": "Senior Database Reliability Engineer at The Walt Disney Company with 5+ years of experience in PostgreSQL, Aurora, AWS and Terraform."
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://dishantmodh.com/blog/aws-database-cost-optimization-right-sizing.html#article",
+      "headline": "AWS Database Cost Optimization: A Right-Sizing Framework That Works",
+      "description": "A step-by-step framework to cut AWS database and compute costs safely: find idle resources, right-size with percentiles, pick storage and pricing, and automate.",
+      "image": "https://dishantmodh.com/og-image.jpg",
+      "datePublished": "2026-10-24",
+      "dateModified": "2026-10-24",
+      "author": {
+        "@id": "https://dishantmodh.com/#person"
+      },
+      "publisher": {
+        "@id": "https://dishantmodh.com/#person"
+      },
+      "mainEntityOfPage": "https://dishantmodh.com/blog/aws-database-cost-optimization-right-sizing.html",
+      "keywords": "AWS cost optimization, RDS right-sizing, EC2 right sizing, gp3 vs gp2, Graviton, Reserved Instances, idle resources, FinOps",
+      "inLanguage": "en",
+      "articleSection": "Cost"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://dishantmodh.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://dishantmodh.com/blog.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "AWS Database Cost Optimization: A Right-Sizing Framework That Works",
+          "item": "https://dishantmodh.com/blog/aws-database-cost-optimization-right-sizing.html"
+        }
+      ]
+    }
+  ]
+}
+  </script>
+  <!-- SEO:end -->
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="animated-bg">
+    <div class="gradient-orb orb-1"></div>
+    <div class="gradient-orb orb-2"></div>
+    <div class="gradient-orb orb-3"></div>
+  </div>
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="/index.html" class="logo">
+        <span class="logo-text">DM</span>
+        <span class="logo-glow"></span>
+      </a>
+      <ul class="nav-menu">
+        <li><a href="/about.html" class="nav-link">About</a></li>
+        <li><a href="/experience.html" class="nav-link">Experience</a></li>
+        <li><a href="/projects.html" class="nav-link">Projects</a></li>
+        <li><a href="/tools.html" class="nav-link">Tools</a></li>
+        <li><a href="/blog.html" class="nav-link">Blog</a></li>
+        <li><a href="/contact.html" class="nav-link">Contact</a></li>
+        <li><a href="/games.html" class="nav-link">Games</a></li>
+        <li><a href="/resume.html" class="nav-link resume-link">Resume</a></li>
+      </ul>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <span class="theme-icon">🌙</span>
+      </button>
+      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+  <main id="main" class="post-wrap">
+    <article class="post">
+      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><a href="/blog.html">Blog</a><span>/</span><span aria-current="page">Cost</span></nav>
+      <header class="post-head">
+        <span class="blog-category">Cost</span>
+        <h1>AWS Database Cost Optimization: A Right-Sizing Framework That Works</h1>
+        <p class="post-meta"><span>By <a href="/about.html">Dishant Modh</a></span><span>&middot;</span><time datetime="2026-10-24">Oct 2026</time><span>&middot;</span><span>7 min read</span></p>
+        <p class="post-lede">A step-by-step framework to cut AWS database and compute costs safely: find idle resources, right-size with percentiles, pick storage and pricing, and automate.</p>
+      </header>
+      <aside class="toc glass" aria-label="Table of contents"><strong>On this page</strong><ol id="toc"></ol></aside>
+      <div class="post-body">
+<p>Cloud cost work succeeds when it is <strong>systematic and safe</strong>: find waste, change one thing at a time, and verify performance. A structured right-sizing program across EC2, RDS and EBS delivered about $1.2M in annualized savings. This framework shows how to repeat that approach in your environment.</p>
+
+<h2 id="visibility">1. Get visibility first</h2>
+<ul>
+<li>Enforce <strong>cost allocation tags</strong> (team, service, environment, owner) so every dollar has an owner.</li>
+<li>Use Cost Explorer or the Cost and Usage Report to rank spend by service, account and tag.</li>
+<li>Start with the top 10 line items. Savings follow the Pareto rule.</li>
+</ul>
+
+<h2 id="idle">2. Hunt the obvious waste</h2>
+<ul>
+<li><strong>Idle databases:</strong> instances with near-zero connections and low CPU for weeks. Snapshot, then stop or delete after owner approval.</li>
+<li><strong>Unattached EBS volumes</strong> and orphaned snapshots from deleted instances.</li>
+<li><strong>Old manual snapshots</strong> kept forever. Apply a retention policy.</li>
+<li><strong>Non-production running 24/7.</strong> Stop dev and test databases outside working hours. RDS can be stopped for a limited number of days at a time, so schedule the restart.</li>
+<li><strong>Over-provisioned storage and IOPS</strong> bought "just in case".</li>
+</ul>
+
+<p>A quick way to list unattached EBS volumes in a Region (review before deleting anything):</p>
+<pre><code>aws ec2 describe-volumes   --filters Name=status,Values=available   --query 'Volumes[].[VolumeId,Size,VolumeType,CreateTime]'   --output table</code></pre>
+
+<h2 id="rightsize">3. Right-size using percentiles, not averages</h2>
+<p>Averages hide spikes and make everything look oversized. Look at at least two to four weeks of CloudWatch metrics and use p95 or p99:</p>
+<ul>
+<li><code>CPUUtilization</code>, <code>FreeableMemory</code>, swap, and <code>DatabaseConnections</code>.</li>
+<li>Read/write IOPS and throughput versus provisioned limits.</li>
+<li>Replica lag and latency, so you notice if a smaller instance hurts.</li>
+</ul>
+<p>Keep headroom for growth and failover (a standby must carry the full load). Drop one instance size at a time, in a maintenance window, and watch the metrics for a week before the next step.</p>
+
+<h2 id="storage">4. Pick the right storage</h2>
+<ul>
+<li><strong>gp3 over gp2</strong> for most workloads: it is generally cheaper per GB and lets you tune IOPS and throughput independently of size. Confirm for your volume sizes.</li>
+<li>Use provisioned-IOPS volumes only where metrics prove you need them.</li>
+<li>Delete data you do not need, and archive cold data (for example to S3) instead of paying for premium database storage.</li>
+</ul>
+
+<h2 id="compute">5. Choose cheaper compute where safe</h2>
+<ul>
+<li><strong>Graviton-based instance classes</strong> often give better price-performance. Test on your engine version and workload first.</li>
+<li>Consolidate lightly used databases only when isolation and blast radius allow it.</li>
+<li>Review replicas: each one costs a full instance. Remove those that nobody reads from.</li>
+</ul>
+
+<h2 id="pricing">6. Commit only after you right-size</h2>
+<p>Buy commitments <em>after</em> shrinking, otherwise you lock in waste. EC2 and some compute services can use Savings Plans; for RDS, <strong>Reserved Instances</strong> are the usual commitment tool (Savings Plans do not cover RDS, so verify against current AWS documentation). Cover your steady baseline, not your peak.</p>
+
+<h2 id="automate">7. Automate and keep it from creeping back</h2>
+<ul>
+<li>A weekly report of idle resources and top savings candidates sent to owners.</li>
+<li>Scheduled stop/start for non-production.</li>
+<li>Budgets and anomaly alerts on spend.</li>
+<li>Guardrails in Terraform modules: sensible defaults for size, storage type and retention.</li>
+</ul>
+
+<h2 id="measure">8. Measure and report</h2>
+<p>Track savings as <em>annualized run-rate</em> (monthly saving times 12) and keep a before/after table for every change, including the performance metrics you verified. That evidence builds trust with engineering teams and finance, and makes the next round easier.</p>
+
+<h2 id="checklist">Checklist</h2>
+<ol>
+<li>Tag everything; rank spend.</li>
+<li>Remove idle and orphaned resources.</li>
+<li>Right-size with p95/p99 and headroom, one step at a time.</li>
+<li>gp3 and Graviton where proven safe.</li>
+<li>Commit after optimizing.</li>
+<li>Automate reports, schedules and budgets.</li>
+</ol>
+</div>
+      <section class="post-cta glass">
+        <h2>Enjoyed this?</h2>
+        <p>I write about PostgreSQL, AWS and database reliability. Have a question or a similar problem to solve?</p>
+        <div class="hero-actions"><a class="btn btn-primary" href="/contact.html"><span>Get in touch</span></a><a class="btn btn-secondary" href="/tools.html"><span>Try the tools</span></a></div>
+        <div class="share-row"><span>Share:</span>
+          <a href="https://twitter.com/intent/tweet?url=https://dishantmodh.com/blog/aws-database-cost-optimization-right-sizing.html&amp;text=AWS%20Database%20Cost%20Optimization:%20A%20Right-Sizing%20Framework%20That%20Works" target="_blank" rel="noopener noreferrer">Twitter</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://dishantmodh.com/blog/aws-database-cost-optimization-right-sizing.html" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <button type="button" class="copy-btn" data-copy="https://dishantmodh.com/blog/aws-database-cost-optimization-right-sizing.html">Copy link</button></div>
+      </section>
+      <section class="related"><h2>More articles</h2><div class="featured-grid"><a class="featured-card glass" href="/blog/postgresql-p95-latency-playbook.html"><span class="featured-kicker">PostgreSQL</span><h3>How I Cut PostgreSQL p95 Latency from 1.8s to 0.9s</h3><span class="featured-link">Read article &rarr;</span></a><a class="featured-card glass" href="/blog/zero-downtime-database-migration-aws-dms-pglogical.html"><span class="featured-kicker">Migration</span><h3>Zero-Downtime Database Migrations: On-Prem to AWS with DMS and pglogical</h3><span class="featured-link">Read article &rarr;</span></a><a class="featured-card glass" href="/blog/aurora-global-database-dr-readiness.html"><span class="featured-kicker">Reliability</span><h3>DR Readiness for Aurora Global Database: From Architecture to Quarterly Drills</h3><span class="featured-link">Read article &rarr;</span></a><a class="featured-card glass" href="/blog/mongodb-aggregation-pipeline-tuning.html"><span class="featured-kicker">MongoDB</span><h3>MongoDB Aggregation Tuning in Production (and Fixing Cassandra Hotspots)</h3><span class="featured-link">Read article &rarr;</span></a><a class="featured-card glass" href="/blog/datadog-grafana-alerting-reduce-mttr.html"><span class="featured-kicker">Observability</span><h3>Datadog + Grafana Alerting That Actually Reduces MTTR</h3><span class="featured-link">Read article &rarr;</span></a><a class="featured-card glass" href="/blog/postgresql-on-call-playbook-p1-incidents.html"><span class="featured-kicker">Reliability</span><h3>PostgreSQL On-Call Playbook for P1/P0 Incidents</h3><span class="featured-link">Read article &rarr;</span></a><a class="featured-card glass" href="/blog/pgbouncer-connection-pooling-guide.html"><span class="featured-kicker">PostgreSQL</span><h3>PgBouncer Explained: Connection Pooling Modes, Sizing and Pitfalls</h3><span class="featured-link">Read article &rarr;</span></a><a class="featured-card glass" href="/blog/terraform-rds-module-patterns.html"><span class="featured-kicker">Automation</span><h3>Terraform for RDS: Reusable Module Patterns and Drift Detection</h3><span class="featured-link">Read article &rarr;</span></a><a class="featured-card glass" href="/blog/aurora-vs-rds-postgresql-decision-guide.html"><span class="featured-kicker">AWS</span><h3>Aurora PostgreSQL vs RDS PostgreSQL: A Practical Decision Guide</h3><span class="featured-link">Read article &rarr;</span></a><a class="featured-card glass" href="/blog/postgresql-backup-pitr-restore-testing.html"><span class="featured-kicker">PostgreSQL</span><h3>PostgreSQL Backups and Point-in-Time Recovery: Test Your Restores</h3><span class="featured-link">Read article &rarr;</span></a><a class="featured-card glass" href="/blog/patroni-high-availability-postgresql-guide.html"><span class="featured-kicker">Reliability</span><h3>Patroni High Availability for PostgreSQL: Architecture, Config and Failover Testing</h3><span class="featured-link">Read article &rarr;</span></a><a class="featured-card glass" href="/blog/postgresql-index-types-guide.html"><span class="featured-kicker">PostgreSQL</span><h3>PostgreSQL Index Types Explained: B-tree, GIN, GiST, BRIN and When to Use Each</h3><span class="featured-link">Read article &rarr;</span></a></div></section>
+    </article>
+  </main>
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2026 Dishant Modh. Built with passion for reliability and performance.</p>
+      <div class="footer-links">
+        <a href="https://linkedin.com/in/dishantmodh" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">LinkedIn</a>
+        <span>•</span>
+        <a href="https://github.com/dhmodh" target="_blank" rel="noopener noreferrer" aria-label="GitHub">GitHub</a>
+        <span>•</span>
+        <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">Resume</a>
+      </div>
+    </div>
+  </footer>
+  <script src="/script.js?v=20261101"></script>
+  <script src="/post.js?v=20261101"></script>
+</body>
+</html>

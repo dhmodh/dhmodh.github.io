@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="/favicon_io/favicon.svg?v=5">
+  <link rel="manifest" href="/favicon_io/site.webmanifest">
+  <link rel="stylesheet" href="/styles.css?v=20261101">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- SEO:start -->
+  <title>PostgreSQL Backups and PITR: Test Your Restores | Dishant Modh</title>
+  <meta name="description" content="A practical guide to PostgreSQL backups: base backups, WAL archiving, point-in-time recovery steps, RDS PITR and how to prove your restores work.">
+  <meta name="author" content="Dishant Modh">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+  <meta name="theme-color" content="#0a0e27">
+  <link rel="canonical" href="https://dishantmodh.com/blog/postgresql-backup-pitr-restore-testing.html">
+  <link rel="alternate" type="application/rss+xml" title="Dishant Modh - Articles" href="https://dishantmodh.com/feed.xml">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Dishant Modh">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:url" content="https://dishantmodh.com/blog/postgresql-backup-pitr-restore-testing.html">
+  <meta property="og:title" content="PostgreSQL Backups and PITR: Test Your Restores | Dishant Modh">
+  <meta property="og:description" content="A practical guide to PostgreSQL backups: base backups, WAL archiving, point-in-time recovery steps, RDS PITR and how to prove your restores work.">
+  <meta property="og:image" content="https://dishantmodh.com/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Dishant Modh - Senior Database Reliability Engineer">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PostgreSQL Backups and PITR: Test Your Restores | Dishant Modh">
+  <meta name="twitter:description" content="A practical guide to PostgreSQL backups: base backups, WAL archiving, point-in-time recovery steps, RDS PITR and how to prove your restores work.">
+  <meta name="twitter:image" content="https://dishantmodh.com/og-image.jpg">
+  <meta property="article:published_time" content="2026-10-22">
+  <meta property="article:author" content="Dishant Modh">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://dishantmodh.com/#person",
+      "name": "Dishant Modh",
+      "jobTitle": "Senior Database Reliability Engineer",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "The Walt Disney Company"
+      },
+      "url": "https://dishantmodh.com/",
+      "image": "https://dishantmodh.com/og-image.jpg",
+      "sameAs": [
+        "https://linkedin.com/in/dishantmodh",
+        "https://github.com/dhmodh"
+      ],
+      "knowsAbout": [
+        "Database Reliability Engineering",
+        "Site Reliability Engineering",
+        "PostgreSQL",
+        "Amazon Aurora",
+        "AWS",
+        "Terraform",
+        "MySQL",
+        "MongoDB",
+        "Cassandra",
+        "Snowflake",
+        "Disaster Recovery",
+        "Database Performance Tuning",
+        "Zero-Downtime Migrations"
+      ],
+      "alumniOf": {
+        "@type": "CollegeOrUniversity",
+        "name": "Dharmsinh Desai University"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Bengaluru",
+        "addressRegion": "Karnataka",
+        "addressCountry": "IN"
+      },
+      "description": "Senior Database Reliability Engineer at The Walt Disney Company with 5+ years of experience in PostgreSQL, Aurora, AWS and Terraform."
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://dishantmodh.com/blog/postgresql-backup-pitr-restore-testing.html#article",
+      "headline": "PostgreSQL Backups and Point-in-Time Recovery: Test Your Restores",
+      "description": "A practical guide to PostgreSQL backups: base backups, WAL archiving, point-in-time recovery steps, RDS PITR and how to prove your restores work.",
+      "image": "https://dishantmodh.com/og-image.jpg",
+      "datePublished": "2026-10-22",
+      "dateModified": "2026-10-22",
+      "author": {
+        "@id": "https://dishantmodh.com/#person"
+      },
+      "publisher": {
+        "@id": "https://dishantmodh.com/#person"
+      },
+      "mainEntityOfPage": "https://dishantmodh.com/blog/postgresql-backup-pitr-restore-testing.html",
+      "keywords": "PostgreSQL backup, point-in-time recovery, PITR, WAL archiving, pgBackRest, pg_basebackup, RDS backups, restore testing",
+      "inLanguage": "en",
+      "articleSection": "PostgreSQL"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://dishantmodh.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://dishantmodh.com/blog.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "PostgreSQL Backups and Point-in-Time Recovery: Test Your Restores",
+          "item": "https://dishantmodh.com/blog/postgresql-backup-pitr-restore-testing.html"
+        }
+      ]
+    }
+  ]
+}
+  </script>
+  <!-- SEO:end -->
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="animated-bg">
+    <div class="gradient-orb orb-1"></div>
+    <div class="gradient-orb orb-2"></div>
+    <div class="gradient-orb orb-3"></div>
+  </div>
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="/index.html" class="logo">
+        <span class="logo-text">DM</span>
+        <span class="logo-glow"></span>
+      </a>
+      <ul class="nav-menu">
+        <li><a href="/about.html" class="nav-link">About</a></li>
+        <li><a href="/experience.html" class="nav-link">Experience</a></li>
+        <li><a href="/projects.html" class="nav-link">Projects</a></li>
+        <li><a href="/tools.html" class="nav-link">Tools</a></li>
+        <li><a href="/blog.html" class="nav-link">Blog</a></li>
+        <li><a href="/contact.html" class="nav-link">Contact</a></li>
+        <li><a href="/games.html" class="nav-link">Games</a></li>
+        <li><a href="/resume.html" class="nav-link resume-link">Resume</a></li>
+      </ul>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <span class="theme-icon">🌙</span>
+      </button>
+      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+  <main id="main" class="post-wrap">
+    <article class="post">
+      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><a href="/blog.html">Blog</a><span>/</span><span aria-current="page">PostgreSQL</span></nav>
+      <header class="post-head">
+        <span class="blog-category">PostgreSQL</span>
+        <h1>PostgreSQL Backups and Point-in-Time Recovery: Test Your Restores</h1>
+        <p class="post-meta"><span>By <a href="/about.html">Dishant Modh</a></span><span>&middot;</span><time datetime="2026-10-22">Oct 2026</time><span>&middot;</span><span>7 min read</span></p>
+        <p class="post-lede">A practical guide to PostgreSQL backups: base backups, WAL archiving, point-in-time recovery steps, RDS PITR and how to prove your restores work.</p>
+      </header>
+      <aside class="toc glass" aria-label="Table of contents"><strong>On this page</strong><ol id="toc"></ol></aside>
+      <div class="post-body">
+<p>A backup you have never restored is a hope, not a backup. This guide covers the building blocks of PostgreSQL backup and point-in-time recovery (PITR), and, more importantly, how to prove they work before an incident forces the question.</p>
+
+<h2 id="types">1. Logical vs physical backups</h2>
+<ul>
+<li><strong>Logical</strong> (<code>pg_dump</code>/<code>pg_dumpall</code>): portable, good for single databases, version upgrades and small to medium data. Slower to restore on large databases and no point-in-time recovery.</li>
+<li><strong>Physical</strong> (<code>pg_basebackup</code> or a tool such as pgBackRest or WAL-G): copies the data directory, fast to restore at scale, and combined with archived WAL gives PITR.</li>
+</ul>
+<p>Most production systems use physical backups plus WAL archiving, and keep periodic logical dumps for portability.</p>
+
+<h2 id="wal">2. Enable WAL archiving</h2>
+<p>PITR works by restoring a base backup and replaying archived WAL up to a chosen moment.</p>
+<pre><code># postgresql.conf
+wal_level = replica
+archive_mode = on
+archive_command = 'pgbackrest --stanza=main archive-push %p'</code></pre>
+<p>Monitor archiving: failed archives make WAL pile up on disk and break your recovery window. Alert on <code>pg_stat_archiver.failed_count</code> increasing and on the age of the last successful archive.</p>
+<pre><code>SELECT archived_count, failed_count, last_archived_time, last_failed_time
+FROM pg_stat_archiver;</code></pre>
+
+<h2 id="pitr">3. A point-in-time recovery, step by step</h2>
+<ol>
+<li>Stop PostgreSQL on the restore target and move the old data directory aside.</li>
+<li>Restore the most recent base backup taken before your target time.</li>
+<li>Tell PostgreSQL how to fetch WAL and where to stop:</li>
+</ol>
+<pre><code># postgresql.conf (or postgresql.auto.conf) on the restore target
+restore_command = 'pgbackrest --stanza=main archive-get %f "%p"'
+recovery_target_time = '2026-10-30 09:41:00+00'
+recovery_target_action = 'promote'</code></pre>
+<ol start="4">
+<li>Create an empty <code>recovery.signal</code> file in the data directory (PostgreSQL 12+) and start the server.</li>
+<li>Check the logs for the recovery target being reached, then verify data before pointing applications at it.</li>
+</ol>
+<p>Always restore to a <em>new</em> server first. Overwriting production in a panic turns one problem into two.</p>
+
+<h2 id="rds">4. On RDS and Aurora</h2>
+<p>Amazon RDS takes automated backups and retains transaction logs, so you can restore to any second within the retention period. A restore always creates a <strong>new instance</strong> with a new endpoint, so plan how applications switch over. Automated backups are tied to the instance, so take manual snapshots (and copy them to another Region or account) for long-term and DR needs. Check current limits for maximum retention in the AWS documentation.</p>
+
+<h2 id="testing">5. Prove it: automated restore tests</h2>
+<p>Schedule a job that, at least monthly (weekly for critical systems):</p>
+<ol>
+<li>Restores the latest backup to a throwaway server.</li>
+<li>Replays WAL to a recent timestamp.</li>
+<li>Runs sanity checks: row counts on key tables, newest record timestamps, application smoke queries, and integrity checks such as <code>pg_amcheck</code>.</li>
+<li>Records the elapsed time. That is your <strong>measured RTO</strong>.</li>
+<li>Destroys the server and reports pass/fail to your alerting system.</li>
+</ol>
+
+<h2 id="policy">6. Policies that save you later</h2>
+<ul>
+<li>Encrypt backups and store them in a different account or Region than production.</li>
+<li>Use immutability or object-lock features so ransomware or a mistaken delete cannot erase history.</li>
+<li>Define retention by business need and compliance, not by default settings.</li>
+<li>Document who can restore and how, and practise it with the on-call team.</li>
+</ul>
+
+<h2 id="checklist">Checklist</h2>
+<ol>
+<li>Base backups plus continuous WAL archiving.</li>
+<li>Alerts on archive failures and backup age.</li>
+<li>A written, rehearsed PITR runbook.</li>
+<li>Automated restore tests with measured RTO.</li>
+<li>Off-account, encrypted, immutable copies.</li>
+</ol>
+</div>
+      <section class="post-cta glass">
+        <h2>Enjoyed this?</h2>
+        <p>I write about PostgreSQL, AWS and database reliability. Have a question or a similar problem to solve?</p>
+        <div class="hero-actions"><a class="btn btn-primary" href="/contact.html"><span>Get in touch</span></a><a class="btn btn-secondary" href="/tools.html"><span>Try the tools</span></a></div>
+        <div class="share-row"><span>Share:</span>
+          <a href="https://twitter.com/intent/tweet?url=https://dishantmodh.com/blog/postgresql-backup-pitr-restore-testing.html&amp;text=PostgreSQL%20Backups%20and%20Point-in-Time%20Recovery:%20Test%20Your%20Restores" target="_blank" rel="noopener noreferrer">Twitter</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://dishantmodh.com/blog/postgresql-backup-pitr-restore-testing.html" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <button type="button" class="copy-btn" data-copy="https://dishantmodh.com/blog/postgresql-backup-pitr-restore-testing.html">Copy link</button></div>
+      </section>
+      <section class="related"><h2>More articles</h2><div class="featured-grid"><a class="featured-card glass" href="/blog/postgresql-p95-latency-playbook.html"><span class="featured-kicker">PostgreSQL</span><h3>How I Cut PostgreSQL p95 Latency from 1.8s to 0.9s</h3><span class="featured-link">Read article &rarr;</span></a><a class="featured-card glass" href="/blog/zero-downtime-database-migration-aws-dms-pglogical.html"><span class="featured-kicker">Migration</span><h3>Zero-Downtime Database Migrations: On-Prem to AWS with DMS and pglogical</h3><span class="featured-link">Read article &rarr;</span></a><a class="featured-card glass" href="/blog/aurora-global-database-dr-readiness.html"><span class="featured-kicker">Reliability</span><h3>DR Readiness for Aurora Global Database: From Architecture to Quarterly Drills</h3><span class="featured-link">Read article &rarr;</span></a><a class="featured-card glass" href="/blog/mongodb-aggregation-pipeline-tuning.html"><span class="featured-kicker">MongoDB</span><h3>MongoDB Aggregation Tuning in Production (and Fixing Cassandra Hotspots)</h3><span class="featured-link">Read article &rarr;</span></a><a class="featured-card glass" href="/blog/datadog-grafana-alerting-reduce-mttr.html"><span class="featured-kicker">Observability</span><h3>Datadog + Grafana Alerting That Actually Reduces MTTR</h3><span class="featured-link">Read article &rarr;</span></a><a class="featured-card glass" href="/blog/postgresql-on-call-playbook-p1-incidents.html"><span class="featured-kicker">Reliability</span><h3>PostgreSQL On-Call Playbook for P1/P0 Incidents</h3><span class="featured-link">Read article &rarr;</span></a><a class="featured-card glass" href="/blog/pgbouncer-connection-pooling-guide.html"><span class="featured-kicker">PostgreSQL</span><h3>PgBouncer Explained: Connection Pooling Modes, Sizing and Pitfalls</h3><span class="featured-link">Read article &rarr;</span></a><a class="featured-card glass" href="/blog/terraform-rds-module-patterns.html"><span class="featured-kicker">Automation</span><h3>Terraform for RDS: Reusable Module Patterns and Drift Detection</h3><span class="featured-link">Read article &rarr;</span></a><a class="featured-card glass" href="/blog/aurora-vs-rds-postgresql-decision-guide.html"><span class="featured-kicker">AWS</span><h3>Aurora PostgreSQL vs RDS PostgreSQL: A Practical Decision Guide</h3><span class="featured-link">Read article &rarr;</span></a><a class="featured-card glass" href="/blog/aws-database-cost-optimization-right-sizing.html"><span class="featured-kicker">Cost</span><h3>AWS Database Cost Optimization: A Right-Sizing Framework That Works</h3><span class="featured-link">Read article &rarr;</span></a><a class="featured-card glass" href="/blog/patroni-high-availability-postgresql-guide.html"><span class="featured-kicker">Reliability</span><h3>Patroni High Availability for PostgreSQL: Architecture, Config and Failover Testing</h3><span class="featured-link">Read article &rarr;</span></a><a class="featured-card glass" href="/blog/postgresql-index-types-guide.html"><span class="featured-kicker">PostgreSQL</span><h3>PostgreSQL Index Types Explained: B-tree, GIN, GiST, BRIN and When to Use Each</h3><span class="featured-link">Read article &rarr;</span></a></div></section>
+    </article>
+  </main>
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2026 Dishant Modh. Built with passion for reliability and performance.</p>
+      <div class="footer-links">
+        <a href="https://linkedin.com/in/dishantmodh" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">LinkedIn</a>
+        <span>•</span>
+        <a href="https://github.com/dhmodh" target="_blank" rel="noopener noreferrer" aria-label="GitHub">GitHub</a>
+        <span>•</span>
+        <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">Resume</a>
+      </div>
+    </div>
+  </footer>
+  <script src="/script.js?v=20261101"></script>
+  <script src="/post.js?v=20261101"></script>
+</body>
+</html>

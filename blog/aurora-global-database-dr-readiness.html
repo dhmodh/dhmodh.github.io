@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="/favicon_io/favicon.svg?v=5">
+  <link rel="manifest" href="/favicon_io/site.webmanifest">
+  <link rel="stylesheet" href="/styles.css?v=20261101">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- SEO:start -->
+  <title>Aurora Global Database DR Readiness Guide | Dishant Modh</title>
+  <meta name="description" content="How to make Aurora Global Database disaster recovery real: RPO and RTO targets, switchover vs failover, replication lag monitoring, runbooks and automated drills.">
+  <meta name="author" content="Dishant Modh">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+  <meta name="theme-color" content="#0a0e27">
+  <link rel="canonical" href="https://dishantmodh.com/blog/aurora-global-database-dr-readiness.html">
+  <link rel="alternate" type="application/rss+xml" title="Dishant Modh - Articles" href="https://dishantmodh.com/feed.xml">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Dishant Modh">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:url" content="https://dishantmodh.com/blog/aurora-global-database-dr-readiness.html">
+  <meta property="og:title" content="Aurora Global Database DR Readiness Guide | Dishant Modh">
+  <meta property="og:description" content="How to make Aurora Global Database disaster recovery real: RPO and RTO targets, switchover vs failover, replication lag monitoring, runbooks and automated drills.">
+  <meta property="og:image" content="https://dishantmodh.com/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Dishant Modh - Senior Database Reliability Engineer">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Aurora Global Database DR Readiness Guide | Dishant Modh">
+  <meta name="twitter:description" content="How to make Aurora Global Database disaster recovery real: RPO and RTO targets, switchover vs failover, replication lag monitoring, runbooks and automated drills.">
+  <meta name="twitter:image" content="https://dishantmodh.com/og-image.jpg">
+  <meta property="article:published_time" content="2025-11-12">
+  <meta property="article:author" content="Dishant Modh">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://dishantmodh.com/#person",
+      "name": "Dishant Modh",
+      "jobTitle": "Senior Database Reliability Engineer",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "The Walt Disney Company"
+      },
+      "url": "https://dishantmodh.com/",
+      "image": "https://dishantmodh.com/og-image.jpg",
+      "sameAs": [
+        "https://linkedin.com/in/dishantmodh",
+        "https://github.com/dhmodh"
+      ],
+      "knowsAbout": [
+        "Database Reliability Engineering",
+        "Site Reliability Engineering",
+        "PostgreSQL",
+        "Amazon Aurora",
+        "AWS",
+        "Terraform",
+        "MySQL",
+        "MongoDB",
+        "Cassandra",
+        "Snowflake",
+        "Disaster Recovery",
+        "Database Performance Tuning",
+        "Zero-Downtime Migrations"
+      ],
+      "alumniOf": {
+        "@type": "CollegeOrUniversity",
+        "name": "Dharmsinh Desai University"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Bengaluru",
+        "addressRegion": "Karnataka",
+        "addressCountry": "IN"
+      },
+      "description": "Senior Database Reliability Engineer at The Walt Disney Company with 5+ years of experience in PostgreSQL, Aurora, AWS and Terraform."
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://dishantmodh.com/blog/aurora-global-database-dr-readiness.html#article",
+      "headline": "DR Readiness for Aurora Global Database: From Architecture to Quarterly Drills",
+      "description": "How to make Aurora Global Database disaster recovery real: RPO and RTO targets, switchover vs failover, replication lag monitoring, runbooks and automated drills.",
+      "image": "https://dishantmodh.com/og-image.jpg",
+      "datePublished": "2025-11-12",
+      "dateModified": "2025-11-12",
+      "author": {
+        "@id": "https://dishantmodh.com/#person"
+      },
+      "publisher": {
+        "@id": "https://dishantmodh.com/#person"
+      },
+      "mainEntityOfPage": "https://dishantmodh.com/blog/aurora-global-database-dr-readiness.html",
+      "keywords": "Aurora Global Database, disaster recovery, RPO RTO, multi-region failover, AWS DR drill, cross-region replication, database reliability",
+      "inLanguage": "en",
+      "articleSection": "Reliability"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://dishantmodh.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://dishantmodh.com/blog.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "DR Readiness for Aurora Global Database: From Architecture to Quarterly Drills",
+          "item": "https://dishantmodh.com/blog/aurora-global-database-dr-readiness.html"
+        }
+      ]
+    }
+  ]
+}
+  </script>
+  <!-- SEO:end -->
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="animated-bg">
+    <div class="gradient-orb orb-1"></div>
+    <div class="gradient-orb orb-2"></div>
+    <div class="gradient-orb orb-3"></div>
+  </div>
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="/index.html" class="logo">
+        <span class="logo-text">DM</span>
+        <span class="logo-glow"></span>
+      </a>
+      <ul class="nav-menu">
+        <li><a href="/about.html" class="nav-link">About</a></li>
+        <li><a href="/experience.html" class="nav-link">Experience</a></li>
+        <li><a href="/projects.html" class="nav-link">Projects</a></li>
+        <li><a href="/tools.html" class="nav-link">Tools</a></li>
+        <li><a href="/blog.html" class="nav-link">Blog</a></li>
+        <li><a href="/contact.html" class="nav-link">Contact</a></li>
+        <li><a href="/games.html" class="nav-link">Games</a></li>
+        <li><a href="/resume.html" class="nav-link resume-link">Resume</a></li>
+      </ul>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <span class="theme-icon">🌙</span>
+      </button>
+      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+  <main id="main" class="post-wrap">
+    <article class="post">
+      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><a href="/blog.html">Blog</a><span>/</span><span aria-current="page">Reliability</span></nav>
+      <header class="post-head">
+        <span class="blog-category">Reliability</span>
+        <h1>DR Readiness for Aurora Global Database: From Architecture to Quarterly Drills</h1>
+        <p class="post-meta"><span>By <a href="/about.html">Dishant Modh</a></span><span>&middot;</span><time datetime="2025-11-12">Nov 2025</time><span>&middot;</span><span>7 min read</span></p>
+        <p class="post-lede">How to make Aurora Global Database disaster recovery real: RPO and RTO targets, switchover vs failover, replication lag monitoring, runbooks and automated drills.</p>
+      </header>
+      <aside class="toc glass" aria-label="Table of contents"><strong>On this page</strong><ol id="toc"></ol></aside>
+      <div class="post-body">
+<p>A multi-region architecture is not a disaster recovery plan until you have <strong>failed over and measured how long it took</strong>. On a multi-region Aurora Global Database setup, combined with AWS DMS for a few specific flows, we pushed RPO from about 15 minutes to near zero and RTO from about 8 minutes to under 60 seconds, then proved it every quarter with automated drills. Here is the framework.</p>
+
+<h2 id="targets">1. Start with RPO and RTO as numbers</h2>
+<p><strong>RPO</strong> is how much data you can afford to lose; <strong>RTO</strong> is how long you can be down. Write them per service tier. A target nobody wrote down cannot be tested, and a target you never tested is a guess.</p>
+
+<h2 id="how">2. What Aurora Global Database gives you</h2>
+<p>Aurora Global Database replicates at the <em>storage layer</em> to read-only secondary clusters in other AWS Regions, typically with replication lag well under a second. Because replication does not compete with query processing on the primary, it is a good fit for cross-region DR and low-latency regional reads. Check the current documentation for the number of supported secondary Regions and engine-version requirements before you design.</p>
+
+<h2 id="switchover-failover">3. Switchover vs failover</h2>
+<ul>
+<li><strong>Managed planned failover (switchover)</strong>: a controlled role swap with no data loss, ideal for drills, maintenance and region rebalancing.</li>
+<li><strong>Unplanned failover</strong>: when the primary Region is impaired, you detach and promote a secondary cluster. Some in-flight data may not have replicated, which is exactly what your RPO target describes.</li>
+</ul>
+<p>Practise both. Planned switchovers are low risk and build muscle memory; unplanned ones test your real runbook.</p>
+
+<h2 id="monitor">4. Monitor the things that predict your RPO</h2>
+<ul>
+<li>Cross-region replication lag (CloudWatch <code>AuroraGlobalDBReplicationLag</code>) with alarms well below your RPO.</li>
+<li>For Aurora PostgreSQL, consider the <code>rds.global_db_rpo</code> parameter to bound RPO. Verify behaviour in current AWS docs, since it can affect write availability when lag exceeds the limit.</li>
+<li>Replication health of any DMS tasks that feed or depend on the global cluster.</li>
+</ul>
+
+<h2 id="app">5. The database is the easy part. Prepare the application</h2>
+<ul>
+<li>How do clients find the new writer? Use cluster endpoints with short DNS TTLs and connection retry logic.</li>
+<li>Secrets, parameter groups, security groups and IAM must exist and match in the secondary Region. Manage them with Terraform so the secondary is not a hand-built snowflake.</li>
+<li>Capacity: the secondary must handle full production load after promotion, so right-size or scale it in the runbook.</li>
+<li>Dependencies: caches, queues and downstream services also need a regional story.</li>
+</ul>
+
+<h2 id="drills">6. Automate the drill</h2>
+<p>Manual drills get skipped. Automating them with Lambda, CloudWatch and scripted runbooks turns DR from an annual fire drill into a routine check. A useful automated drill:</p>
+<ol>
+<li>Verifies replication lag is within target and the secondary is healthy.</li>
+<li>Executes a planned switchover (or promotes an isolated clone in a test account).</li>
+<li>Runs application health and write/read smoke tests against the new primary.</li>
+<li>Records the elapsed time as your <em>measured</em> RTO and checks data continuity as your measured RPO.</li>
+<li>Switches back and files a report. Failures open a ticket automatically.</li>
+</ol>
+
+<h2 id="cost">7. Mind the cost</h2>
+<p>A warm secondary region means paying for compute, storage and cross-region data transfer. Review the instance sizes in the secondary regularly and align the DR tier with business value rather than defaulting everything to the most expensive option.</p>
+
+<h2 id="checklist">DR readiness checklist</h2>
+<ol>
+<li>RPO and RTO written per tier.</li>
+<li>Replication-lag alarms below RPO.</li>
+<li>Secondary infrastructure managed as code.</li>
+<li>Runbooks for planned and unplanned failover.</li>
+<li>Automated drills on a schedule, with measured results.</li>
+<li>Post-drill review and action items.</li>
+</ol>
+<p>Compute what your availability targets really allow with the <a href="/tools.html">SLO and error-budget calculator</a>.</p>
+</div>
+      <section class="post-cta glass">
+        <h2>Enjoyed this?</h2>
+        <p>I write about PostgreSQL, AWS and database reliability. Have a question or a similar problem to solve?</p>
+        <div class="hero-actions"><a class="btn btn-primary" href="/contact.html"><span>Get in touch</span></a><a class="btn btn-secondary" href="/tools.html"><span>Try the tools</span></a></div>
+        <div class="share-row"><span>Share:</span>
+          <a href="https://twitter.com/intent/tweet?url=https://dishantmodh.com/blog/aurora-global-database-dr-readiness.html&amp;text=DR%20Readiness%20for%20Aurora%20Global%20Database:%20From%20Architecture%20to%20Quarterly%20Drills" target="_blank" rel="noopener noreferrer">Twitter</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://dishantmodh.com/blog/aurora-global-database-dr-readiness.html" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <button type="button" class="copy-btn" data-copy="https://dishantmodh.com/blog/aurora-global-database-dr-readiness.html">Copy link</button></div>
+      </section>
+      <section class="related"><h2>More articles</h2><div class="featured-grid"><a class="featured-card glass" href="/blog/postgresql-p95-latency-playbook.html"><span class="featured-kicker">PostgreSQL</span><h3>How I Cut PostgreSQL p95 Latency from 1.8s to 0.9s</h3><span class="featured-link">Read article &rarr;</span></a><a class="featured-card glass" href="/blog/zero-downtime-database-migration-aws-dms-pglogical.html"><span class="featured-kicker">Migration</span><h3>Zero-Downtime Database Migrations: On-Prem to AWS with DMS and pglogical</h3><span class="featured-link">Read article &rarr;</span></a><a class="featured-card glass" href="/blog/mongodb-aggregation-pipeline-tuning.html"><span class="featured-kicker">MongoDB</span><h3>MongoDB Aggregation Tuning in Production (and Fixing Cassandra Hotspots)</h3><span class="featured-link">Read article &rarr;</span></a><a class="featured-card glass" href="/blog/datadog-grafana-alerting-reduce-mttr.html"><span class="featured-kicker">Observability</span><h3>Datadog + Grafana Alerting That Actually Reduces MTTR</h3><span class="featured-link">Read article &rarr;</span></a><a class="featured-card glass" href="/blog/postgresql-on-call-playbook-p1-incidents.html"><span class="featured-kicker">Reliability</span><h3>PostgreSQL On-Call Playbook for P1/P0 Incidents</h3><span class="featured-link">Read article &rarr;</span></a><a class="featured-card glass" href="/blog/pgbouncer-connection-pooling-guide.html"><span class="featured-kicker">PostgreSQL</span><h3>PgBouncer Explained: Connection Pooling Modes, Sizing and Pitfalls</h3><span class="featured-link">Read article &rarr;</span></a><a class="featured-card glass" href="/blog/terraform-rds-module-patterns.html"><span class="featured-kicker">Automation</span><h3>Terraform for RDS: Reusable Module Patterns and Drift Detection</h3><span class="featured-link">Read article &rarr;</span></a><a class="featured-card glass" href="/blog/aurora-vs-rds-postgresql-decision-guide.html"><span class="featured-kicker">AWS</span><h3>Aurora PostgreSQL vs RDS PostgreSQL: A Practical Decision Guide</h3><span class="featured-link">Read article &rarr;</span></a><a class="featured-card glass" href="/blog/postgresql-backup-pitr-restore-testing.html"><span class="featured-kicker">PostgreSQL</span><h3>PostgreSQL Backups and Point-in-Time Recovery: Test Your Restores</h3><span class="featured-link">Read article &rarr;</span></a><a class="featured-card glass" href="/blog/aws-database-cost-optimization-right-sizing.html"><span class="featured-kicker">Cost</span><h3>AWS Database Cost Optimization: A Right-Sizing Framework That Works</h3><span class="featured-link">Read article &rarr;</span></a><a class="featured-card glass" href="/blog/patroni-high-availability-postgresql-guide.html"><span class="featured-kicker">Reliability</span><h3>Patroni High Availability for PostgreSQL: Architecture, Config and Failover Testing</h3><span class="featured-link">Read article &rarr;</span></a><a class="featured-card glass" href="/blog/postgresql-index-types-guide.html"><span class="featured-kicker">PostgreSQL</span><h3>PostgreSQL Index Types Explained: B-tree, GIN, GiST, BRIN and When to Use Each</h3><span class="featured-link">Read article &rarr;</span></a></div></section>
+    </article>
+  </main>
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2026 Dishant Modh. Built with passion for reliability and performance.</p>
+      <div class="footer-links">
+        <a href="https://linkedin.com/in/dishantmodh" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">LinkedIn</a>
+        <span>•</span>
+        <a href="https://github.com/dhmodh" target="_blank" rel="noopener noreferrer" aria-label="GitHub">GitHub</a>
+        <span>•</span>
+        <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">Resume</a>
+      </div>
+    </div>
+  </footer>
+  <script src="/script.js?v=20261101"></script>
+  <script src="/post.js?v=20261101"></script>
+</body>
+</html>

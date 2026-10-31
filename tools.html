@@ -3,17 +3,77 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- SEO:start -->
+  <title>SLO Calculator &amp; PostgreSQL Config Tool | Dishant Modh</title>
+  <meta name="description" content="Free browser-based SRE tools: SLA/SLO downtime and error budget calculator, PostgreSQL config generator and a Patroni-style failover simulator.">
+  <meta name="author" content="Dishant Modh">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+  <meta name="theme-color" content="#0a0e27">
+  <link rel="canonical" href="https://dishantmodh.com/tools.html">
+  <link rel="alternate" type="application/rss+xml" title="Dishant Modh - Articles" href="https://dishantmodh.com/feed.xml">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Dishant Modh">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:url" content="https://dishantmodh.com/tools.html">
+  <meta property="og:title" content="SLO Calculator &amp; PostgreSQL Config Tool | Dishant Modh">
+  <meta property="og:description" content="Free browser-based SRE tools: SLA/SLO downtime and error budget calculator, PostgreSQL config generator and a Patroni-style failover simulator.">
+  <meta property="og:image" content="https://dishantmodh.com/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Dishant Modh - Senior Database Reliability Engineer">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="SLO Calculator &amp; PostgreSQL Config Tool | Dishant Modh">
+  <meta name="twitter:description" content="Free browser-based SRE tools: SLA/SLO downtime and error budget calculator, PostgreSQL config generator and a Patroni-style failover simulator.">
+  <meta name="twitter:image" content="https://dishantmodh.com/og-image.jpg">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://dishantmodh.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Tools",
+          "item": "https://dishantmodh.com/tools.html"
+        }
+      ]
+    },
+    {
+      "@type": "WebApplication",
+      "name": "Dishant Modh Reliability Tools",
+      "url": "https://dishantmodh.com/tools.html",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "author": {
+        "@id": "https://dishantmodh.com/#person"
+      }
+    }
+  ]
+}
+  </script>
+  <!-- SEO:end -->
   <link rel="icon" type="image/svg+xml" href="favicon_io/favicon.svg?v=5">
   <link rel="manifest" href="favicon_io/site.webmanifest">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=20261101">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <title>Reliability Tools | Dishant Modh</title>
-  <meta name="description" content="Free interactive SRE tools: SLA/SLO downtime and error-budget calculator, and a PostgreSQL configuration starter generator.">
-  <link rel="canonical" href="https://dishantmodh.com/tools.html">
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
   <div class="animated-bg">
     <div class="gradient-orb orb-1"></div>
     <div class="gradient-orb orb-2"></div>
@@ -32,8 +92,8 @@
         <li><a href="tools.html" class="nav-link">Tools</a></li>
         <li><a href="blog.html" class="nav-link">Blog</a></li>
         <li><a href="contact.html" class="nav-link">Contact</a></li>
-        <li><a href="game.html" class="nav-link">Games</a></li>
-        <li><a href="resume.pdf" class="nav-link resume-link" target="_blank">Resume</a></li>
+        <li><a href="games.html" class="nav-link">Games</a></li>
+        <li><a href="resume.html" class="nav-link resume-link">Resume</a></li>
       </ul>
       <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
         <span class="theme-icon">🌙</span>
@@ -45,10 +105,11 @@
       </button>
     </div>
   </nav>
+  <main id="main">
 
   <section class="section">
     <div class="container">
-      <h2 class="reveal">Reliability Tools</h2>
+      <h1 class="reveal">Reliability Tools</h1>
       <p class="page-lead reveal">Small, free utilities I wish I had during on-call. Everything runs in your browser &mdash; nothing is sent anywhere.</p>
 
       <!-- SLO calculator -->
@@ -82,6 +143,39 @@
           <div class="budget-bar"><div class="budget-fill" id="slo-budget-fill"></div></div>
           <p id="slo-budget-note"></p>
         </div>
+      </div>
+
+      <!-- Failover simulator -->
+      <div class="tool-card glass reveal" id="failover-tool">
+        <span id="failover" class="anchor-target"></span>
+        <div class="tool-head">
+          <div class="tool-icon">⚡</div>
+          <div>
+            <h3>High-Availability Failover Simulator</h3>
+            <p>A 3-node PostgreSQL cluster managed Patroni-style with a consensus store. Kill the leader and watch detection, election and promotion happen. Click any node to kill or revive it.</p>
+          </div>
+        </div>
+        <div class="fo-top"><span id="fo-status" class="ok">Writes: accepting</span><span id="fo-quorum" class="ok">consensus quorum OK</span></div>
+        <div class="fo-nodes">
+          <button type="button" class="fo-node leader" data-node="node-1"><strong>node-1</strong><span class="fo-role">LEADER (primary)</span><span class="fo-lag">lag 0.00s</span></button>
+          <button type="button" class="fo-node replica" data-node="node-2"><strong>node-2</strong><span class="fo-role">replica</span><span class="fo-lag">lag 0.12s</span></button>
+          <button type="button" class="fo-node replica" data-node="node-3"><strong>node-3</strong><span class="fo-role">replica</span><span class="fo-lag">lag 0.31s</span></button>
+        </div>
+        <div class="fo-controls">
+          <button type="button" class="btn btn-primary" id="fo-kill-leader"><span>Kill the leader</span></button>
+          <button type="button" class="btn btn-secondary" id="fo-revive-all"><span>Revive all</span></button>
+          <button type="button" class="btn btn-secondary" id="fo-reset"><span>Reset</span></button>
+          <label class="field fo-slider"><span>Failure detection timeout: <strong id="fo-detect-val">3s</strong></span>
+            <input type="range" id="fo-detect" min="1" max="10" step="1" value="3"></label>
+        </div>
+        <div class="result-grid">
+          <div class="result"><span>Writes succeeded</span><strong id="fo-ok">0</strong></div>
+          <div class="result"><span>Writes failed</span><strong id="fo-fail">0</strong></div>
+          <div class="result"><span>Write availability</span><strong id="fo-avail">100.00%</strong></div>
+          <div class="result"><span>Last failover time</span><strong id="fo-last">-</strong></div>
+        </div>
+        <ul class="fo-log" id="fo-log" aria-live="polite" aria-label="Event log"></ul>
+        <p class="tool-note">Educational model. Failover time = failure detection + promotion. Kill two nodes to see why a 3-node consensus store needs a majority (quorum).</p>
       </div>
 
       <!-- PG tuning -->
@@ -120,6 +214,7 @@
     </div>
   </section>
 
+  </main>
   <footer class="footer">
     <div class="container">
       <p>&copy; 2026 Dishant Modh. Built with passion for reliability and performance.</p>
@@ -132,7 +227,8 @@
       </div>
     </div>
   </footer>
-  <script src="script.js"></script>
-  <script src="tools.js"></script>
+  <script src="script.js?v=20261101"></script>
+  <script src="tools.js?v=20261101"></script>
+  <script src="failover.js?v=20261101"></script>
 </body>
 </html>
