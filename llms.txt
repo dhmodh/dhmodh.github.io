@@ -7,7 +7,7 @@
 - [Experience](https://dishantmodh.com/experience.html): Disney, GlobalLogic, HHAeXchange
 - [Resume](https://dishantmodh.com/resume.html): full resume (PDF: https://dishantmodh.com/resume.pdf)
 - [Projects](https://dishantmodh.com/projects.html)
-- [Tools](https://dishantmodh.com/tools.html): SLO calculator, PostgreSQL config starter, failover simulator
+- [Tools](https://dishantmodh.com/tools.html): 13 free tools - Terraform plan risk checker, RDS module generator, Snowflake cost estimator, AWS savings, CIDR planner, PostgreSQL memory and autovacuum calculators, burn-rate alerts, backup RTO, cron explainer, SLO calculator, failover simulator
 - [Blog](https://dishantmodh.com/blog.html)
 - [Games](https://dishantmodh.com/games.html): word guess, vacuum snake, SQL typing sprint, quiz, memory, incident challenge
 

@@ -34,7 +34,7 @@
       case 'blog':
         return { lines: ['- How I Cut PostgreSQL p95 Latency from 1.8s to 0.9s', '- Zero-Downtime Database Migrations: On-Prem to AWS', '- DR Readiness for Aurora Global Database', "-> type 'open blog' to read them"] };
       case 'tools':
-        return { lines: ['- SLO / error budget calculator', '- PostgreSQL config starter', '- Failover simulator (try killing the leader!)', "-> type 'open tools'"] };
+        return { lines: ['- Terraform plan risk checker + RDS module generator', '- Snowflake cost estimator, AWS savings, CIDR planner', '- PostgreSQL memory/autovacuum/config tools, cron, SLO, backups', '- Failover simulator (try killing the leader!)', "-> type 'open tools'"] };
       case 'contact':
         return { lines: ['email   : dishantmodh7@gmail.com', 'linkedin: linkedin.com/in/dishantmodh', 'github  : github.com/dhmodh', "-> type 'open contact' for the form"] };
       case 'open': case 'cd': case 'goto': {

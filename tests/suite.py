@@ -63,7 +63,7 @@ async def main():
         # 6. command palette
         await page.keyboard.press('Control+k'); await page.wait_for_timeout(200)
         vis=await page.is_visible('.cmdk'); check('palette opens (Ctrl+K)',vis)
-        await page.keyboard.type('exp'); await page.wait_for_timeout(150)
+        await page.keyboard.type('experience'); await page.wait_for_timeout(150)
         n=await page.locator('.cmdk-list li[data-n]').count(); check('palette filters',n==1,str(n))
         await page.keyboard.press('Enter'); await page.wait_for_url('**/experience.html',timeout=3000)
         check('palette navigates on Enter',page.url.endswith('experience.html'))

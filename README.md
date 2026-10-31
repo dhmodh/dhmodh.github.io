@@ -48,7 +48,7 @@ To enable Google Analytics:
 ├── failover.js / terminal.js / post.js
 ├── games.html + word-game / snake-game / typing-game (.html/.js), games-common.js, games-hub.js
 ├── SEO-GUIDE.md        # Steps to get ranked (Search Console, backlinks)
-├── tests/suite.py, suite2.py, suite3.py  # Browser test suites (Playwright)
+├── tests/suite.py ... suite4.py  # Browser test suites (Playwright)
 ├── blog.html           # Blog page
 ├── contact.html        # Contact page
 ├── styles.css          # Main stylesheet
@@ -150,7 +150,7 @@ Built with modern web technologies and best practices for performance and SEO.
 ```bash
 pip install playwright && playwright install chromium
 python3 -m http.server 8000          # terminal 1 (repo root)
-python3 tests/suite.py && python3 tests/suite2.py && python3 tests/suite3.py   # terminal 2
+python3 tests/suite.py && python3 tests/suite2.py && python3 tests/suite3.py && python3 tests/suite4.py   # terminal 2
 ```
 Covers: console errors, broken links/assets, horizontal overflow on desktop/tablet/mobile,
 experience content, command palette (Ctrl/Cmd+K), SLO + PostgreSQL calculators (unit + UI),

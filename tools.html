@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- SEO:start -->
-  <title>SLO Calculator &amp; PostgreSQL Config Tool | Dishant Modh</title>
-  <meta name="description" content="Free browser-based SRE tools: SLA/SLO downtime and error budget calculator, PostgreSQL config generator and a Patroni-style failover simulator.">
+  <title>SRE, Terraform, AWS &amp; Snowflake Tools | Dishant Modh</title>
+  <meta name="description" content="Free browser tools for Terraform, AWS, Snowflake, PostgreSQL and SRE: plan risk checker, cost estimators, CIDR planner, cron, SLO and failover simulator.">
   <meta name="author" content="Dishant Modh">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
   <meta name="theme-color" content="#0a0e27">
@@ -15,15 +15,15 @@
   <meta property="og:site_name" content="Dishant Modh">
   <meta property="og:locale" content="en_US">
   <meta property="og:url" content="https://dishantmodh.com/tools.html">
-  <meta property="og:title" content="SLO Calculator &amp; PostgreSQL Config Tool | Dishant Modh">
-  <meta property="og:description" content="Free browser-based SRE tools: SLA/SLO downtime and error budget calculator, PostgreSQL config generator and a Patroni-style failover simulator.">
+  <meta property="og:title" content="SRE, Terraform, AWS &amp; Snowflake Tools | Dishant Modh">
+  <meta property="og:description" content="Free browser tools for Terraform, AWS, Snowflake, PostgreSQL and SRE: plan risk checker, cost estimators, CIDR planner, cron, SLO and failover simulator.">
   <meta property="og:image" content="https://dishantmodh.com/og-image.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="Dishant Modh - Senior Database Reliability Engineer">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="SLO Calculator &amp; PostgreSQL Config Tool | Dishant Modh">
-  <meta name="twitter:description" content="Free browser-based SRE tools: SLA/SLO downtime and error budget calculator, PostgreSQL config generator and a Patroni-style failover simulator.">
+  <meta name="twitter:title" content="SRE, Terraform, AWS &amp; Snowflake Tools | Dishant Modh">
+  <meta name="twitter:description" content="Free browser tools for Terraform, AWS, Snowflake, PostgreSQL and SRE: plan risk checker, cost estimators, CIDR planner, cron, SLO and failover simulator.">
   <meta name="twitter:image" content="https://dishantmodh.com/og-image.jpg">
   <script type="application/ld+json">
 {
@@ -48,7 +48,22 @@
     },
     {
       "@type": "WebApplication",
-      "name": "Dishant Modh Reliability Tools",
+      "name": "Dishant Modh SRE and Cloud Tools",
+      "featureList": [
+        "Terraform plan risk checker",
+        "Terraform RDS module generator",
+        "Snowflake credit and cost estimator",
+        "AWS savings estimator",
+        "VPC CIDR subnet planner",
+        "PostgreSQL memory budget",
+        "Autovacuum threshold calculator",
+        "SLO burn-rate alert generator",
+        "Backup and restore-time estimator",
+        "Cron explainer and EventBridge converter",
+        "SLO error budget calculator",
+        "Failover simulator",
+        "PostgreSQL config starter"
+      ],
       "url": "https://dishantmodh.com/tools.html",
       "applicationCategory": "DeveloperApplication",
       "operatingSystem": "Any",
@@ -110,10 +125,24 @@
   <section class="section">
     <div class="container">
       <h1 class="reveal">Reliability Tools</h1>
-      <p class="page-lead reveal">Small, free utilities I wish I had during on-call. Everything runs in your browser &mdash; nothing is sent anywhere.</p>
-
+      <p class="page-lead reveal">Free utilities for Terraform, AWS, Snowflake, PostgreSQL and SRE work. Everything runs in your browser, and nothing you enter is sent anywhere.</p>
+      <!-- TOOLBAR:start -->
+      <div class="tools-toolbar reveal" id="tools-toolbar">
+        <input type="search" id="tools-search" placeholder="Search tools (e.g. terraform, snowflake, cidr, cron)..." aria-label="Search tools">
+        <div class="tools-cats" role="group" aria-label="Categories">
+          <button type="button" class="chip active" data-tcat="all">All</button>
+          <button type="button" class="chip" data-tcat="terraform">Terraform</button>
+          <button type="button" class="chip" data-tcat="aws">AWS</button>
+          <button type="button" class="chip" data-tcat="snowflake">Snowflake</button>
+          <button type="button" class="chip" data-tcat="postgresql">PostgreSQL</button>
+          <button type="button" class="chip" data-tcat="reliability">Reliability</button>
+        </div>
+        <p id="tools-count" class="tool-note" aria-live="polite"></p>
+      </div>
+      <!-- TOOLBAR:end -->
+      
       <!-- SLO calculator -->
-      <div class="tool-card glass reveal" id="slo-tool">
+      <div class="tool-card glass reveal" id="slo-tool" data-cat="reliability" data-title="SLA / SLO Downtime &amp; Error Budget" data-keywords="sla slo availability nines downtime error budget">
         <div class="tool-head">
           <div class="tool-icon">⏱️</div>
           <div>
@@ -145,8 +174,78 @@
         </div>
       </div>
 
+      <!-- NEWTOOLS:start -->
+      <div class="tool-card glass reveal" id="t-terraform-plan" data-cat="terraform" data-title="Terraform Plan Risk Checker" data-keywords="terraform plan destroy replace risk iac review rds s3 snowflake">
+        <div class="tool-head"><div class="tool-icon">🛡️</div><div><h3>Terraform Plan Risk Checker</h3><p>Paste <code>terraform plan</code> output. It counts changes and flags stateful resources (databases, buckets, keys) that will be destroyed or replaced. Runs locally; nothing is uploaded.</p></div></div>
+        <textarea id="tf-input" class="tf-input" rows="9" spellcheck="false" aria-label="Terraform plan output" placeholder="Paste terraform plan output here..."></textarea>
+        <div class="tool-actions"><button type="button" class="chip" id="tf-sample">Load sample</button><button type="button" class="chip" id="tf-clear">Clear</button></div>
+        <div class="tf-verdict" id="tf-verdict" role="status" aria-live="polite"></div>
+        <div class="result-grid" id="tf-counts"></div>
+        <div class="tbl-wrap"><table class="tool-table"><thead><tr><th>Resource</th><th>Action</th><th>Risk</th></tr></thead><tbody id="tf-rows"></tbody></table></div>
+        <p class="tool-note">Tip: run <code>terraform plan -out=tfplan</code> in CI and require approval whenever a stateful resource is replaced.</p>
+      </div>
+
+      <div class="tool-card glass reveal" id="t-terraform-rds" data-cat="terraform aws" data-title="Terraform RDS Module Generator" data-keywords="terraform rds aws_db_instance hcl module generator postgres mysql mariadb">
+        <div class="tool-head"><div class="tool-icon">🧱</div><div><h3>Terraform RDS Module Generator</h3><p>Generate an <code>aws_db_instance</code> with safe production defaults: encryption, Secrets Manager password, backups, deletion protection and lifecycle rules.</p></div></div>
+        <div class="tool-grid four"><label class="field">Name<input type="text" id="rd-name" value="orders" ></label><label class="field">Engine<select id="rd-engine"><option value="postgres" selected>PostgreSQL</option><option value="mysql">MySQL</option><option value="mariadb">MariaDB</option></select></label><label class="field">Engine version<input type="text" id="rd-version" value="15.5" ></label><label class="field">Instance class<input type="text" id="rd-class" value="db.r6g.large" ></label></div><div class="tool-grid four"><label class="field">Storage (GB)<input type="number" id="rd-storage" value="100" min="20"></label><label class="field">Environment<select id="rd-env"><option value="prod" selected>Production</option><option value="nonprod">Non-production</option></select></label><label class="field">Backup retention (days)<input type="number" id="rd-retention" value="14" min="0" max="35"></label><label class="field check"><span>Multi-AZ</span><input type="checkbox" id="rd-multi" checked></label></div><div class="code-wrap"><button type="button" class="copy-btn code-copy" id="rd-copy">Copy</button><pre class="code-block" id="rd-output" aria-live="polite"></pre></div>
+        <p class="tool-note">Starting point only. Validate attribute names against your AWS provider version and add your subnet group, security groups and variables.</p>
+      </div>
+
+      <div class="tool-card glass reveal" id="t-snowflake" data-cat="snowflake" data-title="Snowflake Credit &amp; Cost Estimator" data-keywords="snowflake credits warehouse cost auto-suspend resource monitor storage finops">
+        <div class="tool-head"><div class="tool-icon">❄️</div><div><h3>Snowflake Credit &amp; Cost Estimator</h3><p>Estimate monthly Snowflake spend from warehouse size, active hours, idle time and storage, and see what a 1-minute auto-suspend would save.</p></div></div>
+        <div class="tool-grid four"><label class="field">Warehouse size<select id="sf-size"><option value="M" selected>M</option></select></label><label class="field">Avg active clusters<input type="number" id="sf-clusters" value="1" min="1"></label><label class="field">Active query hours / day<input type="number" id="sf-active" value="6" min="0" step="0.5"></label><label class="field">Resumes / day<input type="number" id="sf-resumes" value="20" min="0"></label></div><div class="tool-grid four"><label class="field">Auto-suspend (minutes)<input type="number" id="sf-suspend" value="5" min="0" step="0.5"></label><label class="field">Days / month<input type="number" id="sf-days" value="22" min="0" max="31"></label><label class="field">Price per credit (USD)<input type="number" id="sf-price" value="3" min="0" step="0.1"></label><label class="field">Storage (TB)<input type="number" id="sf-storage" value="5" min="0" step="0.1"></label></div><div class="tool-grid "><label class="field">Storage price (USD / TB / month)<input type="number" id="sf-sprice" value="23" min="0"></label></div><div class="result-grid" id="sf-results" aria-live="polite"></div>
+        <p class="tool-note" id="sf-note"></p>
+        <p class="tool-note">Example prices only. Credit and storage rates depend on your edition, region and contract; edit them to match your account. Larger warehouses finish queries faster, so for queries that scale well they often cost about the same per query.</p>
+      </div>
+
+      <div class="tool-card glass reveal" id="t-aws-savings" data-cat="aws" data-title="AWS Savings Estimator" data-keywords="aws cost savings rds ec2 gp3 gp2 reserved instance schedule snapshot finops">
+        <div class="tool-head"><div class="tool-icon">💸</div><div><h3>AWS Savings Estimator</h3><p>Quantify savings from stopping non-production on a schedule, commitments, gp2 to gp3 storage and snapshot cleanup. Enter your own rates.</p></div></div>
+        <div class="tool-grid four"><label class="field">Hourly rate per instance (USD)<input type="number" id="aw-rate" value="0.50" min="0" step="0.01"></label><label class="field">Instance count<input type="number" id="aw-count" value="4" min="0"></label><label class="field">Run hours / day (schedule)<input type="number" id="aw-hours" value="12" min="0" max="24"></label><label class="field">Run days / week<input type="number" id="aw-days" value="5" min="0" max="7"></label></div><div class="tool-grid four"><label class="field">Commitment discount (%)<input type="number" id="aw-disc" value="30" min="0" max="100"></label><label class="field">Storage to migrate (GB)<input type="number" id="aw-gb" value="2000" min="0"></label><label class="field">gp2 price (USD / GB-month)<input type="number" id="aw-gp2" value="0.10" min="0" step="0.001"></label><label class="field">gp3 price (USD / GB-month)<input type="number" id="aw-gp3" value="0.08" min="0" step="0.001"></label></div><div class="tool-grid "><label class="field">Old snapshots to delete (GB)<input type="number" id="aw-snapgb" value="5000" min="0"></label><label class="field">Snapshot price (USD / GB-month)<input type="number" id="aw-snapprice" value="0.05" min="0" step="0.001"></label></div><div class="result-grid" id="aw-results" aria-live="polite"></div>
+        <p class="tool-note">Rates shown are examples; check current AWS pricing for your Region and service. Do not buy a 24/7 commitment for capacity you plan to stop on a schedule: choose one or the other for the same instances.</p>
+      </div>
+
+      <div class="tool-card glass reveal" id="t-cidr" data-cat="aws" data-title="VPC / CIDR Subnet Planner" data-keywords="aws vpc cidr subnet ip planner network netmask">
+        <div class="tool-head"><div class="tool-icon">🌐</div><div><h3>VPC / CIDR Subnet Planner</h3><p>Plan AWS network ranges: usable IPs (AWS reserves 5 per subnet), range checks and an equal split into subnets.</p></div></div>
+        <div class="tool-grid "><label class="field">CIDR block<input type="text" id="cd-input" value="10.0.0.0/16" ></label><label class="field">Split into<select id="cd-split"><option value="0">No split</option><option value="1">2 subnets</option><option value="2" selected>4 subnets</option><option value="3">8 subnets</option><option value="4">16 subnets</option><option value="5">32 subnets</option><option value="6">64 subnets</option></select></label></div><div class="result-grid" id="cd-results" aria-live="polite"></div>
+        <p class="tool-note" id="cd-notes"></p>
+        <div class="tbl-wrap"><table class="tool-table"><thead><tr><th>Subnet</th><th>Usable range (AWS)</th><th>Usable IPs</th></tr></thead><tbody id="cd-rows"></tbody></table></div>
+      </div>
+
+      <div class="tool-card glass reveal" id="t-pg-memory" data-cat="postgresql" data-title="PostgreSQL Connection &amp; Memory Budget" data-keywords="postgresql work_mem max_connections memory oom shared_buffers pgbouncer budget">
+        <div class="tool-head"><div class="tool-icon">🧮</div><div><h3>PostgreSQL Connection &amp; Memory Budget</h3><p>Check whether <code>max_connections</code> and <code>work_mem</code> can exhaust RAM, and find the largest safe <code>work_mem</code>.</p></div></div>
+        <div class="tool-grid four"><label class="field">RAM (GB)<input type="number" id="mb-ram" value="32" min="1"></label><label class="field">shared_buffers (GB)<input type="number" id="mb-sb" value="8" min="0" step="0.5"></label><label class="field">max_connections<input type="number" id="mb-conn" value="200" min="1"></label><label class="field">work_mem (MB)<input type="number" id="mb-work" value="16" min="1"></label></div><div class="tool-grid four"><label class="field">Sort/hash nodes per query<input type="number" id="mb-nodes" value="2" min="1"></label><label class="field">Per-connection overhead (MB)<input type="number" id="mb-per" value="8" min="0"></label><label class="field">maintenance_work_mem (MB)<input type="number" id="mb-maint" value="512" min="0"></label><label class="field">Autovacuum workers<input type="number" id="mb-workers" value="3" min="0"></label></div><div class="tool-grid "><label class="field">OS reserve (%)<input type="number" id="mb-os" value="10" min="0" max="50"></label><label class="field">Heavy-query connections (%)<input type="number" id="mb-active" value="25" min="0" max="100"></label></div><div class="result-grid" id="mb-results" aria-live="polite"></div>
+        <p class="tool-note" id="mb-note"></p>
+      </div>
+
+      <div class="tool-card glass reveal" id="t-autovacuum" data-cat="postgresql" data-title="Autovacuum Threshold Calculator" data-keywords="postgresql autovacuum vacuum analyze scale factor threshold bloat dead tuples">
+        <div class="tool-head"><div class="tool-icon">🧹</div><div><h3>Autovacuum Threshold Calculator</h3><p>See when autovacuum and autoanalyze actually trigger on a large table, and generate per-table settings for a target dead-row percentage.</p></div></div>
+        <div class="tool-grid four"><label class="field">Table rows<input type="number" id="av-rows" value="100000000" min="0"></label><label class="field">vacuum scale factor<input type="number" id="av-sf" value="0.2" step="0.001"></label><label class="field">vacuum threshold<input type="number" id="av-thr" value="50" ></label><label class="field">analyze scale factor<input type="number" id="av-asf" value="0.1" step="0.001"></label></div><div class="tool-grid four"><label class="field">analyze threshold<input type="number" id="av-athr" value="50" ></label><label class="field">insert scale factor (PG13+)<input type="number" id="av-isf" value="0.2" step="0.001"></label><label class="field">insert threshold (PG13+)<input type="number" id="av-ithr" value="1000" ></label><label class="field">Target: vacuum at % dead rows<input type="number" id="av-pct" value="1" min="0.001" step="0.1"></label></div><div class="tool-grid "><label class="field">Table name for SQL<input type="text" id="av-table" value="public.orders" ></label></div><div class="result-grid" id="av-results" aria-live="polite"></div>
+        <div class="code-wrap"><button type="button" class="copy-btn code-copy" id="av-copy">Copy</button><pre class="code-block" id="av-output"></pre></div>
+      </div>
+
+      <div class="tool-card glass reveal" id="t-burn-rate" data-cat="reliability" data-title="SLO Burn-Rate Alert Generator" data-keywords="slo burn rate alert prometheus datadog sre error budget multiwindow">
+        <div class="tool-head"><div class="tool-icon">🔥</div><div><h3>SLO Burn-Rate Alert Generator</h3><p>Turn an SLO into multi-window burn-rate thresholds and ready-to-edit Prometheus alert rules.</p></div></div>
+        <div class="tool-grid "><label class="field">SLO (%)<input type="number" id="br-slo" value="99.9" step="0.001" min="1" max="99.99999"></label><label class="field">SLO window (days)<input type="number" id="br-days" value="30" min="1"></label></div><div class="tbl-wrap"><table class="tool-table"><thead><tr><th>Severity</th><th>Windows</th><th>Budget used</th><th>Burn rate</th><th>Error ratio &gt;</th></tr></thead><tbody id="br-rows"></tbody></table></div>
+        <div class="code-wrap"><button type="button" class="copy-btn code-copy" id="br-copy">Copy</button><pre class="code-block" id="br-output"></pre></div>
+        <p class="tool-note">Replace the example <code>http_requests_total</code> expression with your own error and total request metrics. Pairs a long and a short window to avoid noisy pages. See the <a href="/blog/datadog-grafana-alerting-reduce-mttr.html">alerting article</a>.</p>
+      </div>
+
+      <div class="tool-card glass reveal" id="t-backup" data-cat="reliability postgresql aws" data-title="Backup Storage &amp; Restore-Time (RTO) Estimator" data-keywords="backup restore rto rpo storage retention wal pitr cost estimator">
+        <div class="tool-head"><div class="tool-icon">💾</div><div><h3>Backup Storage &amp; Restore-Time (RTO) Estimator</h3><p>Estimate backup storage, monthly cost and how long a restore plus WAL replay will really take.</p></div></div>
+        <div class="tool-grid four"><label class="field">Database size (GB)<input type="number" id="bk-size" value="500" min="0"></label><label class="field">Daily change (%)<input type="number" id="bk-change" value="5" min="0" step="0.5"></label><label class="field">Retention (days)<input type="number" id="bk-ret" value="14" min="1"></label><label class="field">Full backup every (days)<input type="number" id="bk-full" value="7" min="1"></label></div><div class="tool-grid four"><label class="field">Compression ratio (0.1-1)<input type="number" id="bk-comp" value="0.5" min="0.05" max="1" step="0.05"></label><label class="field">Storage price (USD / GB-month)<input type="number" id="bk-price" value="0.023" min="0" step="0.001"></label><label class="field">Restore throughput (MB/s)<input type="number" id="bk-tp" value="200" min="1"></label><label class="field">WAL replay (MB/s)<input type="number" id="bk-replay" value="50" min="1"></label></div><div class="tool-grid "><label class="field">Validation / cutover (min)<input type="number" id="bk-valid" value="15" min="0"></label></div><div class="result-grid" id="bk-results" aria-live="polite"></div>
+        <p class="tool-note">A model, not a promise. Measure a real restore to get your true RTO. See <a href="/blog/postgresql-backup-pitr-restore-testing.html">backups and PITR</a>.</p>
+      </div>
+
+      <div class="tool-card glass reveal" id="t-cron" data-cat="reliability aws" data-title="Cron Explainer &amp; EventBridge Converter" data-keywords="cron schedule eventbridge backup job next runs converter">
+        <div class="tool-head"><div class="tool-icon">⏰</div><div><h3>Cron Explainer &amp; EventBridge Converter</h3><p>Validate a cron expression, preview the next runs (UTC and local) and convert it to an AWS EventBridge schedule.</p></div></div>
+        <div class="tool-grid "><label class="field">Cron expression (5 fields)<input type="text" id="cr-expr" value="*/15 * * * *" spellcheck="false"></label></div><div class="tool-actions"><button type="button" class="chip" data-cron="*/15 * * * *">every 15 min</button><button type="button" class="chip" data-cron="0 2 * * *">daily 02:00</button><button type="button" class="chip" data-cron="30 1 * * 1-5">weekdays 01:30</button><button type="button" class="chip" data-cron="0 3 * * SUN">Sundays 03:00</button><button type="button" class="chip" data-cron="0 0 1 * *">monthly</button></div>
+        <div id="cr-out" aria-live="polite"></div>
+        <p class="tool-note">Standard Unix semantics: when both day-of-month and day-of-week are restricted, a run happens when either matches. Times are computed in UTC.</p>
+      </div>
+
+      <!-- NEWTOOLS:end -->
       <!-- Failover simulator -->
-      <div class="tool-card glass reveal" id="failover-tool">
+      <div class="tool-card glass reveal" id="failover-tool" data-cat="postgresql reliability" data-title="High-Availability Failover Simulator" data-keywords="patroni failover etcd quorum high availability simulator postgresql">
         <span id="failover" class="anchor-target"></span>
         <div class="tool-head">
           <div class="tool-icon">⚡</div>
@@ -179,7 +278,7 @@
       </div>
 
       <!-- PG tuning -->
-      <div class="tool-card glass reveal" id="pg-tool">
+      <div class="tool-card glass reveal" id="pg-tool" data-cat="postgresql" data-title="PostgreSQL Config Starter" data-keywords="postgresql postgresql.conf shared_buffers work_mem tuning config generator">
         <div class="tool-head">
           <div class="tool-icon">🐘</div>
           <div>
@@ -229,6 +328,7 @@
   </footer>
   <script src="script.js?v=20261101"></script>
   <script src="tools.js?v=20261101"></script>
+  <script src="tools2.js?v=20261101"></script>
   <script src="failover.js?v=20261101"></script>
 </body>
 </html>
